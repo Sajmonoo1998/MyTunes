@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mytunes.gui;
+package mytunes.gui.Controller;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -46,15 +50,19 @@ public class SongEditorController implements Initializable {
     }
 
     @FXML
-    private void clickToPickFile(ActionEvent event) {
+    private void clickToPickFile(ActionEvent event) throws IOException {
+        
+        
     }
 
     @FXML
     private void clickToCancel(ActionEvent event) {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
     private void clickToSave(ActionEvent event) {
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
     
 }
