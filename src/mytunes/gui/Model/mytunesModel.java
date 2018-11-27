@@ -25,7 +25,7 @@ public class mytunesModel {
     
     public mytunesModel() throws IOException  {
         
-        mytun= new myTunesManager();
+        mytun = new myTunesManager();
     }
     
     public void createPlaylist(String nameOfplaylist){
