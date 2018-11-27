@@ -27,11 +27,11 @@ public class SongDAO {
         cp = new ConnectionProvider();
     }
 
-    public void createSong(int id, String artist, String category, String time, String path) {
+    public void createSong(int id,String title, String artist, String category, String time, String path) {
 
         try {
             Connection con = cp.getConnection();
-
+        //    String sql = "INSERT INTO Songs (?,?,?"
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

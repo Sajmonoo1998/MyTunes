@@ -14,12 +14,12 @@ import java.util.List;
  */
 public class Playlist {
     private final int id;
-    private final String name;
+    private String name;
     List<Song> songsList = new ArrayList<>();
 
-    public Playlist(int id, String name) {
+    public Playlist(int id,String name) {
         this.id = id;
-        this.name = name;
+        this.name=name;
     }
     
 }

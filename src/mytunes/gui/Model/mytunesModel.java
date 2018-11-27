@@ -25,7 +25,7 @@ public class mytunesModel {
     
     public mytunesModel() throws IOException  {
         
-        mytun= new myTunesManager();
+        mytun = new myTunesManager();
     }
     
     public void createPlaylist(String nameOfplaylist){
@@ -45,8 +45,8 @@ public class mytunesModel {
     mytun.updatePlaylist(newPlaylistName);
     }
 
-    public void createSong(int id, String artist, String category, String time, String path){
-    mytun.createSong(id, artist, category, time, path);
+    public void createSong(int id,String title, String artist, String category, String time, String path){
+    mytun.createSong(id,title, artist, category, time, path);
     }
 
     public void deleteSong(Song song){
