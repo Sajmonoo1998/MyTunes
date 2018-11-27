@@ -7,8 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="279.0" prefWidth="339.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="mytunes.gui.SongEditorController">
+<AnchorPane id="AnchorPane" prefHeight="279.0" prefWidth="339.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.SongEditorController">
    <children>
       <Line endX="148.5" layoutX="189.0" layoutY="26.0" startX="-189.0" />
       <Line endX="147.0" layoutX="192.0" layoutY="254.0" startX="-192.0" />
