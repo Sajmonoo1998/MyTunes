@@ -11,17 +11,27 @@ package mytunes.be;
  */
 public class Song {
     private final int id;
+    private String title;
     private String artist;
     private String category;
     private String time;
     private String path;
 
-    public Song(int id, String artist, String category, String time, String path) {
+    public Song(int id, String title, String artist, String category, String time, String path) {
         this.id = id;
+        this.title = title;
         this.artist = artist;
         this.category = category;
         this.time = time;
         this.path = path;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getArtist() {
@@ -55,5 +65,9 @@ public class Song {
     public void setPath(String path) {
         this.path = path;
     }
+
+    
+
+    
     
 }

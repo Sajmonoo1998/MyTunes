@@ -52,8 +52,8 @@ public class myTunesManager implements mytunesLogicFacade {
     }
 
     @Override
-    public void createSong(int id, String artist, String category, String time, String path) {
-        songdao.createSong(id, artist, category, time, path);
+    public void createSong(int id,String title, String artist, String category, String time, String path) {
+        songdao.createSong(id,title, artist, category, time, path);
     }
 
     @Override
