@@ -5,11 +5,14 @@
  */
 package mytunes;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mytunes.dal.SongDAO;
 
 /**
  *
@@ -32,9 +35,12 @@ public class MyTunes extends Application
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException, SQLException
     {
+        SongDAO sdao = new SongDAO();
+        System.out.println(sdao.nextAvailableID());
         launch(args);
+        
     }
     
 }

@@ -32,5 +32,6 @@ public interface mytunesLogicFacade {
     public void updateSong(Song song);
 
     public List<Song> searchSong(String query);
+    public Integer nextAvailableID();
 
 }

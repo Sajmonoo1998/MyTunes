@@ -36,15 +36,15 @@ public class mainWindowController implements Initializable
     @FXML
     private TableView<?> tableSongs;
 
-    String bip = "C:\\Users\\Szymon\\Desktop\\Actual java\\MyTunes\\src\\mytunes\\Champion.mp3";
-    Media hit;
-    MediaPlayer mediaPlayer;
+//    String bip = "C:\\Users\\Szymon\\Desktop\\Actual java\\MyTunes\\src\\mytunes\\Champion.mp3";
+//    Media hit;
+//    MediaPlayer mediaPlayer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        hit = new Media(new File(bip).toURI().toString());
-        mediaPlayer = new MediaPlayer(hit);
+//        hit = new Media(new File(bip).toURI().toString());
+//        mediaPlayer = new MediaPlayer(hit);
     }
 
     @FXML
@@ -110,15 +110,15 @@ public class mainWindowController implements Initializable
     @FXML
     private void play(ActionEvent event)
     {
-        boolean isPlaying = false;
-        if (!isPlaying)
-        {
-           mediaPlayer.play(); 
-        } else
-        {
-            mediaPlayer.pause();
-        }
-        
+//        boolean isPlaying = false;
+//        if (!isPlaying)
+//        {
+//           mediaPlayer.play(); 
+//        } else
+//        {
+//            mediaPlayer.pause();
+//        }
+//        
 
     }
 

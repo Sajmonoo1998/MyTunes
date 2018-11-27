@@ -8,6 +8,7 @@ package mytunes.bll;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,30 +54,60 @@ public class myTunesManager implements mytunesLogicFacade {
 
     @Override
     public void createSong(int id,String title, String artist, String category, String time, String path) {
-        songdao.createSong(id,title, artist, category, time, path);
+        try {
+            songdao.createSong(id,title, artist, category, time, path);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void deleteSong(Song song) {
 
-        songdao.deleteSong(song);
+        try {
+            songdao.deleteSong(song);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
     @Override
     public List<Song> getAllSongs() {
-        List<Song> allsongs = songdao.getAllSongs();
-        return allsongs;
+        List<Song> allsongs;
+        try {
+           return allsongs = songdao.getAllSongs();
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return  null;
     }
 
     @Override
     public void updateSong(Song song) {
-        songdao.updateSong(song);
+        try {
+            songdao.updateSong(song);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public List<Song> searchSong(String query) {
-        List<Song> searchResult = songdao.searchSong(query);
-        return searchResult;
+        List<Song> searchResult;
+        try {
+           return searchResult = songdao.searchSong(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Integer nextAvailableID(){
+        try {
+           return songdao.nextAvailableID();
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

@@ -16,7 +16,7 @@ public class Song {
     private String category;
     private String time;
     private String path;
-
+    private int playlistID;
     public Song(int id, String title, String artist, String category, String time, String path) {
         this.id = id;
         this.title = title;
@@ -24,6 +24,10 @@ public class Song {
         this.category = category;
         this.time = time;
         this.path = path;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -66,6 +70,14 @@ public class Song {
         this.path = path;
     }
 
+    public int getPlaylistID() {
+        return playlistID;
+    }
+
+    public void setPlaylistID(int playlistID) {
+        this.playlistID = playlistID;
+    }
+    
     
 
     
