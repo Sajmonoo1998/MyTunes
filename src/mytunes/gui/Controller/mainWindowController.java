@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,9 +83,14 @@ public class mainWindowController implements Initializable
         hit = new Media(new File(bip).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
         isPlaying = false;
-        slider.setMax(100);
+        slider.setMax(1.0);
         slider.setMin(0);
         slider.setValue(50);
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+        @Override
+        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            mediaPlayer.setVolume(newValue.doubleValue());}
+        });
         
     }
 
@@ -160,12 +167,10 @@ public class mainWindowController implements Initializable
         
     }
 
-    @FXML
     private void getSliderValue(DragEvent event) {
         lblSongTitle.setText(Double.toString(slider.getValue()));
     }
 
-    @FXML
     private void getSliderValue(MouseEvent event) {
         lblSongTitle.setText(Double.toString(slider.getValue()));
     }

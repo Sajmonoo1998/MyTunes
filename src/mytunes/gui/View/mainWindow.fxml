@@ -84,7 +84,7 @@
                         <Image url="@../../assets/play-button-black.png" />
                      </image>
                   </ImageView>
-                  <Slider fx:id="slider" layoutX="800.0" layoutY="142.0" onDragDetected="#getSliderValue" onDragDone="#getSliderValue" onMouseDragReleased="#getSliderValue" prefHeight="18.0" prefWidth="173.0" />
+                  <Slider fx:id="slider" layoutX="800.0" layoutY="142.0" prefHeight="18.0" prefWidth="173.0" />
                   <Label fx:id="lblSongTitle" alignment="CENTER" layoutX="356.0" layoutY="105.0" prefHeight="27.0" prefWidth="291.0" text="Label" textFill="#f5f5f5">
                      <font>
                         <Font name="Consolas Bold" size="24.0" />
