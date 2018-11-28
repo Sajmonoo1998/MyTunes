@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
@@ -63,6 +64,10 @@ public class mainWindowController implements Initializable
     private ImageView nextButton;
     @FXML
     private ImageView previousButton;
+    @FXML
+    private Button exitButton;
+    @FXML
+    private Button minimizeButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -208,6 +213,25 @@ public class mainWindowController implements Initializable
         {
             Logger.getLogger("Problem: " + ex);
         }
+    }
+    @FXML
+    private void exitButtonExit(MouseEvent event) {
+        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;");
+        
+    
+    }
+
+    @FXML
+    private void exitButtonEnter(MouseEvent event) {
+        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc6262;");
+}
+
+    @FXML
+    private void minimizeButtonExit(MouseEvent event) {
+    }
+
+    @FXML
+    private void minimizeButtonEnter(MouseEvent event) {
     }
 
 }

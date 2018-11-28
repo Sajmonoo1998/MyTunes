@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1003.0" style="-fx-background-color: #0f1419;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
+<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1003.0" style="-fx-background-color: #0f1419;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
    <children>
       <VBox layoutY="199.0" prefHeight="530.0" prefWidth="1003.0">
          <children>
@@ -97,6 +97,16 @@
                         <Image url="@../../assets/previous-button-black.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="exitButton" layoutX="970.0" layoutY="11.0" mnemonicParsing="false" onMouseEntered="#exitButtonEnter" onMouseExited="#exitButtonExit" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="minimizeButton" layoutX="941.0" layoutY="11.0" mnemonicParsing="false" onMouseEntered="#minimizeButtonEnter" onMouseExited="#minimizeButtonExit" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #21bc62;">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>

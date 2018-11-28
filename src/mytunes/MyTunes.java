@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import mytunes.dal.SongDAO;
 
@@ -27,6 +28,7 @@ public class MyTunes extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
+        stage.initStyle(StageStyle.UNDECORATED);
         Parent root = FXMLLoader.load(getClass().getResource("gui/View/mainWindow.fxml"));
         
         Scene scene = new Scene(root);
