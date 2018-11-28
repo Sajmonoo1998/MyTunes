@@ -67,5 +67,9 @@ public class mytunesModel {
     return s;
     }
     
+    public Integer getNextSongID()
+    {
+        return mytun.nextAvailableID();
+    }
     
 }

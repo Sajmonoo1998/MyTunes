@@ -8,6 +8,7 @@ package mytunes.gui.Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import mytunes.gui.Model.mytunesModel;
 
 /**
  * FXML Controller class
@@ -30,14 +32,22 @@ public class PlaylistEditorController implements Initializable
 
     @FXML
     private TextField txtPlaylistName;
-
+    
+    private mytunesModel mm;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        try
+        {
+            mm = new mytunesModel();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
 
     @FXML
@@ -49,6 +59,7 @@ public class PlaylistEditorController implements Initializable
     @FXML
     private void clickToSave(ActionEvent event)
     {
+        mm.createPlaylist(txtPlaylistName.getText());
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 }

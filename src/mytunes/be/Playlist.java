@@ -15,6 +15,11 @@ import java.util.List;
 public class Playlist {
     private final int id;
     private String name;
+
+    public String getName()
+    {
+        return name;
+    }
     List<Song> songsList = new ArrayList<>();
 
     public Playlist(int id,String name) {
