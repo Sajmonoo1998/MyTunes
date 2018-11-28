@@ -51,7 +51,7 @@ public class mainWindowController implements Initializable
     
     boolean isPlaying;
 
-    String bip = "C:\\Users\\leopo.DESKTOP-GS83DEO\\Documents\\GitHub\\MyTunesUP\\src\\mp3 files\\Boris Brejcha - Hashtag.mp3";
+    String bip = "src\\mp3 files\\Boris Brejcha - Hashtag.mp3";
     Media hit;
     MediaPlayer mediaPlayer;
     @FXML
