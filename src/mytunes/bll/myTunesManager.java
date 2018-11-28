@@ -102,9 +102,17 @@ public class myTunesManager implements mytunesLogicFacade {
         }
         return null;
     }
-    public Integer nextAvailableID(){
+    public Integer nextAvailableSongID(){
         try {
-           return songdao.nextAvailableID();
+           return songdao.nextAvailableSongID();
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Integer nextAvailablePlaylistID(){
+        try {
+           return playlistdao.nextAvailablePlaylistID();
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -137,7 +137,7 @@ public class SongDAO {
 
         return null;
     }
-    public Integer nextAvailableID() throws SQLException{
+    public Integer nextAvailableSongID() throws SQLException{
      try {
         Connection con = cp.getConnection();
         String sql = "SELECT MAX(id) FROM Songs";

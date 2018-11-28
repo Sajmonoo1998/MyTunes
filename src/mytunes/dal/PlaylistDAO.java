@@ -8,6 +8,9 @@ package mytunes.dal;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,5 +62,25 @@ public class PlaylistDAO {
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+     public Integer nextAvailablePlaylistID() throws SQLException {
+     try {
+        Connection con = cp.getConnection();
+        String sql = "SELECT MAX(id) FROM Playlists";
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        int id = 0; 
+            if ( rs.next() ){
+            id = rs.getInt(1);  
+            }
+            
+          
+            return id+1;
+        } catch (SQLServerException ex) {
+            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 }

@@ -49,8 +49,7 @@ public class MyTunes extends Application
      */
     public static void main(String[] args) throws IOException, SQLException
     {
-        SongDAO sdao = new SongDAO();
-        System.out.println(sdao.nextAvailableID());
+        
         launch(args);
         
     }

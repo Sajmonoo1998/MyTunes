@@ -23,7 +23,7 @@ public interface mytunesLogicFacade {
 
     public void updatePlaylist(String newPlaylistName);
 
-    public void createSong(int id,String artist, String title, String category, String time, String path);
+    public void createSong(int id, String artist, String title, String category, String time, String path);
 
     public void deleteSong(Song song);
 
@@ -32,6 +32,9 @@ public interface mytunesLogicFacade {
     public void updateSong(Song song);
 
     public List<Song> searchSong(String query);
-    public Integer nextAvailableID();
+
+    public Integer nextAvailableSongID();
+
+    public Integer nextAvailablePlaylistID();
 
 }

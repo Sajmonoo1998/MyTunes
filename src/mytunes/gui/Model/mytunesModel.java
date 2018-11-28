@@ -17,55 +17,58 @@ import mytunes.bll.mytunesLogicFacade;
  * @author Szymon
  */
 public class mytunesModel {
-    
-   
+
     public final mytunesLogicFacade mytun;
-    
-    
-    
-    public mytunesModel() throws IOException  {
-        
+
+    public mytunesModel() throws IOException {
+
         mytun = new myTunesManager();
     }
-    
-    public void createPlaylist(String nameOfplaylist){
-    mytun.createPlaylist(nameOfplaylist);
+
+    public void createPlaylist(String nameOfplaylist) {
+        mytun.createPlaylist(nameOfplaylist);
     }
 
-    public void deletePlaylist(Playlist playlistToDelete){
-    mytun.deletePlaylist(playlistToDelete);
+    public void deletePlaylist(Playlist playlistToDelete) {
+        mytun.deletePlaylist(playlistToDelete);
     }
 
-    public List<Playlist> getAllPlaylists(){
-    List<Playlist> p = mytun.getAllPlaylists();
-    return p;
+    public List<Playlist> getAllPlaylists() {
+        List<Playlist> p = mytun.getAllPlaylists();
+        return p;
     }
 
-    public void updatePlaylist(String newPlaylistName){
-    mytun.updatePlaylist(newPlaylistName);
+    public void updatePlaylist(String newPlaylistName) {
+        mytun.updatePlaylist(newPlaylistName);
     }
 
-    public void createSong(int id,String title, String artist, String category, String time, String path){
-    mytun.createSong(id,title, artist, category, time, path);
+    public void createSong(int id, String title, String artist, String category, String time, String path) {
+        mytun.createSong(id, title, artist, category, time, path);
     }
 
-    public void deleteSong(Song song){
-    mytun.deleteSong(song);
+    public void deleteSong(Song song) {
+        mytun.deleteSong(song);
     }
 
-    public List<Song> getAllSongs(){
-    List<Song> s=mytun.getAllSongs();
-    return s;
+    public List<Song> getAllSongs() {
+        List<Song> s = mytun.getAllSongs();
+        return s;
     }
 
-    public void updateSong(Song song){
-    mytun.updateSong(song);
+    public void updateSong(Song song) {
+        mytun.updateSong(song);
     }
 
-    public List<Song> searchSong(String query){
-    List<Song> s= mytun.searchSong(query);
-    return s;
+    public List<Song> searchSong(String query) {
+        List<Song> s = mytun.searchSong(query);
+        return s;
     }
-    
-    
+
+    public Integer nextAvailableSongID() {
+        return mytun.nextAvailableSongID();
+    }
+
+    public Integer nextAvailablePlaylistID() {
+        return mytun.nextAvailablePlaylistID();
+    }
 }
