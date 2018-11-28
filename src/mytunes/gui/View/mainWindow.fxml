@@ -97,7 +97,7 @@
                         <Image url="@../../assets/previous-button-black.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="exitButton" layoutX="970.0" layoutY="11.0" mnemonicParsing="false" onMouseEntered="#exitButtonEnter" onMouseExited="#exitButtonExit" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;">
+                  <Button fx:id="exitButton" layoutX="970.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#appExit" onMouseEntered="#exitButtonEnter" onMouseExited="#exitButtonExit" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;">
                      <font>
                         <Font size="1.0" />
                      </font>

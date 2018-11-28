@@ -234,4 +234,9 @@ public class mainWindowController implements Initializable
     private void minimizeButtonEnter(MouseEvent event) {
     }
 
+    @FXML
+    private void appExit(MouseEvent event) {
+        System.exit(1);
+    }
+
 }
