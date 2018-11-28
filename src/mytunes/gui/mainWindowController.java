@@ -13,10 +13,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -35,16 +41,32 @@ public class mainWindowController implements Initializable
     private TableView<?> tablePlaylist;
     @FXML
     private TableView<?> tableSongs;
+    
+    boolean isPlaying;
 
-    String bip = "C:\\Users\\Szymon\\Desktop\\Actual java\\MyTunes\\src\\mytunes\\Champion.mp3";
+    String bip = "C:\\Users\\Revy\\Documents\\GitHub\\MyTunes\\src\\mytunes\\Champion.mp3";
     Media hit;
     MediaPlayer mediaPlayer;
+    @FXML
+    private ImageView playButton;
+    private String url;
+    @FXML
+    private Slider slider;
+    @FXML
+    private ImageView nextButton;
+    @FXML
+    private ImageView previousButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         hit = new Media(new File(bip).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
+        isPlaying = false;
+        slider.setMax(100);
+        slider.setMin(0);
+        slider.setValue(50);
+        
     }
 
     @FXML
@@ -107,29 +129,57 @@ public class mainWindowController implements Initializable
     {
     }
 
+
+
     @FXML
-    private void play(ActionEvent event)
-    {
-        boolean isPlaying = false;
-        if (!isPlaying)
-        {
-           mediaPlayer.play(); 
-        } else
-        {
+    private void playReleased(MouseEvent event) {
+        if(!isPlaying){
+            isPlaying = true;
+            mediaPlayer.play();
+            playButton.setImage(new Image("mytunes/assets/pause-button-black.png"));}
+        else{
+            isPlaying = false;
             mediaPlayer.pause();
-        }
+            playButton.setImage(new Image("mytunes/assets/play-button-black.png"));}
+    }
+
+    @FXML
+    private void playPressed(MouseEvent event) {
+        if(!isPlaying){
+            playButton.setImage(new Image("mytunes/assets/play-button-grey.png"));}
+        else{
+            playButton.setImage(new Image("mytunes/assets/pause-button-grey.png"));}
         
-
     }
 
     @FXML
-    private void forward(ActionEvent event)
-    {
+    private void getSliderValue(DragEvent event) {
+        lblSongTitle.setText(Double.toString(slider.getValue()));
     }
 
     @FXML
-    private void backward(ActionEvent event)
-    {
+    private void getSliderValue(MouseEvent event) {
+        lblSongTitle.setText(Double.toString(slider.getValue()));
+    }
+
+    @FXML
+    private void nextReleased(MouseEvent event) {
+        nextButton.setImage(new Image("mytunes/assets/next-button-black.png"));
+    }
+
+    @FXML
+    private void nextPressed(MouseEvent event) {
+        nextButton.setImage(new Image("mytunes/assets/next-button-grey.png"));
+    }
+
+    @FXML
+    private void previousReleased(MouseEvent event) {
+        previousButton.setImage(new Image("mytunes/assets/previous-button-black.png"));
+    }
+
+    @FXML
+    private void previousPressed(MouseEvent event) {
+        previousButton.setImage(new Image("mytunes/assets/previous-button-grey.png"));
     }
 
 }
