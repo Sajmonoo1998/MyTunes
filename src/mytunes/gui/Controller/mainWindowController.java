@@ -68,6 +68,12 @@ public class mainWindowController implements Initializable
     private Button exitButton;
     @FXML
     private Button minimizeButton;
+    @FXML
+    private ImageView upArrow;
+    @FXML
+    private ImageView downArrow;
+    @FXML
+    private ImageView leftArrow;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -81,10 +87,6 @@ public class mainWindowController implements Initializable
         
     }
 
-    @FXML
-    private void clickToPutSong(ActionEvent event)
-    {
-    }
 
     @FXML
     private void clickToSearch(ActionEvent event)
@@ -96,10 +98,6 @@ public class mainWindowController implements Initializable
     {
     }
 
-    @FXML
-    private void clickToChangeOrderDown(ActionEvent event)
-    {
-    }
 
     @FXML
     private void clickToEditSong(ActionEvent event)
@@ -111,10 +109,6 @@ public class mainWindowController implements Initializable
     {
     }
 
-    @FXML
-    private void clickToCloseTab(ActionEvent event)
-    {
-    }
 
     @FXML
     private void clickToNewPlaylist(ActionEvent event)
@@ -142,10 +136,6 @@ public class mainWindowController implements Initializable
     {
     }
 
-    @FXML
-    private void clickToChangeOrderUp(ActionEvent event)
-    {
-    }
 
 
 
@@ -246,6 +236,36 @@ public class mainWindowController implements Initializable
     private void appMinimize(MouseEvent event) {
         Stage stage = (Stage)exitButton.getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    @FXML
+    private void clickToChangeOrderUpReleased(MouseEvent event) {
+        upArrow.setImage(new Image("mytunes/assets/white-up-arrow.png"));
+    }
+
+    @FXML
+    private void clickToChangeOrderUpPressed(MouseEvent event) {
+        upArrow.setImage(new Image("mytunes/assets/grey-up-arrow.png"));
+    }
+
+    @FXML
+    private void clickToChangeOrderDownReleased(MouseEvent event) {
+        downArrow.setImage(new Image("mytunes/assets/white-down-arrow.png"));
+    }
+
+    @FXML
+    private void clickToChangeOrderDownPressed(MouseEvent event) {
+        downArrow.setImage(new Image("mytunes/assets/grey-down-arrow.png"));
+    }
+
+    @FXML
+    private void clickToPutSongReleased(MouseEvent event) {
+        leftArrow.setImage(new Image("mytunes/assets/white-left-arrow.png"));
+    }
+
+    @FXML
+    private void clickToPutSongPressed(MouseEvent event) {
+        leftArrow.setImage(new Image("mytunes/assets/grey-left-arrow.png"));
     }
 
 }
