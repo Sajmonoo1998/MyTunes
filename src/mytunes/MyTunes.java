@@ -8,10 +8,13 @@ package mytunes;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import mytunes.dal.SongDAO;
 
 /**
@@ -24,12 +27,19 @@ public class MyTunes extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("gui/mainWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gui/View/mainWindow.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
+            @Override
+            public void handle(WindowEvent event)
+            {
+                Platform.exit();
+            }
+        });
     }
 
     /**

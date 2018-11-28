@@ -14,18 +14,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -44,18 +48,32 @@ public class mainWindowController implements Initializable
     private TableView<?> tablePlaylist;
     @FXML
     private TableView<?> tableSongs;
-    @FXML
-    private Label errorMessage;
+    
+    boolean isPlaying;
 
-    String bip = "C:\\Users\\leopo.DESKTOP-GS83DEO\\Documents\\GitHub\\MyTunesUP\\src\\mytunes\\Champion.mp3";
+    String bip = "C:\\Users\\leopo.DESKTOP-GS83DEO\\Documents\\GitHub\\MyTunesUP\\src\\mp3 files\\Boris Brejcha - Hashtag.mp3";
     Media hit;
     MediaPlayer mediaPlayer;
+    @FXML
+    private ImageView playButton;
+    private String url;
+    @FXML
+    private Slider slider;
+    @FXML
+    private ImageView nextButton;
+    @FXML
+    private ImageView previousButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         hit = new Media(new File(bip).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
+        isPlaying = false;
+        slider.setMax(100);
+        slider.setMin(0);
+        slider.setValue(50);
+        
     }
 
     @FXML
@@ -81,17 +99,6 @@ public class mainWindowController implements Initializable
     @FXML
     private void clickToEditSong(ActionEvent event)
     {
-        if (tableSongs.getItems().isEmpty())
-        {
-            String problem = "No song is selected!";
-            openError(problem);
-        }
-        else 
-        {
-            String path = "mytunes/gui/View/songEditor";
-            String name = "Song Editor";
-            openWindow(path, name);
-        }
     }
 
     @FXML
@@ -102,7 +109,6 @@ public class mainWindowController implements Initializable
     @FXML
     private void clickToCloseTab(ActionEvent event)
     {
-        System.exit(1);
     }
 
     @FXML
@@ -124,17 +130,6 @@ public class mainWindowController implements Initializable
     @FXML
     private void clickToEditPlaylist(ActionEvent event)
     {
-        if (tablePlaylist.getItems().isEmpty())
-        {
-            String problem = "No playlist is selected!";
-            openError(problem);
-        }
-        else 
-        {
-            String path = "mytunes/gui/View/playlistEditor";
-            String name = "Playlist Editor";
-            openWindow(path, name);
-        }
     }
 
     @FXML
@@ -147,35 +142,58 @@ public class mainWindowController implements Initializable
     {
     }
 
+
+
     @FXML
-    private void play(ActionEvent event)
-    {
-        boolean isPlaying = false;
-        if (!isPlaying)
-        {
-           mediaPlayer.play(); 
-        } else
-        {
+    private void playReleased(MouseEvent event) {
+        if(!isPlaying){
+            isPlaying = true;
+            mediaPlayer.play();
+            playButton.setImage(new Image("mytunes/assets/pause-button-black.png"));}
+        else{
+            isPlaying = false;
             mediaPlayer.pause();
-        }
+            playButton.setImage(new Image("mytunes/assets/play-button-black.png"));}
     }
 
     @FXML
-    private void next(ActionEvent event)
-    {
+    private void playPressed(MouseEvent event) {
+        if(!isPlaying){
+            playButton.setImage(new Image("mytunes/assets/play-button-grey.png"));}
+        else{
+            playButton.setImage(new Image("mytunes/assets/pause-button-grey.png"));}
+        
     }
 
     @FXML
-    private void previous(ActionEvent event)
-    {
+    private void getSliderValue(DragEvent event) {
+        lblSongTitle.setText(Double.toString(slider.getValue()));
     }
-    
+
     @FXML
-    private void clickToCloseError(ActionEvent event)
-    {
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+    private void getSliderValue(MouseEvent event) {
+        lblSongTitle.setText(Double.toString(slider.getValue()));
     }
-    
+
+    @FXML
+    private void nextReleased(MouseEvent event) {
+        nextButton.setImage(new Image("mytunes/assets/next-button-black.png"));
+    }
+
+    @FXML
+    private void nextPressed(MouseEvent event) {
+        nextButton.setImage(new Image("mytunes/assets/next-button-grey.png"));
+    }
+
+    @FXML
+    private void previousReleased(MouseEvent event) {
+        previousButton.setImage(new Image("mytunes/assets/previous-button-black.png"));
+    }
+
+    @FXML
+    private void previousPressed(MouseEvent event) {
+        previousButton.setImage(new Image("mytunes/assets/previous-button-grey.png"));
+    }
     private void openWindow(String path, String title){
         
         try {
@@ -190,14 +208,6 @@ public class mainWindowController implements Initializable
         {
             Logger.getLogger("Problem: " + ex);
         }
-    }
-    
-    private void openError(String problem)
-    {
-        String path = "mytunes/gui/View/errorWindow.fxml";
-        String name = "Error Message";
-        openWindow(path, name);
-        errorMessage.setText(problem);
     }
 
 }
