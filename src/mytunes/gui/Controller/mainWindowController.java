@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +25,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -54,12 +58,12 @@ public class mainWindowController implements Initializable
     @FXML
     private TableView<?> tablePlaylist;
     @FXML
-    private TableView<?> tableSongs;
+    private TableView<Song> tableSongs;
     
     boolean isPlaying;
     boolean muted;
 
-    String bip = "src\\mp3 files\\Boris Brejcha - Hashtag.mp3";
+    
     Media hit;
     MediaPlayer mediaPlayer;
     @FXML
@@ -84,11 +88,26 @@ public class mainWindowController implements Initializable
     @FXML
     private ImageView speaker;
     private mytunesModel mm;
+    private ObservableList songsAsObservable;
+    @FXML
+    private TableColumn<Song, String> artistCol;
+    @FXML
+    private TableColumn<Song, String> titleCol;
+    @FXML
+    private TableColumn<Song, String> categoryCol;
+    @FXML
+    private TableColumn<Song, String> timeCol;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        hit = new Media(new File(bip).toURI().toString());
+//        Song song = tableSongs.getSelectionModel().getSelectedItem();
+//        String path = song.getPath();
+//        hit = new Media(new File(path).toURI().toString());
+          hit = new Media(new File("src\\mp3 files\\TACONAFIDE - C3PO.mp3").toURI().toString());
+        
         mediaPlayer = new MediaPlayer(hit);
+        
         isPlaying = false;
         muted = false;
         slider.setMax(1.0);
@@ -106,11 +125,25 @@ public class mainWindowController implements Initializable
         {
             Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        songsAsObservable = FXCollections.observableArrayList(mm.getSongsAsObservable());
+        setSongsTable();
         
     }
 
 
+    private void setSongsTable(){
+    //Artist col
+        artistCol.setCellValueFactory(new PropertyValueFactory<>("artist"));
+        //Title col
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        //Category col
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        //Time col
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        tableSongs.getColumns().clear();
+        tableSongs.setItems(songsAsObservable);
+        tableSongs.getColumns().addAll(artistCol,titleCol,categoryCol,timeCol);
+    }
     @FXML
     private void clickToSearch(ActionEvent event)
     {
@@ -178,6 +211,7 @@ public class mainWindowController implements Initializable
 
     @FXML
     private void playReleased(MouseEvent event) {
+        
         if(!isPlaying){
             isPlaying = true;
             mediaPlayer.play();
@@ -186,7 +220,8 @@ public class mainWindowController implements Initializable
             isPlaying = false;
             mediaPlayer.pause();
             playButton.setImage(new Image("mytunes/assets/play-button-black.png"));}
-    }
+        }
+    
 
     @FXML
     private void playPressed(MouseEvent event) {

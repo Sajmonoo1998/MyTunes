@@ -7,6 +7,8 @@ package mytunes.gui.Model;
 
 import java.io.IOException;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import mytunes.be.Playlist;
 import mytunes.be.Song;
 import mytunes.bll.myTunesManager;
@@ -19,12 +21,16 @@ import mytunes.bll.mytunesLogicFacade;
 public class mytunesModel {
 
     public final mytunesLogicFacade mytun;
-
+    public ObservableList ol;
     public mytunesModel() throws IOException {
-
+        ol = FXCollections.observableArrayList();
         mytun = new myTunesManager();
+        ol.addAll(getAllSongs());
     }
 
+    public ObservableList getSongsAsObservable(){
+    return ol;
+    }
     public void createPlaylist(String nameOfplaylist) {
         mytun.createPlaylist(nameOfplaylist);
     }
