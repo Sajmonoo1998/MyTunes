@@ -53,6 +53,7 @@ public class mainWindowController implements Initializable
     private TableView<?> tableSongs;
     
     boolean isPlaying;
+    boolean muted;
 
     String bip = "src\\mp3 files\\Boris Brejcha - Hashtag.mp3";
     Media hit;
@@ -76,6 +77,8 @@ public class mainWindowController implements Initializable
     private ImageView downArrow;
     @FXML
     private ImageView leftArrow;
+    @FXML
+    private ImageView speaker;
    // private mytunesModel mm;
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -83,6 +86,7 @@ public class mainWindowController implements Initializable
         hit = new Media(new File(bip).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
         isPlaying = false;
+        muted = false;
         slider.setMax(1.0);
         slider.setMin(0);
         slider.setValue(50);
@@ -272,7 +276,22 @@ public class mainWindowController implements Initializable
 
     @FXML
     private void clickToPutSongPressed(MouseEvent event) {
-        leftArrow.setImage(new Image("mytunes/assets/grey-left-arrow.png"));
+        leftArrow.setImage(new Image ("mytunes/assets/grey-left-arrow.png"));} 
+    
+    @FXML
+    private void muteAll(MouseEvent event) {
+        if(!muted){
+            speaker.setImage(new Image("mytunes/assets/Speaker-muted.png"));
+            muted = true;
+            mediaPlayer.setMute(true);}
+        else{
+            speaker.setImage(new Image("mytunes/assets/Speaker.png"));
+            muted = false;
+            mediaPlayer.setMute(false);}
+        
     }
+
+
+    
 
 }

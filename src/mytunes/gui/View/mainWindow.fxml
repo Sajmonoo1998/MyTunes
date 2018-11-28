@@ -21,20 +21,20 @@
             <Line endX="920.1715698242188" endY="-8.8284273147583" startX="-78.0" startY="-10.0" stroke="WHITE" strokeWidth="4.0" />
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="531.0" prefWidth="1001.0">
                <children>
-                  <Button layoutX="478.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeleteSongFromPlaylist" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
-                  <Button layoutX="742.0" layoutY="451.0" mnemonicParsing="false" onAction="#clickToEditSong" prefHeight="35.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Edit" textFill="WHITE" />
-                  <Button layoutX="663.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeleteSong" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
+                  <Button layoutX="477.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeleteSongFromPlaylist" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
+                  <Button layoutX="653.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToEditSong" prefHeight="35.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Edit" textFill="WHITE" />
+                  <Button layoutX="887.0" layoutY="452.0" mnemonicParsing="false" onAction="#clickToDeleteSong" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
                   <Button layoutX="26.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToNewPlaylist" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="New" textFill="WHITE" />
                   <Button layoutX="595.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToNewSong" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="New" textFill="WHITE" />
-                  <Button layoutX="187.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToEditPlaylist" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Edit" textFill="WHITE" />
+                  <Button layoutX="236.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToEditPlaylist" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Edit" textFill="WHITE" />
                   <Button layoutX="106.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeletePlaylist" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
-                  <ListView fx:id="listSongsOnPlaylist" layoutX="19.0" layoutY="60.0" prefHeight="386.0" prefWidth="220.0" style="-fx-background-color: #0f1419; -fx-border-color: white;" />
-                  <Label layoutX="19.0" layoutY="41.0" text="Playlists" textFill="WHITE">
+                  <ListView fx:id="listSongsOnPlaylist" layoutX="324.0" layoutY="60.0" prefHeight="386.0" prefWidth="220.0" style="-fx-background-color: #0f1419; -fx-border-color: white;" />
+                  <Label layoutX="33.0" layoutY="42.0" text="Playlists" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="289.0" layoutY="40.0" text="Songs on Playlist" textFill="WHITE">
+                  <Label layoutX="323.0" layoutY="41.0" text="Songs on Playlist" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -44,24 +44,26 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tablePlaylist" layoutX="289.0" layoutY="60.0" prefHeight="386.0" prefWidth="255.0" style="-fx-background-color: #0f1419; -fx-border-color: white;">
+                  <TableView fx:id="tablePlaylist" layoutX="33.0" layoutY="60.0" prefHeight="386.0" prefWidth="255.0" style="-fx-background-color: #0f1419; -fx-border-color: white;">
                     <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="103.0" text="C2" />
                     </columns>
                   </TableView>
-                  <TableView fx:id="tableSongs" layoutX="595.0" layoutY="60.0" prefHeight="386.0" prefWidth="359.0" style="-fx-background-color: #0f1419; -fx-border-color: white;">
+                  <TableView fx:id="tableSongs" layoutX="595.0" layoutY="60.0" prefHeight="386.0" prefWidth="359.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-alignment: CENTER_RIGHT;">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn prefWidth="128.0" style="-fx-alignment: CENTER-RIGHT;" text="Artist" />
+                      <TableColumn prefWidth="93.0" text="Title" />
+                        <TableColumn text="Category" />
+                        <TableColumn prefWidth="56.0" text="Time" />
                     </columns>
                   </TableView>
-                  <ImageView fx:id="upArrow" fitHeight="35.0" fitWidth="38.0" layoutX="289.0" layoutY="451.0" onMousePressed="#clickToChangeOrderUpPressed" onMouseReleased="#clickToChangeOrderUpReleased">
+                  <ImageView fx:id="upArrow" fitHeight="35.0" fitWidth="38.0" layoutX="338.0" layoutY="453.0" onMousePressed="#clickToChangeOrderUpPressed" onMouseReleased="#clickToChangeOrderUpReleased">
                      <image>
                         <Image url="@../../assets/white-up-arrow.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="downArrow" fitHeight="35.0" fitWidth="38.0" layoutX="356.0" layoutY="453.0" onMousePressed="#clickToChangeOrderDownPressed" onMouseReleased="#clickToChangeOrderDownReleased">
+                  <ImageView fx:id="downArrow" fitHeight="35.0" fitWidth="38.0" layoutX="396.0" layoutY="455.0" onMousePressed="#clickToChangeOrderDownPressed" onMouseReleased="#clickToChangeOrderDownReleased">
                      <image>
                         <Image url="@../../assets/white-down-arrow.png" />
                      </image>
@@ -117,6 +119,11 @@
                         <Font size="1.0" />
                      </font>
                   </Button>
+                  <ImageView fx:id="speaker" fitHeight="28.0" fitWidth="24.0" layoutX="767.0" layoutY="137.0" onMouseClicked="#muteAll">
+                     <image>
+                        <Image url="@../../assets/Speaker.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children>
