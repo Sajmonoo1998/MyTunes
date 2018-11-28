@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -33,6 +34,9 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.imageio.ImageIO;
+import mytunes.be.Playlist;
+import mytunes.be.Song;
+import mytunes.gui.Model.mytunesModel;
 
 /**
  *
@@ -79,7 +83,7 @@ public class mainWindowController implements Initializable
     private ImageView leftArrow;
     @FXML
     private ImageView speaker;
-   // private mytunesModel mm;
+    private mytunesModel mm;
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -95,7 +99,13 @@ public class mainWindowController implements Initializable
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
             mediaPlayer.setVolume(newValue.doubleValue());}
         });
-        
+        try
+        {
+            mm = new mytunesModel();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }
@@ -104,6 +114,9 @@ public class mainWindowController implements Initializable
     @FXML
     private void clickToSearch(ActionEvent event)
     {
+        
+        String text = txtSearch.getText();
+        mm.searchSong(text);
     }
 
     @FXML
@@ -115,11 +128,16 @@ public class mainWindowController implements Initializable
     @FXML
     private void clickToEditSong(ActionEvent event)
     {
+        String path = "mytunes/gui/View/songEditor.fxml";
+        String name = "Song Editor";
+        openWindow(path, name); 
     }
 
     @FXML
     private void clickToDeleteSong(ActionEvent event)
     {
+       //  Song song = tableSongs.getSelectionModel().getSelectedItem();
+       // mm.deleteSong(song);
     }
 
 
@@ -142,11 +160,17 @@ public class mainWindowController implements Initializable
     @FXML
     private void clickToEditPlaylist(ActionEvent event)
     {
+//          String path = "mytunes/gui/View/playlistEditor.fxml";
+//        String name = "Playlist Editor";
+//        openWindow(path, name);
+//        Playlist pl = tablePlaylist.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     private void clickToDeletePlaylist(ActionEvent event)
     {
+//            Playlist playlistToDelete = tablePlaylist.getSelectionModel().getSelectedItem();
+//        mm.deletePlaylist(playlistToDelete);
     }
 
 
