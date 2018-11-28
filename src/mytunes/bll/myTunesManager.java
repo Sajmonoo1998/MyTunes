@@ -53,9 +53,9 @@ public class myTunesManager implements mytunesLogicFacade {
     }
 
     @Override
-    public void createSong(int id,String title, String artist, String category, String time, String path) {
+    public void createSong(int id,String artist, String title, String category, String time, String path) {
         try {
-            songdao.createSong(id,title, artist, category, time, path);
+            songdao.createSong(id,artist, title, category, time, path);
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }

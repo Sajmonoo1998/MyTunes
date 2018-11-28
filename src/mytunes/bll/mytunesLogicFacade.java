@@ -23,7 +23,7 @@ public interface mytunesLogicFacade {
 
     public void updatePlaylist(String newPlaylistName);
 
-    public void createSong(int id,String title, String artist, String category, String time, String path);
+    public void createSong(int id,String artist, String title, String category, String time, String path);
 
     public void deleteSong(Song song);
 

@@ -76,7 +76,7 @@ public class mainWindowController implements Initializable
     private ImageView downArrow;
     @FXML
     private ImageView leftArrow;
-
+   // private mytunesModel mm;
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -91,6 +91,8 @@ public class mainWindowController implements Initializable
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
             mediaPlayer.setVolume(newValue.doubleValue());}
         });
+        
+        
         
     }
 

@@ -21,5 +21,11 @@ public class Playlist {
         this.id = id;
         this.name=name;
     }
+
+    @Override
+    public String toString() {
+        return "Playlist{" + "id=" + id + ", name=" + name + ", songsList=" + songsList + '}';
+    }
+    
     
 }

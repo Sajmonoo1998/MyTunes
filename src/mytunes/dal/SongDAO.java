@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,16 +30,16 @@ public class SongDAO {
         cp = new ConnectionProvider();
     }
 
-    public Song createSong(int id,String title, String artist, String category, String time, String path) throws SQLException {
+    public Song createSong(int id,String artist, String title, String category, String time, String path) throws SQLException {
 
         try {
-            Song song = new Song(id, title, artist, category, time, path);
+            Song song = new Song(id, artist, title, category, time, path);
             Connection con = cp.getConnection();
-            String sql = "INSERT INTO Songs (id,title,artist,category,time,path) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO Songs (id,artist,title,category,time,path) VALUES (?,?,?,?,?,?)";
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, id);
-            ppst.setString(2, title);
-            ppst.setString(3, artist);
+            ppst.setString(2, artist);
+            ppst.setString(3, title);
             ppst.setString(4, category);
             ppst.setString(5, time);
             ppst.setString(6, path);
@@ -64,37 +65,40 @@ public class SongDAO {
 
     }
 
-    public List<Song> getAllSongs() throws SQLException {
-        try {
-            Connection con = cp.getConnection();
-            List<Song> allSongs = null;
+    public List<Song> getAllSongs() throws SQLException 
+        {
+        List<Song> songs = new ArrayList<>();
+        
+        try (Connection con = cp.getConnection())
+        {
             Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Songs");
-             while(rs.next())
+            ResultSet rs = statement.executeQuery("SELECT * FROM Songs;");
+            while(rs.next())
             {
-                int id = rs.getInt("id");
-                String title = rs.getString("title");
+                int id = rs.getInt("ID");
                 String artist = rs.getString("artist");
+                String title = rs.getString("title");
                 String category = rs.getString("category");
                 String time = rs.getString("time");
                 String path = rs.getString("path");
-                Song song = new Song(id, title, artist, category, time, path);
-                allSongs.add(song);
-                return allSongs;
+                Song song = new Song(id, artist, title, category, time, path);
+                songs.add(song);
             }
-        } catch (SQLServerException ex) {
-            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
         }
-        return null;
+        return songs;
     }
 
     public void updateSong(Song song) throws SQLException {
         try {
             Connection con = cp.getConnection();
-            String sql = "UPDATE Songs SET title=?,artist=?,category=?,time=?,path=? WHERE id=?";
+            String sql = "UPDATE Songs SET artist=?,title=?,category=?,time=?,path=? WHERE id=?";
             PreparedStatement ppst = con.prepareStatement(sql);
-            ppst.setString(1, song.getTitle());
-            ppst.setString(2, song.getArtist());
+            ppst.setString(1, song.getArtist());
+            ppst.setString(2, song.getTitle());
             ppst.setString(3, song.getCategory());
             ppst.setString(4, song.getTime());
             ppst.setString(5, song.getPath());
@@ -118,12 +122,12 @@ public class SongDAO {
              while(rs.next())
             {
             int id = rs.getInt("id");
-                String title = rs.getString("title");
-                String artist = rs.getString("artist");
+                String title = rs.getString("artist");
+                String artist = rs.getString("title");
                 String category = rs.getString("category");
                 String time = rs.getString("time");
                 String path = rs.getString("path");
-                Song song = new Song(id, title, artist, category, time, path);
+                Song song = new Song(id, artist, title, category, time, path);
                 allSongs.add(song);
             }
              return allSongs;
