@@ -102,7 +102,7 @@
                         <Font size="1.0" />
                      </font>
                   </Button>
-                  <Button fx:id="minimizeButton" layoutX="941.0" layoutY="11.0" mnemonicParsing="false" onMouseEntered="#minimizeButtonEnter" onMouseExited="#minimizeButtonExit" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #21bc62;">
+                  <Button fx:id="minimizeButton" layoutX="941.0" layoutY="11.0" mnemonicParsing="false" onMouseEntered="#minimizeButtonEnter" onMouseExited="#minimizeButtonExit" onMousePressed="#appMinimize" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #21bc62;">
                      <font>
                         <Font size="1.0" />
                      </font>

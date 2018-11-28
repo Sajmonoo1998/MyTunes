@@ -228,15 +228,24 @@ public class mainWindowController implements Initializable
 
     @FXML
     private void minimizeButtonExit(MouseEvent event) {
+        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #21bc62;");
     }
 
     @FXML
     private void minimizeButtonEnter(MouseEvent event) {
+        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #5bea75;");
     }
 
     @FXML
     private void appExit(MouseEvent event) {
         System.exit(1);
+        
+    }
+
+    @FXML
+    private void appMinimize(MouseEvent event) {
+        Stage stage = (Stage)exitButton.getScene().getWindow();
+        stage.setIconified(true);
     }
 
 }
