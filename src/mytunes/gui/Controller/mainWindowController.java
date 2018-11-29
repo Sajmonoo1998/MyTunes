@@ -137,6 +137,11 @@ public class mainWindowController implements Initializable {
         tableSongs.getColumns().clear();
         tableSongs.setItems(songsAsObservable);
         tableSongs.getColumns().addAll(artistCol, titleCol, categoryCol, timeCol);
+        
+        artistCol.getStyleClass().add("my-special-table-style");
+        titleCol.getStyleClass().add("my-special-table-style");
+        categoryCol.getStyleClass().add("my-special-table-style");
+        timeCol.getStyleClass().add("my-special-table-style");
     }
 
     @FXML
