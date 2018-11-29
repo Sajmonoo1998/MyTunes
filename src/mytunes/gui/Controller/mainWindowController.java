@@ -351,6 +351,7 @@ public class mainWindowController implements Initializable {
 
     @FXML
     private void muteAll(MouseEvent event) {
+        if(song!=null){
         if (!muted) {
             speaker.setImage(new Image("mytunes/assets/Speaker-muted.png"));
             muted = true;
@@ -360,7 +361,7 @@ public class mainWindowController implements Initializable {
             muted = false;
             mediaPlayer.setMute(false);
         }
-
+        }
     }
 
 }
