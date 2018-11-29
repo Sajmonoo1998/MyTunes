@@ -141,7 +141,8 @@ public class mainWindowController implements Initializable {
         artistCol.getStyleClass().add("my-special-table-style");
         titleCol.getStyleClass().add("my-special-table-style");
         categoryCol.getStyleClass().add("my-special-table-style");
-        timeCol.getStyleClass().add("my-special-table-style");
+        timeCol.getStyleClass().add("my-special-table-style-time");
+        timeCol.getStyleClass().add("time-col");
     }
 
     @FXML
