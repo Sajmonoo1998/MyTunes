@@ -32,3 +32,23 @@
     -fx-border-color: #21a5d1;
 }
 
+.slider .track{
+    
+-fx-background-color: null;    
+    
+}
+.slider .thumb{
+    
+-fx-background-color: null;    
+    
+}
+.progress-bar .bar { 
+    -fx-padding: 1px; 
+    -fx-background-insets: 0; 
+    -fx-accent: white;
+}
+
+.progress-bar > .track {
+  -fx-text-box-border: white;
+  -fx-control-inner-background: grey;
+}
