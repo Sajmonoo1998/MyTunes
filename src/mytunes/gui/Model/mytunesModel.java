@@ -31,6 +31,12 @@ public class mytunesModel {
     public ObservableList getSongsAsObservable(){
     return ol;
     }
+    
+    public ObservableList testMethod(){
+    ObservableList test = FXCollections.observableArrayList();
+    test.addAll(getAllSongs());
+            return test;
+    }
     public void createPlaylist(String nameOfplaylist) {
         mytun.createPlaylist(nameOfplaylist);
     }

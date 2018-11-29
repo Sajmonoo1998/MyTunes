@@ -24,6 +24,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -97,6 +99,8 @@ public class mainWindowController implements Initializable {
     private TableColumn<Song, String> categoryCol;
     @FXML
     private TableColumn<Song, String> timeCol;
+    @FXML
+    private ProgressBar progressBar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -104,14 +108,20 @@ public class mainWindowController implements Initializable {
 //        hit = new Media(new File(songPath).toURI().toString());        
 //        mediaPlayer = new MediaPlayer(hit);
         isPlaying = false;
+        
+       
+        progressBar.setProgress(0.5);
 
         muted = false;
         slider.setMax(1.0);
         slider.setMin(0);
-        slider.setValue(50);
+        slider.setValue(0.5);
+        final ProgressIndicator pi = new ProgressIndicator(0);
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                progressBar.setProgress(newValue.doubleValue());
+                if(song!=null)
                 mediaPlayer.setVolume(newValue.doubleValue());
             }
         });
@@ -137,6 +147,12 @@ public class mainWindowController implements Initializable {
         tableSongs.getColumns().clear();
         tableSongs.setItems(songsAsObservable);
         tableSongs.getColumns().addAll(artistCol, titleCol, categoryCol, timeCol);
+        
+        artistCol.getStyleClass().add("my-special-table-style");
+        titleCol.getStyleClass().add("my-special-table-style");
+        categoryCol.getStyleClass().add("my-special-table-style");
+        timeCol.getStyleClass().add("my-special-table-style-time");
+        timeCol.getStyleClass().add("time-col");
     }
 
     @FXML

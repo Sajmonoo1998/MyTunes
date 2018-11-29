@@ -13,9 +13,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import mytunes.be.Song;
 import mytunes.dal.SongDAO;
 
 /**
@@ -24,7 +26,8 @@ import mytunes.dal.SongDAO;
  */
 public class MyTunes extends Application
 {
-    
+    private double xOffset = 0;
+    private double yOffset = 0;
     @Override
     public void start(Stage stage) throws Exception
     {
@@ -42,6 +45,20 @@ public class MyTunes extends Application
                 Platform.exit();
             }
         });
+        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
     }
 
     /**
@@ -49,7 +66,12 @@ public class MyTunes extends Application
      */
     public static void main(String[] args) throws IOException, SQLException
     {
-        
+//        SongDAO sd = new SongDAO();
+//      //  sd.searchSong("travis");
+//        for (Song s:sd.searchSong("tr")) {
+//    //  for (Song s:sd.getAllSongs()) {
+//            System.out.println(s);
+//        }
         launch(args);
         
     }

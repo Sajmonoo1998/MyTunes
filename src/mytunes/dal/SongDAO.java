@@ -31,26 +31,24 @@ public class SongDAO {
     }
 
     public Song createSong(int id,String artist, String title, String category, String time, String path) throws SQLException {
-
-        try {
-            Song song = new Song(id, artist, title, category, time, path);
-            Connection con = cp.getConnection();
-            String sql = "INSERT INTO Songs (id,artist,title,category,time,path) VALUES (?,?,?,?,?,?)";
+        {
+        try(Connection con = cp.getConnection())
+        {
+            String sql = "INSERT INTO Songs(id,artist,title,category,time,path) VALUES(?,?,?,?,?,?)";
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, id);
             ppst.setString(2, artist);
             ppst.setString(3, title);
             ppst.setString(4, category);
-            ppst.setString(5, time);
+            ppst.setString(5,time );
             ppst.setString(6, path);
-            ppst.executeQuery();
-            return song;
-        } catch (SQLServerException ex) {
-            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+            ppst.execute();
+            Song s = new Song(id, artist, title, category, time, path);
+            return s;
+        
     }
-
+        }
+    }
     public void deleteSong(Song song) throws SQLException {
 
         try {
@@ -58,7 +56,7 @@ public class SongDAO {
             String sql ="DELETE FROM Songs WHERE id=?";
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, song.getId());
-            
+            ppst.execute();
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -110,32 +108,32 @@ public class SongDAO {
     }
 
     public List<Song> searchSong(String query) throws SQLException {
-        try {
-        Connection con = cp.getConnection();
-        List<Song> allSongs = null;
-        List<Song> songs = null;
-        String sql = "SELECT FROM Songs WHERE title like '%?%' OR artist like '%?%'";
-        PreparedStatement ppst = con.prepareCall(sql);
-        ppst.setString(1, query);
-        ppst.setString(2, query);
-        ResultSet rs = ppst.executeQuery();
-             while(rs.next())
+        List<Song> songs = new ArrayList<>();
+        
+        try 
+        {   Connection con = cp.getConnection();
+            String sql = "SELECT * FROM Songs WHERE artist like ? OR title like ?";
+            PreparedStatement ppst = con.prepareStatement(sql);
+            ppst.setString(1, "%"+query+"%");
+            ppst.setString(2, "%"+query+"%");
+            ResultSet rs = ppst.executeQuery();
+            while(rs.next())
             {
-            int id = rs.getInt("id");
-                String title = rs.getString("artist");
-                String artist = rs.getString("title");
+                int id = rs.getInt("id");
+                String artist = rs.getString("artist");
+                String title = rs.getString("title");
                 String category = rs.getString("category");
                 String time = rs.getString("time");
                 String path = rs.getString("path");
                 Song song = new Song(id, artist, title, category, time, path);
-                allSongs.add(song);
+                songs.add(song);
             }
-             return allSongs;
-        } catch (SQLServerException ex) {
-            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        return null;
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        return songs;
     }
     public Integer nextAvailableSongID() throws SQLException{
      try {

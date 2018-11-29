@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
@@ -25,25 +26,29 @@ import mytunes.gui.Model.mytunesModel;
  */
 public class SongEditorController implements Initializable {
 
-    @FXML
-    private TextField txtTitle;
-    @FXML
-    private TextField txtArtist;
-    @FXML
-    private TextField txtTime;
-    @FXML
-    private ComboBox<String> comboboxCategory;
-    @FXML
-    private TextField txtFile;
+    
     
     private mytunesModel mm;
-
+    @FXML
+    private TextField titleField;
+    @FXML
+    private TextField artistField;
+    @FXML
+    private TextField timeField;
+    @FXML
+    private ComboBox<String> categoryCombobox;
+    @FXML
+    private TextField fileField;
+    private mainWindowController mwController;
     /**
      * Initializes the controller class.
      */
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainWindow.fxml"));
+        mwController = loader.<mainWindowController>getController();
+        
         try
         {
             mm = new mytunesModel();
@@ -51,13 +56,9 @@ public class SongEditorController implements Initializable {
         {
             Logger.getLogger(SongEditorController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        categoryCombobox.getItems().addAll("Pop","Metal","Hip hop","Minimal Techno","Rap");
     }    
 
-    @FXML
-    private void clickToMore(ActionEvent event) {
-        
-    }
 
     @FXML
     private void clickToPickFile(ActionEvent event) {
@@ -69,15 +70,23 @@ public class SongEditorController implements Initializable {
     }
 
     @FXML
-    private void clickToSave(ActionEvent event) {
+    private void clickToSave(ActionEvent event) throws IOException {
+        if(timeField.getText()!="" && artistField.getText()!="" && categoryCombobox.getSelectionModel().getSelectedItem()!=null 
+               && timeField.getText()!="" && fileField.getText()!=""){
         int id = mm.nextAvailableSongID();
-        String title = txtTitle.getText();
-        String artist = txtArtist.getText();
-        String category = "Pop"; // comboboxCategory.getSelectionModel().getSelectedItem();
-        String time = txtTime.getText();
-        String path = txtFile.getText();
-        mm.createSong(id, title, artist, category, time, path);
+        String title = titleField.getText();
+        String artist = artistField.getText();
+        String category = categoryCombobox.getSelectionModel().getSelectedItem();
+        String time = timeField.getText();
+        String path = fileField.getText();
+        mm.createSong(id, artist, title, category, time, path);
         ((Node) (event.getSource())).getScene().getWindow().hide();
+     
+        
+    }
+    }
+    @FXML
+    private void clickToMoreCategories(ActionEvent event) {
     }
     
     
