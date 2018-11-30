@@ -15,7 +15,7 @@ import mytunes.be.Song;
  */
 public interface mytunesLogicFacade {
 
-    public void createPlaylist(String nameOfplaylist);
+    public void createPlaylist(Playlist p);
 
     public void deletePlaylist(Playlist playlistToDelete);
 
@@ -36,9 +36,13 @@ public interface mytunesLogicFacade {
     public Integer nextAvailableSongID();
 
     public Integer nextAvailablePlaylistID();
-    
+
     public List<Song> getPlaylistSongs(Playlist p);
-    
+
     public void addSongToPlaylist(Song s, Playlist p);
+
+    public void deleteSongFromPlaylistSongs(int id);
+
+    public void deletePlaylistFromPlaylistSongs(int id);
 
 }

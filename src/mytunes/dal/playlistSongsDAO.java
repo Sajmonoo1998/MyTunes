@@ -73,5 +73,31 @@ public class playlistSongsDAO {
         }
        
     }
+    
+    public void deleteSongFromPlaylistSongs(int id) throws SQLException{
+    try {
+            Connection con = cp.getConnection();
+            String sql = "DELETE FROM playlistSongs WHERE songID=?";
+            PreparedStatement ppst = con.prepareCall(sql);
+            ppst.setInt(1, id);
+            ppst.execute();
+       
+        } catch (SQLServerException ex) {
+            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deletePlaylistFromPlaylistSongs(int id) throws SQLException{
+    try {
+            Connection con = cp.getConnection();
+            String sql = "DELETE FROM playlistSongs WHERE playlistID=?";
+            PreparedStatement ppst = con.prepareCall(sql);
+            ppst.setInt(1, id);
+            ppst.execute();
+       
+        } catch (SQLServerException ex) {
+            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

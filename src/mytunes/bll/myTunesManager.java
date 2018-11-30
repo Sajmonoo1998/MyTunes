@@ -35,9 +35,9 @@ public class myTunesManager implements mytunesLogicFacade {
     }
 
     @Override
-    public void createPlaylist(String nameOfplaylist) {
+    public void createPlaylist(Playlist p) {
         try {
-            playlistdao.createPlaylist(nameOfplaylist);
+            playlistdao.createPlaylist(p);
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,6 +153,22 @@ public class myTunesManager implements mytunesLogicFacade {
     public void addSongToPlaylist(Song s, Playlist p){
         try {
             playlistSongsDAO.addSongToPlaylist(s, p);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteSongFromPlaylistSongs(int id){
+        try {
+            playlistSongsDAO.deleteSongFromPlaylistSongs(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deletePlaylistFromPlaylistSongs(int id){
+        try {
+            playlistSongsDAO.deletePlaylistFromPlaylistSongs(id);
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }

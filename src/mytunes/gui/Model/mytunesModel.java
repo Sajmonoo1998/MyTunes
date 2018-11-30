@@ -6,6 +6,7 @@
 package mytunes.gui.Model;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,28 +24,27 @@ public class mytunesModel {
     public final mytunesLogicFacade mytun;
     public ObservableList olSongs;
     public ObservableList olPlaylists;
+
     public mytunesModel() throws IOException {
         olSongs = FXCollections.observableArrayList();
         olPlaylists = FXCollections.observableArrayList();
         mytun = new myTunesManager();
     }
 
-    public ObservableList getSongsAsObservable(){
+    public ObservableList getSongsAsObservable() {
+        olSongs.clear();
         olSongs.addAll(getAllSongs());
-    return olSongs;
+        return olSongs;
     }
-    public ObservableList getPlaylistsAsObservable(){
+
+    public ObservableList getPlaylistsAsObservable() {
+        olPlaylists.clear();
         olPlaylists.addAll(getAllPlaylists());
-    return olPlaylists;
+        return olPlaylists;
     }
-    
-    public ObservableList testMethod(){
-    ObservableList test = FXCollections.observableArrayList();
-    test.addAll(getAllSongs());
-            return test;
-    }
-    public void createPlaylist(String nameOfplaylist) {
-        mytun.createPlaylist(nameOfplaylist);
+
+    public void createPlaylist(Playlist p) {
+        mytun.createPlaylist(p);
     }
 
     public void deletePlaylist(Playlist playlistToDelete) {
@@ -53,6 +53,7 @@ public class mytunesModel {
 
     public List<Playlist> getAllPlaylists() {
         List<Playlist> p = mytun.getAllPlaylists();
+
         return p;
     }
 
@@ -89,11 +90,20 @@ public class mytunesModel {
     public Integer nextAvailablePlaylistID() {
         return mytun.nextAvailablePlaylistID();
     }
-    public List<Song> getPlaylistSongs(Playlist p){
-    return mytun.getPlaylistSongs(p);
+
+    public List<Song> getPlaylistSongs(Playlist p) {
+        return mytun.getPlaylistSongs(p);
     }
-    
-    public void addSongToPlaylist(Song s, Playlist p){
-    mytun.addSongToPlaylist(s, p);
+
+    public void addSongToPlaylist(Song s, Playlist p) {
+        mytun.addSongToPlaylist(s, p);
+    }
+
+    public void deleteSongFromPlaylistSongs(int id) {
+        mytun.deleteSongFromPlaylistSongs(id);
+    }
+
+    public void deletePlaylistFromPlaylistSongs(int id) {
+        mytun.deletePlaylistFromPlaylistSongs(id);
     }
 }

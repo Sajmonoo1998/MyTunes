@@ -25,19 +25,21 @@ import mytunes.be.Song;
  */
 public class PlaylistDAO {
     private final ConnectionProvider cp;
+    private final playlistSongsDAO playlistSDAO;
     public PlaylistDAO() throws IOException
     {
         cp = new ConnectionProvider();
+        playlistSDAO = new playlistSongsDAO();
     }
    
-    public void createPlaylist(String nameOfplaylist) throws SQLException{
+    public void createPlaylist(Playlist p) throws SQLException{
          try {
             Connection con = cp.getConnection();
             String sql = "INSERT INTO Playlists (id,name) VALUES (?,?)";
             PreparedStatement ppst = con.prepareCall(sql);
-            ppst.setInt(1, nextAvailablePlaylistID());
-            ppst.setString(2, nameOfplaylist);
-            ResultSet rs = ppst.executeQuery();
+            ppst.setInt(1, p.getID());
+            ppst.setString(2, p.getName());
+            ppst.execute();
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,6 +71,8 @@ public class PlaylistDAO {
             int id = rs.getInt(1);
             String name = rs.getString(2);
             Playlist pl = new Playlist(id, name);
+            pl.setCountOfSongsOnPlaylist(playlistSDAO.getPlaylistSongs(pl).size());
+                System.out.println(playlistSDAO.getPlaylistSongs(pl).size());
             p.add(pl);
             }
            
@@ -85,6 +89,7 @@ public class PlaylistDAO {
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setString(1, p.getName());
             ppst.setInt(2, p.getID());
+            ppst.execute();
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
