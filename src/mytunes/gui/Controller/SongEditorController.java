@@ -64,14 +64,15 @@ public class SongEditorController implements Initializable
     }
 
     @FXML
-    private void clickToPickFile(ActionEvent event)
+    private void clickToPickFile(ActionEvent event) throws IOException
     {
         FileDialog fd = new FileDialog(new JFrame());
         fd.setVisible(true);
         File[] f = fd.getFiles();
         if (f.length > 0)
         {
-            fileField.setText(fd.getFiles()[0].getAbsolutePath());
+            String filePath = "src\\mp3 files\\" + fd.getFiles()[0].getName();
+            fileField.setText(filePath);
         }
     }
 
