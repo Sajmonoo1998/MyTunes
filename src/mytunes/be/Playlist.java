@@ -17,6 +17,21 @@ public class Playlist {
     private String name;
     List<Song> songsList = new ArrayList<>();
 
+    public String getName()
+    {
+        return name;
+    }
+
+    public List<Song> getSongsList()
+    {
+        return songsList;
+    }
+
+    public void setSongsList(List<Song> songsList)
+    {
+        this.songsList = songsList;
+    }
+
     public Playlist(int id,String name) {
         this.id = id;
         this.name=name;

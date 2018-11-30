@@ -25,10 +25,10 @@ public class mytunesModel {
     public mytunesModel() throws IOException {
         ol = FXCollections.observableArrayList();
         mytun = new myTunesManager();
-        ol.addAll(getAllSongs());
     }
 
     public ObservableList getSongsAsObservable(){
+        ol.addAll(getAllSongs());
     return ol;
     }
     
