@@ -5,6 +5,8 @@
  */
 package mytunes.gui.Controller;
 
+import java.awt.FileDialog;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javax.swing.JFrame;
 import mytunes.gui.Model.mytunesModel;
 
 /**
@@ -23,27 +26,29 @@ import mytunes.gui.Model.mytunesModel;
  *
  * @author Szymon
  */
-public class SongEditorController implements Initializable {
+public class SongEditorController implements Initializable
+{
 
-    @FXML
-    private TextField txtTitle;
-    @FXML
-    private TextField txtArtist;
-    @FXML
-    private TextField txtTime;
-    @FXML
-    private ComboBox<String> comboboxCategory;
-    @FXML
-    private TextField txtFile;
-    
     private mytunesModel mm;
+    @FXML
+    private TextField titleField;
+    @FXML
+    private TextField artistField;
+    @FXML
+    private TextField timeField;
+    @FXML
+    private ComboBox<String> categoryCombobox;
+    @FXML
+    private TextField fileField;
+    private mainWindowController mwController;
+    private TextField txtCategory;
 
     /**
      * Initializes the controller class.
      */
-    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         try
         {
             mm = new mytunesModel();
@@ -51,33 +56,57 @@ public class SongEditorController implements Initializable {
         {
             Logger.getLogger(SongEditorController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }    
-
-    @FXML
-    private void clickToMore(ActionEvent event) {
-        
+        categoryCombobox.getItems().addAll("Pop", "Metal", "Hip hop", "Minimal Techno", "Rap");
     }
 
     @FXML
-    private void clickToPickFile(ActionEvent event) {
+    private void clickToPickFile(ActionEvent event) throws IOException
+    {
+        FileDialog fd = new FileDialog(new JFrame());
+        fd.setVisible(true);
+        File[] f = fd.getFiles();
+        if (f.length > 0)
+        {
+            String filePath = "src\\mp3 files\\" + fd.getFiles()[0].getName();
+            fileField.setText(filePath);
+        }
     }
 
     @FXML
-    private void clickToCancel(ActionEvent event) {
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-    }
-
-    @FXML
-    private void clickToSave(ActionEvent event) {
-        int id = mm.getNextSongID();
-        String title = txtTitle.getText();
-        String artist = txtArtist.getText();
-        String category = "Pop"; // comboboxCategory.getSelectionModel().getSelectedItem();
-        String time = txtTime.getText();
-        String path = txtFile.getText();
-        mm.createSong(id, title, artist, category, time, path);
+    private void clickToCancel(ActionEvent event)
+    {
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
-    
+
+    @FXML
+    private void clickToSave(ActionEvent event) throws IOException
+    {
+        if (timeField.getText() != "" && artistField.getText() != "" && categoryCombobox.getSelectionModel().getSelectedItem() != null
+                && timeField.getText() != "" && fileField.getText() != "")
+        {
+            int id = mm.nextAvailableSongID();
+            String title = titleField.getText();
+            String artist = artistField.getText();
+            String category = categoryCombobox.getSelectionModel().getSelectedItem();
+            String time = timeField.getText();
+            String path = fileField.getText();
+            mm.createSong(id, artist, title, category, time, path);
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+        }
+    }
+
+    private void clickToSaveCategory(ActionEvent event)
+    {
+        categoryCombobox.getItems().add(txtCategory.getText());
+    }
+
+    @FXML
+    private void clickToMoreCategories(ActionEvent event)
+    {
+        String path = "mytunes/gui/View/moreCategory.fxml";
+        mm.openWindow(path);
+    }
+
+
 }
