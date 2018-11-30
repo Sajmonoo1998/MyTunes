@@ -50,5 +50,5 @@
 
 .progress-bar > .track {
   -fx-text-box-border: white;
-  -fx-control-inner-background: grey;
+  -fx-control-inner-background: #171717;
 }
