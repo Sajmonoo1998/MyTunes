@@ -21,7 +21,7 @@ public interface mytunesLogicFacade {
 
     public List<Playlist> getAllPlaylists();
 
-    public void updatePlaylist(String newPlaylistName);
+    public void updatePlaylist(Playlist p);
 
     public void createSong(int id, String artist, String title, String category, String time, String path);
 
@@ -36,5 +36,9 @@ public interface mytunesLogicFacade {
     public Integer nextAvailableSongID();
 
     public Integer nextAvailablePlaylistID();
+    
+    public List<Song> getPlaylistSongs(Playlist p);
+    
+    public void addSongToPlaylist(Song s, Playlist p);
 
 }

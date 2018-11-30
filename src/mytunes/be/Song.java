@@ -80,7 +80,7 @@ public class Song {
 
     @Override
     public String toString() {
-        return "Song{" + "id=" + id + ", title=" + title + ", artist=" + artist + ", category=" + category + ", time=" + time + ", path=" + path + ", playlistID=" + playlistID + '}';
+        return artist+" - "+title;
     }
     
     

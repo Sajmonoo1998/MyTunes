@@ -21,15 +21,21 @@ import mytunes.bll.mytunesLogicFacade;
 public class mytunesModel {
 
     public final mytunesLogicFacade mytun;
-    public ObservableList ol;
+    public ObservableList olSongs;
+    public ObservableList olPlaylists;
     public mytunesModel() throws IOException {
-        ol = FXCollections.observableArrayList();
+        olSongs = FXCollections.observableArrayList();
+        olPlaylists = FXCollections.observableArrayList();
         mytun = new myTunesManager();
     }
 
     public ObservableList getSongsAsObservable(){
-        ol.addAll(getAllSongs());
-    return ol;
+        olSongs.addAll(getAllSongs());
+    return olSongs;
+    }
+    public ObservableList getPlaylistsAsObservable(){
+        olPlaylists.addAll(getAllPlaylists());
+    return olPlaylists;
     }
     
     public ObservableList testMethod(){
@@ -50,8 +56,8 @@ public class mytunesModel {
         return p;
     }
 
-    public void updatePlaylist(String newPlaylistName) {
-        mytun.updatePlaylist(newPlaylistName);
+    public void updatePlaylist(Playlist p) {
+        mytun.updatePlaylist(p);
     }
 
     public void createSong(int id, String title, String artist, String category, String time, String path) {
@@ -82,5 +88,12 @@ public class mytunesModel {
 
     public Integer nextAvailablePlaylistID() {
         return mytun.nextAvailablePlaylistID();
+    }
+    public List<Song> getPlaylistSongs(Playlist p){
+    return mytun.getPlaylistSongs(p);
+    }
+    
+    public void addSongToPlaylist(Song s, Playlist p){
+    mytun.addSongToPlaylist(s, p);
     }
 }

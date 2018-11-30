@@ -16,6 +16,7 @@ import mytunes.be.Playlist;
 import mytunes.be.Song;
 import mytunes.dal.PlaylistDAO;
 import mytunes.dal.SongDAO;
+import mytunes.dal.playlistSongsDAO;
 
 /**
  *
@@ -25,37 +26,56 @@ public class myTunesManager implements mytunesLogicFacade {
 
     private final SongDAO songdao;
     private final PlaylistDAO playlistdao;
+    private final playlistSongsDAO playlistSongsDAO;
 
     public myTunesManager() throws IOException {
         songdao = new SongDAO();
         playlistdao = new PlaylistDAO();
+        playlistSongsDAO = new playlistSongsDAO();
     }
 
     @Override
     public void createPlaylist(String nameOfplaylist) {
-        playlistdao.createPlaylist(nameOfplaylist);
+        try {
+            playlistdao.createPlaylist(nameOfplaylist);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void deletePlaylist(Playlist playlistToDelete) {
-        playlistdao.deletePlaylist(playlistToDelete);
+        try {
+            playlistdao.deletePlaylist(playlistToDelete);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public List<Playlist> getAllPlaylists() {
-        List<Playlist> playlists = playlistdao.getAllPlaylists();
-        return playlists;
-    }
-
-    @Override
-    public void updatePlaylist(String newPlaylistName) {
-        playlistdao.updatePlaylist(newPlaylistName);
-    }
-
-    @Override
-    public void createSong(int id,String artist, String title, String category, String time, String path) {
+        List<Playlist> playlists;
         try {
-            songdao.createSong(id,artist, title, category, time, path);
+         return   playlists = playlistdao.getAllPlaylists();
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public void updatePlaylist(Playlist p) {
+        try {
+            playlistdao.updatePlaylist(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void createSong(int id, String artist, String title, String category, String time, String path) {
+        try {
+            songdao.createSong(id, artist, title, category, time, path);
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,11 +96,11 @@ public class myTunesManager implements mytunesLogicFacade {
     public List<Song> getAllSongs() {
         List<Song> allsongs;
         try {
-           return allsongs = songdao.getAllSongs();
+            return allsongs = songdao.getAllSongs();
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return  null;
+        return null;
     }
 
     @Override
@@ -96,26 +116,46 @@ public class myTunesManager implements mytunesLogicFacade {
     public List<Song> searchSong(String query) {
         List<Song> searchResult;
         try {
-           return searchResult = songdao.searchSong(query);
+            return searchResult = songdao.searchSong(query);
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public Integer nextAvailableSongID(){
+
+    public Integer nextAvailableSongID() {
         try {
-           return songdao.nextAvailableSongID();
+            return songdao.nextAvailableSongID();
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public Integer nextAvailablePlaylistID(){
+
+    public Integer nextAvailablePlaylistID() {
         try {
-           return playlistdao.nextAvailablePlaylistID();
+            return playlistdao.nextAvailablePlaylistID();
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+
+    public List<Song> getPlaylistSongs(Playlist p) {
+        try {
+            return playlistSongsDAO.getPlaylistSongs(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public void addSongToPlaylist(Song s, Playlist p){
+        try {
+            playlistSongsDAO.addSongToPlaylist(s, p);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

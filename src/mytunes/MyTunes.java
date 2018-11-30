@@ -17,8 +17,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import mytunes.be.Playlist;
 import mytunes.be.Song;
+import mytunes.dal.PlaylistDAO;
 import mytunes.dal.SongDAO;
+import mytunes.dal.playlistSongsDAO;
 
 /**
  *
@@ -66,12 +69,7 @@ public class MyTunes extends Application
      */
     public static void main(String[] args) throws IOException, SQLException
     {
-//        SongDAO sd = new SongDAO();
-//      //  sd.searchSong("travis");
-//        for (Song s:sd.searchSong("tr")) {
-//    //  for (Song s:sd.getAllSongs()) {
-//            System.out.println(s);
-//        }
+       
         launch(args);
         
     }

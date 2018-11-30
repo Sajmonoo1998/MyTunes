@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
+<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
    <children>
       <VBox layoutY="199.0" prefHeight="530.0" prefWidth="1019.0">
          <children>
@@ -45,10 +45,11 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tablePlaylist" layoutX="33.0" layoutY="60.0" prefHeight="386.0" prefWidth="255.0" style="-fx-background-color: #0f1419; -fx-border-color: white;">
+                  <TableView fx:id="tablePlaylist" layoutX="33.0" layoutY="60.0" onMouseClicked="#youClickedPlaylist" prefHeight="386.0" prefWidth="255.0" style="-fx-background-color: #0f1419; -fx-border-color: white;">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="178.0" text="C2" />
+                      <TableColumn fx:id="playlistNameCol" prefWidth="149.0" text="Name" />
+                      <TableColumn fx:id="playlistSongsCol" prefWidth="54.0" text="Songs" />
+                        <TableColumn fx:id="playlistTimeCol" prefWidth="55.0" text="Time" />
                     </columns>
                   </TableView>
                   <TableView fx:id="tableSongs" layoutX="595.0" layoutY="60.0" prefHeight="386.0" prefWidth="373.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-alignment: CENTER_RIGHT;">

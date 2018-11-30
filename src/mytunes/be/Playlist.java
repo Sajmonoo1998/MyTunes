@@ -16,7 +16,8 @@ public class Playlist {
     private final int id;
     private String name;
     List<Song> songsList = new ArrayList<>();
-
+    private int countOfSongsOnPlaylist=0;
+    private String timeLengthOfPlaylist="0";
     public String getName()
     {
         return name;
@@ -25,6 +26,10 @@ public class Playlist {
     public List<Song> getSongsList()
     {
         return songsList;
+        
+    }
+    public int getID(){
+    return id;
     }
 
     public void setSongsList(List<Song> songsList)
@@ -36,6 +41,22 @@ public class Playlist {
         this.id = id;
         this.name=name;
     }
+
+    public int getCountOfSongsOnPlaylist() {
+       return songsList.size();
+    }
+
+ 
+
+    public String getTimeLengthOfPlaylist() {
+        return timeLengthOfPlaylist;
+    }
+    
+//    public void addSongToPlaylist(Song song){
+//    songsList.add(song);
+//    }
+   
+    
 
     @Override
     public String toString() {

@@ -39,7 +39,7 @@ public class PlaylistEditorController implements Initializable
     {
         // TODO
     }    
-
+    
     @FXML
     private void clickToCancel(ActionEvent event)
     {

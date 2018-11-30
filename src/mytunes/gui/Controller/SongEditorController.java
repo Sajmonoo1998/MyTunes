@@ -104,4 +104,9 @@ public class SongEditorController implements Initializable
     {
     }
 
+    void setController(mainWindowController controller) {
+        
+       this.mwController =controller;
+    }
+
 }
