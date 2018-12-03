@@ -38,6 +38,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
@@ -97,6 +100,7 @@ public class mainWindowController implements Initializable {
     private Song song = null;
     private ObservableList songsAsObservable;
     private ObservableList playlistsAsObservable;
+    private ObservableList searchedSongsAsObservable;
     @FXML
     private TableColumn<Song, String> artistCol;
     @FXML
@@ -117,7 +121,7 @@ public class mainWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         isPlaying = false;
-        
+        searchedSongsAsObservable = FXCollections.observableArrayList();
         progressBar.setProgress(0.5);
         
         muted = false;
@@ -147,13 +151,9 @@ public class mainWindowController implements Initializable {
     public void setSongsTable() {
         
         songsAsObservable = FXCollections.observableArrayList(mm.getSongsAsObservable());
-        //Artist col
         artistCol.setCellValueFactory(new PropertyValueFactory<>("artist"));
-        //Title col
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        //Category col
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-        //Time col
         timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
         tableSongs.getColumns().clear();
         tableSongs.setItems(songsAsObservable);
@@ -171,17 +171,16 @@ public class mainWindowController implements Initializable {
         tableSongs.setItems(mm.getSongsAsObservable());
     }
     
-    public void refreshTablePlaylists()  {
+    public void refreshTablePlaylists() {
         tablePlaylist.getItems().clear();
         tablePlaylist.setItems(mm.getPlaylistsAsObservable());
     }
     
-    private void setPlaylistTable()  {
+    private void setPlaylistTable() {
         playlistsAsObservable = FXCollections.observableArrayList(mm.getPlaylistsAsObservable());
         playlistNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         playlistSongsCol.setCellValueFactory(new PropertyValueFactory<>("countOfSongsOnPlaylist"));
         playlistTimeCol.setCellValueFactory(new PropertyValueFactory<>("timeLengthOfPlaylist"));
-        
         tablePlaylist.getColumns().clear();
         tablePlaylist.setItems(playlistsAsObservable);
         tablePlaylist.getColumns().addAll(playlistNameCol, playlistSongsCol, playlistTimeCol);
@@ -192,29 +191,19 @@ public class mainWindowController implements Initializable {
     }
     
     @FXML
-    private void clickToSearch(ActionEvent event) {
-        String text = txtSearch.getText();
-        List<Song> ls = mm.searchSong(text);
-        if (ls.size() > 0) {
-            tableSongs.getItems().removeAll(songsAsObservable);
-            tableSongs.getItems().addAll(ls);
-        } else {
-            tableSongs.getItems().removeAll(songsAsObservable);
-            tableSongs.getItems().addAll(songsAsObservable);
+    private void clickToDeleteSongFromPlaylist(ActionEvent event) {
+        if (listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null) {
+            Song s = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            mm.deleteSongFromPlaylistSongs(s.getId());
+            listSongsOnPlaylist.getItems().clear();
+            Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
+            List<Song> l = mm.getPlaylistSongs(p);
+            listSongsOnPlaylist.getItems().addAll(l);
         }
     }
     
     @FXML
-    private void clickToDeleteSongFromPlaylist(ActionEvent event) {
-        
-    }
-    
-    @FXML
     private void clickToEditSong(ActionEvent event) throws IOException {
-//        String path = "mytunes/gui/View/songEditor.fxml";
-//        String name = "Song Editor";
-//        openWindow(path, name);
-
         if (tableSongs.getSelectionModel().getSelectedItem() != null) {
             int id = tableSongs.getSelectionModel().getSelectedItem().getId();
             Parent root1;
@@ -246,15 +235,11 @@ public class mainWindowController implements Initializable {
         Song song = tableSongs.getSelectionModel().getSelectedItem();
         mm.deleteSong(song);
         mm.deleteSongFromPlaylistSongs(song.getId());
-        tableSongs.getItems().removeAll(songsAsObservable);
-        tableSongs.getItems().addAll(mm.getSongsAsObservable());
+        refreshTableSongs();
     }
     
     @FXML
     private void clickToNewPlaylist(ActionEvent event) throws IOException {
-//        String path = "mytunes/gui/View/playlistEditor.fxml";
-//        String name = "Playlist Editor";
-//        openWindow(path, name);
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mytunes/gui/View/playlistEditor.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -267,9 +252,6 @@ public class mainWindowController implements Initializable {
     
     @FXML
     private void clickToEditPlaylist(ActionEvent event) throws IOException {
-//        String path = "mytunes/gui/View/playlistEditor.fxml";
-//        String name = "Playlist Editor";
-//        openWindow(path, name);
         if (tablePlaylist.getSelectionModel().getSelectedItem() != null) {
             int id = tablePlaylist.getSelectionModel().getSelectedItem().getID();
             System.out.println(id);
@@ -292,8 +274,7 @@ public class mainWindowController implements Initializable {
             Playlist playlistToDelete = (Playlist) tablePlaylist.getSelectionModel().getSelectedItem();
             mm.deletePlaylist(playlistToDelete);
             mm.deletePlaylistFromPlaylistSongs(playlistToDelete.getID());
-            tableSongs.getItems().removeAll(songsAsObservable);
-            tableSongs.getItems().addAll(mm.getSongsAsObservable());
+            refreshTablePlaylists();
         }
     }
     
@@ -482,6 +463,33 @@ public class mainWindowController implements Initializable {
             Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
             List<Song> l = mm.getPlaylistSongs(p);
             listSongsOnPlaylist.getItems().addAll(l);
+        }
+    }
+    
+    @FXML
+    private void clickToSearch(ActionEvent event) {
+        search();
+    }
+    
+    private void search() {
+        String text = txtSearch.getText();
+        List<Song> ls = mm.searchSong(text);
+        
+        searchedSongsAsObservable.clear();
+        searchedSongsAsObservable.addAll(ls);
+        if (ls.size() > 0 && text.length() > 0) {
+            tableSongs.setItems(searchedSongsAsObservable);
+        } else if (ls.size() == 0 && text.length() > 0) {
+            tableSongs.getItems().clear();
+        } else if (ls.size() == 0 && text.length() == 0) {
+            refreshTableSongs();
+        }
+    }
+    
+    @FXML
+    private void enterSearch(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER && txtSearch.isFocused()) {
+            search();
         }
     }
     

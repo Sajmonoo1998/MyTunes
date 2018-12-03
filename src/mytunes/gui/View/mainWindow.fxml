@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
+<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
    <children>
       <VBox layoutY="199.0" prefHeight="530.0" prefWidth="1019.0">
          <children>
@@ -100,7 +100,7 @@
                      </font>
                   </Label>
                   <Button layoutX="271.0" layoutY="13.0" mnemonicParsing="false" onAction="#clickToSearch" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-border-radius: 25,25,25,25;" text="Search" textFill="WHITE" />
-                  <TextField fx:id="txtSearch" layoutX="75.0" layoutY="13.0" prefHeight="25.0" prefWidth="187.0" />
+                  <TextField fx:id="txtSearch" layoutX="75.0" layoutY="13.0" onKeyPressed="#enterSearch" prefHeight="25.0" prefWidth="187.0" />
                   <ImageView fx:id="nextButton" fitHeight="35.0" fitWidth="35.0" layoutX="932.0" layoutY="88.0" onMousePressed="#nextPressed" onMouseReleased="#nextReleased">
                      <image>
                         <Image url="@../../assets/next-button-black.png" />
