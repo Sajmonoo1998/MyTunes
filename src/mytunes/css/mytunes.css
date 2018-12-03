@@ -28,8 +28,23 @@
   -fx-text-fill: white;
 }
 
+
+#listSongsOnPlaylist.list-view .list-cell {
+    
+    -fx-background-color: #0f1419;
+    -fx-text-fill: white;
+    
+}
+#listSongsOnPlaylist.list-view .list-cell:selected {
+    
+    -fx-border-color: white;
+    -fx-text-fill: white;
+    
+}
+
 .table-row-cell:selected{
-    -fx-border-color: #21a5d1;
+    -fx-border-color: white;
+    -fx-background-color: white;
 }
 
 .slider .track{
