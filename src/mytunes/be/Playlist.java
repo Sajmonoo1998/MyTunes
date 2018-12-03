@@ -12,19 +12,63 @@ import java.util.List;
  *
  * @author Szymon
  */
-public class Playlist {
+public class Playlist
+{
+
     private final int id;
     private String name;
+    List<Song> songsList = new ArrayList<>();
+    private int countOfSongsOnPlaylist = 0;
+    private double timeLengthOfPlaylist = 0.0;
 
     public String getName()
     {
         return name;
     }
-    List<Song> songsList = new ArrayList<>();
 
-    public Playlist(int id,String name) {
-        this.id = id;
-        this.name=name;
+    public List<Song> getSongsList()
+    {
+        return songsList;
+
     }
-    
+
+    public int getID()
+    {
+        return id;
+    }
+
+    public void setSongsList(List<Song> songsList)
+    {
+        this.songsList = songsList;
+    }
+
+    public Playlist(int id, String name)
+    {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getCountOfSongsOnPlaylist()
+    {
+        return songsList.size();
+    }
+
+    public double getTimeLengthOfPlaylist()
+    {
+        for (Song song : songsList)
+        {
+            timeLengthOfPlaylist += Double.parseDouble(song.getTime());
+        }
+        return timeLengthOfPlaylist;
+    }
+
+//    public void addSongToPlaylist(Song song){
+//    songsList.add(song);
+//    }
+    @Override
+    public String toString()
+    {
+        return "Playlist{" + "id=" + id + ", name=" + name + ", songsList=" + songsList + '}';
+    }
+
 }
