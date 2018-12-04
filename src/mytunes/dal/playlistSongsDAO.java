@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 import mytunes.be.Playlist;
 import mytunes.be.Song;
 
-
 /**
  *
  * @author Szymon
@@ -59,44 +58,67 @@ public class playlistSongsDAO {
     }
 
     public void addSongToPlaylist(Song s, Playlist p) throws SQLException {
-
+        int id = -1;
         try {
             Connection con = cp.getConnection();
-            String sql = "INSERT INTO playlistSongs (playlistID,songID) VALUES (?,?)";
+            String sql = "INSERT INTO playlistSongs (playlistID,songID,positionInListID) VALUES (?,?,?)";
             PreparedStatement ppst = con.prepareCall(sql);
+            id = getNewestSongInPlaylist(p.getID()) + 1;
             ppst.setInt(1, p.getID());
             ppst.setInt(2, s.getId());
+            ppst.setInt(3, id);
             ppst.execute();
-       
+            s.setPositionInListID(id);
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
     }
-    
-    public void deleteSongFromPlaylistSongs(int id) throws SQLException{
-    try {
+
+    public void deleteSongFromPlaylistSongs(int id) throws SQLException {
+        try {
             Connection con = cp.getConnection();
             String sql = "DELETE FROM playlistSongs WHERE songID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
             ppst.execute();
-       
+
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void deletePlaylistFromPlaylistSongs(int id) throws SQLException{
-    try {
+
+    public void deletePlaylistFromPlaylistSongs(int id) throws SQLException {
+        try {
             Connection con = cp.getConnection();
             String sql = "DELETE FROM playlistSongs WHERE playlistID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
             ppst.execute();
-       
+
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private int getNewestSongInPlaylist(int id) {
+        int newestID = -1;
+        try (Connection con = cp.getConnection()) {
+            String query = "SELECT TOP(1) * FROM playlistSongs WHERE PlaylistID = ? ORDER by positionInListID desc";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            ResultSet rs = preparedStmt.executeQuery();
+            while (rs.next()) {
+                newestID = rs.getInt("positionInListID");
+            }
+            System.out.println(newestID);
+            return newestID;
+        } catch (SQLServerException ex) {
+            System.out.println(ex);
+            return newestID;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return newestID;
         }
     }
 

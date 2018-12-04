@@ -17,6 +17,7 @@ public class Song {
     private String time;
     private String path;
     private int playlistID;
+    private int positionInListID;
     public Song(int id, String artist, String title, String category, String time, String path) {
         this.id = id;
         this.title = title;
@@ -82,7 +83,14 @@ public class Song {
     public String toString() {
         return artist+" - "+title;
     }
+
     
+    public void setPositionInListID(int id) {
+       this.positionInListID=id;
+    }
+    public int getPositionInListID(){
+    return positionInListID;
+    }
     
 
     
