@@ -5,6 +5,7 @@
  */
 package mytunes.gui.Controller;
 
+import static java.awt.SystemColor.info;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -47,7 +49,14 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import mytunes.be.Playlist;
 import mytunes.be.Song;
 import mytunes.gui.Model.mytunesModel;
@@ -73,7 +82,11 @@ public class mainWindowController implements Initializable {
     boolean muted;
 
     Media hit;
+    File yourFile;
+    AudioInputStream stream;
     MediaPlayer mediaPlayer;
+    AudioFormat format;
+    private int songLenght;
     @FXML
     private ImageView playButton;
     private String url;
@@ -117,6 +130,12 @@ public class mainWindowController implements Initializable {
     private TableColumn<Playlist, Integer> playlistSongsCol;
     @FXML
     private TableColumn<Playlist, String> playlistTimeCol;
+    @FXML
+    private ProgressBar songProgress;
+    @FXML
+    private Label songTimeLabel;
+    @FXML
+    private Label currentTimeLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -279,26 +298,46 @@ public class mainWindowController implements Initializable {
         }
     }
 
-    private void playSelectedSong() {
+    private void playSelectedSong() throws UnsupportedAudioFileException, IOException {
         if (song == null) {
             song = tableSongs.getSelectionModel().getSelectedItem();
             songPath = song.getPath();
             hit = new Media(new File(songPath).toURI().toString());
             mediaPlayer = new MediaPlayer(hit);
+            Runnable runnable = new progressUpdate();
+            Thread thread = new Thread(runnable);
+            thread.start();
+            songTimeLabel.setText(song.getTime());
+            lblSongTitle.setText(song.getArtist()+"|"+song.getTitle());
+            mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+            songLenght = (int) hit.getDuration().toSeconds();
             mediaPlayer.play();
+        }
+    });
         } else if (song == tableSongs.getSelectionModel().getSelectedItem()) {
-            mediaPlayer.play();
+             mediaPlayer.play();
         } else if (song != tableSongs.getSelectionModel().getSelectedItem()) {
             song = tableSongs.getSelectionModel().getSelectedItem();
             songPath = song.getPath();
             hit = new Media(new File(songPath).toURI().toString());
             mediaPlayer = new MediaPlayer(hit);
+            songTimeLabel.setText(song.getTime());
+            lblSongTitle.setText(song.getArtist()+"|"+song.getTitle());
+             mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+            songLenght = (int) hit.getDuration().toSeconds();
             mediaPlayer.play();
+        }
+    });
+             
         }
     }
 
     @FXML
-    private void playReleased(MouseEvent event) {
+    private void playReleased(MouseEvent event) throws UnsupportedAudioFileException, IOException {
 
         if (!isPlaying) {
             isPlaying = true;
@@ -494,6 +533,48 @@ public class mainWindowController implements Initializable {
         if (event.getCode() == KeyCode.ENTER && txtSearch.isFocused()) {
             search();
         }
+    }
+    
+    private class progressUpdate implements Runnable{
+       @Override public void run() {
+            while (true) {
+                    Platform.runLater(new Runnable() {
+                    @Override public void run() {
+                        Duration currentTime = mediaPlayer.getCurrentTime();
+                        double d = currentTime.toSeconds();
+                        int i = (int) d;
+                        currentTimeLabel.setText(currentTimeCalculator(i));
+                        updateProgressBar(currentTime.toSeconds());
+                        }
+                    });
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    
+                }
+        }
+
+
+    }
+    
+    private void updateProgressBar(final double currentTime){
+        double fractionalProgress = (double) currentTime / (double) songLenght;
+
+        songProgress.setProgress(fractionalProgress);
+    
+    
+    
+    }
+    
+    private String currentTimeCalculator(int timeSec){
+        int minutes = timeSec/60;
+        int seconds = timeSec % 60;
+        if(seconds<10)
+        return minutes+":0"+seconds;
+        else
+        return minutes+":"+seconds;
     }
 
 }
