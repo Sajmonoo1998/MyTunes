@@ -65,7 +65,8 @@ import mytunes.gui.Model.mytunesModel;
  *
  * @author leopo
  */
-public class mainWindowController implements Initializable {
+public class mainWindowController implements Initializable
+{
 
     @FXML
     private ListView<Song> listSongsOnPlaylist;
@@ -138,7 +139,8 @@ public class mainWindowController implements Initializable {
     private Label currentTimeLabel;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         isPlaying = false;
         searchedSongsAsObservable = FXCollections.observableArrayList();
         progressBar.setProgress(0.5);
@@ -148,18 +150,23 @@ public class mainWindowController implements Initializable {
         slider.setMin(0);
         slider.setValue(0.5);
         final ProgressIndicator pi = new ProgressIndicator(0);
-        slider.valueProperty().addListener(new ChangeListener<Number>() {
+        slider.valueProperty().addListener(new ChangeListener<Number>()
+        {
             @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+            {
                 progressBar.setProgress(newValue.doubleValue());
-                if (song != null) {
+                if (song != null)
+                {
                     mediaPlayer.setVolume(newValue.doubleValue());
                 }
             }
         });
-        try {
+        try
+        {
             mm = new mytunesModel();
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -167,7 +174,8 @@ public class mainWindowController implements Initializable {
         setPlaylistTable();
     }
 
-    public void setSongsTable() {
+    public void setSongsTable()
+    {
 
         songsAsObservable = FXCollections.observableArrayList(mm.getSongsAsObservable());
         artistCol.setCellValueFactory(new PropertyValueFactory<>("artist"));
@@ -185,17 +193,20 @@ public class mainWindowController implements Initializable {
         timeCol.getStyleClass().add("time-col");
     }
 
-    public void refreshTableSongs() {
+    public void refreshTableSongs()
+    {
         tableSongs.getItems().clear();
         tableSongs.setItems(mm.getSongsAsObservable());
     }
 
-    public void refreshTablePlaylists() {
+    public void refreshTablePlaylists()
+    {
         tablePlaylist.getItems().clear();
         tablePlaylist.setItems(mm.getPlaylistsAsObservable());
     }
 
-    private void setPlaylistTable() {
+    private void setPlaylistTable()
+    {
         playlistsAsObservable = FXCollections.observableArrayList(mm.getPlaylistsAsObservable());
         playlistNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         playlistSongsCol.setCellValueFactory(new PropertyValueFactory<>("countOfSongsOnPlaylist"));
@@ -210,9 +221,11 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void clickToDeleteSongFromPlaylist(ActionEvent event) {
-        if (listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null) {
-            System.out.println(listSongsOnPlaylist.getSelectionModel().getSelectedItem().getPositionInListID() );
+    private void clickToDeleteSongFromPlaylist(ActionEvent event)
+    {
+        if (listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null)
+        {
+            System.out.println(listSongsOnPlaylist.getSelectionModel().getSelectedItem().getPositionInListID());
             Song s = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
             mm.deleteSongFromPlaylistSongs(s.getId());
             listSongsOnPlaylist.getItems().clear();
@@ -223,8 +236,10 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void clickToEditSong(ActionEvent event) throws IOException {
-        if (tableSongs.getSelectionModel().getSelectedItem() != null) {
+    private void clickToEditSong(ActionEvent event) throws IOException
+    {
+        if (tableSongs.getSelectionModel().getSelectedItem() != null)
+        {
             int id = tableSongs.getSelectionModel().getSelectedItem().getId();
             Parent root1;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mytunes/gui/View/songEditor.fxml"));
@@ -238,7 +253,8 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void clickToNewSong(ActionEvent event) throws IOException {
+    private void clickToNewSong(ActionEvent event) throws IOException
+    {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mytunes/gui/View/songEditor.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -251,7 +267,8 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void clickToDeleteSong(ActionEvent event) {
+    private void clickToDeleteSong(ActionEvent event)
+    {
         Song song = tableSongs.getSelectionModel().getSelectedItem();
         mm.deleteSong(song);
         mm.deleteSongFromPlaylistSongs(song.getId());
@@ -259,7 +276,8 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void clickToNewPlaylist(ActionEvent event) throws IOException {
+    private void clickToNewPlaylist(ActionEvent event) throws IOException
+    {
         Parent root1;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mytunes/gui/View/playlistEditor.fxml"));
         root1 = (Parent) fxmlLoader.load();
@@ -271,8 +289,10 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void clickToEditPlaylist(ActionEvent event) throws IOException {
-        if (tablePlaylist.getSelectionModel().getSelectedItem() != null) {
+    private void clickToEditPlaylist(ActionEvent event) throws IOException
+    {
+        if (tablePlaylist.getSelectionModel().getSelectedItem() != null)
+        {
             int id = tablePlaylist.getSelectionModel().getSelectedItem().getID();
             System.out.println(id);
             Parent root1;
@@ -289,8 +309,10 @@ public class mainWindowController implements Initializable {
 
     @FXML
     private void clickToDeletePlaylist(ActionEvent event
-    ) {
-        if (tablePlaylist.getSelectionModel().getSelectedItem() != null) {
+    )
+    {
+        if (tablePlaylist.getSelectionModel().getSelectedItem() != null)
+        {
             Playlist playlistToDelete = (Playlist) tablePlaylist.getSelectionModel().getSelectedItem();
             mm.deletePlaylist(playlistToDelete);
             mm.deletePlaylistFromPlaylistSongs(playlistToDelete.getID());
@@ -298,56 +320,66 @@ public class mainWindowController implements Initializable {
         }
     }
 
-    private void playSelectedSong() throws UnsupportedAudioFileException, IOException {
-        if (song == null) {
-            song = tableSongs.getSelectionModel().getSelectedItem();
-            songPath = song.getPath();
-            hit = new Media(new File(songPath).toURI().toString());
-            mediaPlayer = new MediaPlayer(hit);
+    private void playSelectedSong() throws UnsupportedAudioFileException, IOException
+    {
+        if (song == null)
+        {
+            setMusicPlayer();
             Runnable runnable = new progressUpdate();
             Thread thread = new Thread(runnable);
             thread.start();
-            songTimeLabel.setText(song.getTime());
-            lblSongTitle.setText(song.getArtist()+"|"+song.getTitle());
-            mediaPlayer.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-            songLenght = (int) hit.getDuration().toSeconds();
+        } else if (song == tableSongs.getSelectionModel().getSelectedItem())
+        {
             mediaPlayer.play();
+        } else if (song != tableSongs.getSelectionModel().getSelectedItem())
+        {
+            setMusicPlayer();
+
         }
-    });
-        } else if (song == tableSongs.getSelectionModel().getSelectedItem()) {
-             mediaPlayer.play();
-        } else if (song != tableSongs.getSelectionModel().getSelectedItem()) {
-            song = tableSongs.getSelectionModel().getSelectedItem();
-            songPath = song.getPath();
-            hit = new Media(new File(songPath).toURI().toString());
-            mediaPlayer = new MediaPlayer(hit);
-            songTimeLabel.setText(song.getTime());
-            lblSongTitle.setText(song.getArtist()+"|"+song.getTitle());
-             mediaPlayer.setOnReady(new Runnable() {
+        mediaPlayer.setOnEndOfMedia(() ->
+        {
+            playButton.setImage(new Image("mytunes/assets/play-button-black.png"));
+            mediaPlayer.stop();
+        });
+    }
+
+    private void setMusicPlayer()
+    {
+        song = tableSongs.getSelectionModel().getSelectedItem();
+        songPath = song.getPath();
+        hit = new Media(new File(songPath).toURI().toString());
+        mediaPlayer = new MediaPlayer(hit);
+        songTimeLabel.setText(song.getTime());
+        lblSongTitle.setText(song.getArtist() + "|" + song.getTitle());
+        mediaPlayer.setOnReady(new Runnable()
+        {
             @Override
-            public void run() {
-            songLenght = (int) hit.getDuration().toSeconds();
-            mediaPlayer.play();
-        }
-    });
-             
-        }
+            public void run()
+            {
+                songLenght = (int) hit.getDuration().toSeconds();
+                mediaPlayer.play();
+            }
+        });
     }
 
     @FXML
-    private void playReleased(MouseEvent event) throws UnsupportedAudioFileException, IOException {
+    private void playReleased(MouseEvent event) throws UnsupportedAudioFileException, IOException
+    {
 
-        if (!isPlaying) {
+        if (!isPlaying)
+        {
             isPlaying = true;
-            if (tableSongs.getSelectionModel().getSelectedItem() != null) {
+            if (tableSongs.getSelectionModel().getSelectedItem() != null)
+            {
                 playSelectedSong();
+                mediaPlayer.setMute(muted);
             }
             playButton.setImage(new Image("mytunes/assets/pause-button-black.png"));
-        } else {
+        } else
+        {
             isPlaying = false;
-            if (tableSongs.getSelectionModel().getSelectedItem() != null) {
+            if (tableSongs.getSelectionModel().getSelectedItem() != null)
+            {
                 mediaPlayer.pause();
             }
             playButton.setImage(new Image("mytunes/assets/play-button-black.png"));
@@ -356,47 +388,58 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void playPressed(MouseEvent event) {
+    private void playPressed(MouseEvent event)
+    {
 
-        if (!isPlaying) {
+        if (!isPlaying)
+        {
             playButton.setImage(new Image("mytunes/assets/play-button-grey.png"));
-        } else {
+        } else
+        {
             playButton.setImage(new Image("mytunes/assets/pause-button-grey.png"));
         }
 
     }
 
-    private void getSliderValue(DragEvent event) {
+    private void getSliderValue(DragEvent event)
+    {
         lblSongTitle.setText(Double.toString(slider.getValue()));
     }
 
-    private void getSliderValue(MouseEvent event) {
+    private void getSliderValue(MouseEvent event)
+    {
         lblSongTitle.setText(Double.toString(slider.getValue()));
     }
 
     @FXML
-    private void nextReleased(MouseEvent event) {
+    private void nextReleased(MouseEvent event)
+    {
         nextButton.setImage(new Image("mytunes/assets/next-button-black.png"));
     }
 
     @FXML
-    private void nextPressed(MouseEvent event) {
+    private void nextPressed(MouseEvent event)
+    {
         nextButton.setImage(new Image("mytunes/assets/next-button-grey.png"));
     }
 
     @FXML
-    private void previousReleased(MouseEvent event) {
+    private void previousReleased(MouseEvent event)
+    {
         previousButton.setImage(new Image("mytunes/assets/previous-button-black.png"));
     }
 
     @FXML
-    private void previousPressed(MouseEvent event) {
+    private void previousPressed(MouseEvent event)
+    {
         previousButton.setImage(new Image("mytunes/assets/previous-button-grey.png"));
     }
 
-    private void openWindow(String path, String title) {
+    private void openWindow(String path, String title)
+    {
 
-        try {
+        try
+        {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(path));
             Stage stage = new Stage();
             stage.initStyle(StageStyle.TRANSPARENT);
@@ -404,68 +447,81 @@ public class mainWindowController implements Initializable {
             stage.setScene(new Scene(root));
             stage.show();
 //        ((Node)(event.getSource())).getScene().getWindow().hide();
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger("Problem: " + ex);
         }
     }
 
     @FXML
-    private void exitButtonExit(MouseEvent event) {
+    private void exitButtonExit(MouseEvent event)
+    {
         exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;");
 
     }
 
     @FXML
-    private void exitButtonEnter(MouseEvent event) {
+    private void exitButtonEnter(MouseEvent event)
+    {
         exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc6262;");
     }
 
     @FXML
-    private void minimizeButtonExit(MouseEvent event) {
+    private void minimizeButtonExit(MouseEvent event)
+    {
         minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #21bc62;");
     }
 
     @FXML
-    private void minimizeButtonEnter(MouseEvent event) {
+    private void minimizeButtonEnter(MouseEvent event)
+    {
         minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #5bea75;");
     }
 
     @FXML
-    private void appExit(MouseEvent event) {
+    private void appExit(MouseEvent event)
+    {
         System.exit(1);
 
     }
 
     @FXML
-    private void appMinimize(MouseEvent event) {
+    private void appMinimize(MouseEvent event)
+    {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.setIconified(true);
     }
 
     @FXML
-    private void clickToChangeOrderUpReleased(MouseEvent event) {
+    private void clickToChangeOrderUpReleased(MouseEvent event)
+    {
         upArrow.setImage(new Image("mytunes/assets/white-up-arrow.png"));
     }
 
     @FXML
-    private void clickToChangeOrderUpPressed(MouseEvent event) {
+    private void clickToChangeOrderUpPressed(MouseEvent event)
+    {
         upArrow.setImage(new Image("mytunes/assets/grey-up-arrow.png"));
     }
 
     @FXML
-    private void clickToChangeOrderDownReleased(MouseEvent event) {
+    private void clickToChangeOrderDownReleased(MouseEvent event)
+    {
         downArrow.setImage(new Image("mytunes/assets/white-down-arrow.png"));
     }
 
     @FXML
-    private void clickToChangeOrderDownPressed(MouseEvent event) {
+    private void clickToChangeOrderDownPressed(MouseEvent event)
+    {
         downArrow.setImage(new Image("mytunes/assets/grey-down-arrow.png"));
     }
 
     @FXML
-    private void clickToPutSongReleased(MouseEvent event) {
+    private void clickToPutSongReleased(MouseEvent event)
+    {
 
-        if (tableSongs.getSelectionModel().getSelectedItem() != null && tablePlaylist.getSelectionModel().getSelectedItem() != null) {
+        if (tableSongs.getSelectionModel().getSelectedItem() != null && tablePlaylist.getSelectionModel().getSelectedItem() != null)
+        {
             Song s = tableSongs.getSelectionModel().getSelectedItem();
             Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
             mm.addSongToPlaylist(s, p);
@@ -477,18 +533,23 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void clickToPutSongPressed(MouseEvent event) {
+    private void clickToPutSongPressed(MouseEvent event)
+    {
         leftArrow.setImage(new Image("mytunes/assets/grey-left-arrow.png"));
     }
 
     @FXML
-    private void muteAll(MouseEvent event) {
-        if (song != null) {
-            if (!muted) {
+    private void muteAll(MouseEvent event)
+    {
+        if (song != null)
+        {
+            if (!muted)
+            {
                 speaker.setImage(new Image("mytunes/assets/Speaker-muted.png"));
                 muted = true;
                 mediaPlayer.setMute(true);
-            } else {
+            } else
+            {
                 speaker.setImage(new Image("mytunes/assets/Speaker.png"));
                 muted = false;
                 mediaPlayer.setMute(false);
@@ -497,8 +558,10 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void youClickedPlaylist(MouseEvent event) {
-        if (tablePlaylist.getSelectionModel().getSelectedItem() != null) {
+    private void youClickedPlaylist(MouseEvent event)
+    {
+        if (tablePlaylist.getSelectionModel().getSelectedItem() != null)
+        {
             listSongsOnPlaylist.getItems().clear();
             Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
             List<Song> l = mm.getPlaylistSongs(p);
@@ -507,11 +570,13 @@ public class mainWindowController implements Initializable {
     }
 
     @FXML
-    private void clickToSearch(ActionEvent event) {
+    private void clickToSearch(ActionEvent event)
+    {
         search();
     }
 
-    private void search() {
+    private void search()
+    {
         String text = txtSearch.getText();
         List<Song> ls = mm.searchSong(text);
 
@@ -519,62 +584,94 @@ public class mainWindowController implements Initializable {
         searchedSongsAsObservable.addAll(ls);
         System.out.println(ls.size());
         System.out.println(text.length());
-        if (ls.size() > 0 && text.length() > 0) {
+        if (ls.size() > 0 && text.length() > 0)
+        {
             tableSongs.setItems(searchedSongsAsObservable);
-        } else if (ls.isEmpty() && text.length() > 0) {
+        } else if (ls.isEmpty() && text.length() > 0)
+        {
             tableSongs.getItems().clear();
-        } else if (ls.size() > 0 && text.length() == 0) {
+        } else if (ls.size() > 0 && text.length() == 0)
+        {
             refreshTableSongs();
         }
     }
 
     @FXML
-    private void enterSearch(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER && txtSearch.isFocused()) {
+    private void enterSearch(KeyEvent event)
+    {
+        if (event.getCode() == KeyCode.ENTER && txtSearch.isFocused())
+        {
             search();
         }
     }
-    
-    private class progressUpdate implements Runnable{
-       @Override public void run() {
-            while (true) {
-                    Platform.runLater(new Runnable() {
-                    @Override public void run() {
+
+    private class progressUpdate implements Runnable
+    {
+
+        @Override
+        public void run()
+        {
+            while (true)
+            {
+                Platform.runLater(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
                         Duration currentTime = mediaPlayer.getCurrentTime();
                         double d = currentTime.toSeconds();
                         int i = (int) d;
                         currentTimeLabel.setText(currentTimeCalculator(i));
                         updateProgressBar(currentTime.toSeconds());
-                        }
-                    });
-                try {
+                    }
+                });
+                try
+                {
                     Thread.sleep(100);
-                } catch (InterruptedException ex) {
+                } catch (InterruptedException ex)
+                {
                     Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                    
-                }
+
+            }
         }
 
-
     }
-    
-    private void updateProgressBar(final double currentTime){
+
+    private void updateProgressBar(final double currentTime)
+    {
         double fractionalProgress = (double) currentTime / (double) songLenght;
 
         songProgress.setProgress(fractionalProgress);
-    
-    
-    
+
     }
-    
-    private String currentTimeCalculator(int timeSec){
-        int minutes = timeSec/60;
+
+    private String currentTimeCalculator(int timeSec)
+    {
+        int minutes = timeSec / 60;
         int seconds = timeSec % 60;
-        if(seconds<10)
-        return minutes+":0"+seconds;
-        else
-        return minutes+":"+seconds;
+        if (seconds < 10)
+        {
+            return minutes + ":0" + seconds;
+        } else
+        {
+            return minutes + ":" + seconds;
+        }
+    }
+
+    @FXML
+    private void doubleClickToPlay(MouseEvent event) throws IOException
+    {
+        if (event.getClickCount() == 2)
+        {
+            try
+            {
+                playSelectedSong();
+            } catch (UnsupportedAudioFileException ex)
+            {
+                Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }
