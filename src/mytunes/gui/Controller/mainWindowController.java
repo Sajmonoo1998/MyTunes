@@ -169,7 +169,7 @@ public class mainWindowController implements Initializable {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 songProgress.setProgress(newValue.doubleValue());
                 if (song != null) {
-                    Duration duration = Duration.seconds(songLenght*newValue.doubleValue());
+                    Duration duration = Duration.seconds(songLenght * newValue.doubleValue());
                     mediaPlayer.seek(duration);
                 }
             }
@@ -235,6 +235,7 @@ public class mainWindowController implements Initializable {
             Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
             List<Song> l = mm.getPlaylistSongs(p);
             listSongsOnPlaylist.getItems().addAll(l);
+            tablePlaylist.refresh();
         }
     }
 
@@ -315,7 +316,6 @@ public class mainWindowController implements Initializable {
     }
 
     private void playSelectedSong() throws UnsupportedAudioFileException, IOException {
-         System.out.println(tableSongs.getSelectionModel().getSelectedItem());
         if (song == null) {
             setMusicPlayer();
             Runnable runnable = new progressUpdate();
@@ -325,21 +325,26 @@ public class mainWindowController implements Initializable {
             mediaPlayer.play();
         } else if (song != tableSongs.getSelectionModel().getSelectedItem() && tableSongs.getSelectionModel().getSelectedItem() != null) {
             setMusicPlayer();
-        } else 
+        } else {
             mediaPlayer.play();
-        
-       
-        
+        }
+
         mediaPlayer.setOnEndOfMedia(()
                 -> {
+           if(tableSongs.getItems().size() == tableSongs.getSelectionModel().getSelectedItem().getId())
+           {
+           tableSongs.getSelectionModel().selectFirst();
+           }else
+           {
            tableSongs.getSelectionModel().selectNext();
-            setMusicPlayer();
+           }
+           setMusicPlayer();
             mediaPlayer.play();
         });
     }
 
     private void setMusicPlayer() {
-        if(mediaPlayer!=null){
+        if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
         song = tableSongs.getSelectionModel().getSelectedItem();
@@ -348,7 +353,9 @@ public class mainWindowController implements Initializable {
         mediaPlayer = new MediaPlayer(hit);
         songTimeLabel.setText(song.getTime());
         lblSongTitle.setText(song.getArtist() + "|" + song.getTitle());
-        if(volume!=0)mediaPlayer.setVolume(volume);
+        if (volume != 0) {
+            mediaPlayer.setVolume(volume);
+        }
         mediaPlayer.setOnReady(new Runnable() {
             @Override
             public void run() {
@@ -425,14 +432,11 @@ public class mainWindowController implements Initializable {
     @FXML
     private void nextReleased(MouseEvent event) {
         tableSongs.getSelectionModel().selectNext();
-        try
-        {
+        try {
             playSelectedSong();
-        } catch (UnsupportedAudioFileException ex)
-        {
+        } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
         nextButton.setImage(new Image("mytunes/assets/next-button-black.png"));
@@ -443,17 +447,14 @@ public class mainWindowController implements Initializable {
         nextButton.setImage(new Image("mytunes/assets/next-button-grey.png"));
     }
 
-     @FXML
+    @FXML
     private void previousReleased(MouseEvent event) {
         tableSongs.getSelectionModel().selectPrevious();
-        try
-        {
+        try {
             playSelectedSong();
-        } catch (UnsupportedAudioFileException ex)
-        {
+        } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
         previousButton.setImage(new Image("mytunes/assets/previous-button-black.png"));
@@ -541,6 +542,7 @@ public class mainWindowController implements Initializable {
             mm.addSongToPlaylist(s, p);
             listSongsOnPlaylist.getItems().clear();
             listSongsOnPlaylist.getItems().addAll(mm.getPlaylistSongs(p));
+            tablePlaylist.refresh();
         }
 
         leftArrow.setImage(new Image("mytunes/assets/white-left-arrow.png"));

@@ -50,6 +50,7 @@ public class playlistSongsDAO {
                 Song song = new Song(id, artist, title, category, time, path);
                 song.setPlaylistElementID(playlistElementID);
                 songs.add(song);
+                p.setCountOfSongsOnPlaylist(songs.size());
             }
 
         } catch (SQLServerException ex) {

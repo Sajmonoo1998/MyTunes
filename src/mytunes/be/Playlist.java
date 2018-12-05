@@ -36,10 +36,15 @@ public class Playlist {
 
     }
 
+    public int getCountOfSongsOnPlaylist() {
+        return countOfSongsOnPlaylist;
+    }
+
     public void setCountOfSongsOnPlaylist(int countOfSongsOnPlaylist) {
         this.countOfSongsOnPlaylist = countOfSongsOnPlaylist;
     }
 
+   
     
 
     public String getTimeLengthOfPlaylist() {
