@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
+<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
    <children>
       <VBox layoutY="199.0" prefHeight="530.0" prefWidth="1019.0">
          <children>
@@ -137,6 +137,7 @@
                         <Font name="Consolas" size="15.0" />
                      </font>
                   </Label>
+                  <Slider fx:id="progressSlider" layoutY="193.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="9.0" prefWidth="1018.0" />
                </children>
             </AnchorPane>
          </children>

@@ -87,6 +87,7 @@ public class mainWindowController implements Initializable {
     private MediaPlayer mediaPlayer;
     private AudioFormat format;
     private int songLenght;
+    private Duration songDuration;
     private double volume = 0;
     @FXML
     private ImageView playButton;
@@ -137,6 +138,8 @@ public class mainWindowController implements Initializable {
     private Label songTimeLabel;
     @FXML
     private Label currentTimeLabel;
+    @FXML
+    private Slider progressSlider;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -156,6 +159,18 @@ public class mainWindowController implements Initializable {
                 if (song != null) {
                     mediaPlayer.setVolume(newValue.doubleValue());
                     volume = newValue.doubleValue();
+                }
+            }
+        });
+        progressSlider.setMax(1.0);
+        progressSlider.setMin(0);
+        progressSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                songProgress.setProgress(newValue.doubleValue());
+                if (song != null) {
+                    Duration duration = Duration.seconds(songLenght*newValue.doubleValue());
+                    mediaPlayer.seek(duration);
                 }
             }
         });
@@ -310,7 +325,9 @@ public class mainWindowController implements Initializable {
             mediaPlayer.play();
         } else if (song != tableSongs.getSelectionModel().getSelectedItem()) {
             setMusicPlayer();
-        }
+        } else if (song != null)
+            mediaPlayer.play();
+        
         mediaPlayer.setOnEndOfMedia(()
                 -> {
             playButton.setImage(new Image("mytunes/assets/play-button-black.png"));
@@ -333,6 +350,7 @@ public class mainWindowController implements Initializable {
             @Override
             public void run() {
                 songLenght = (int) hit.getDuration().toSeconds();
+                songDuration = hit.getDuration();
                 mediaPlayer.play();
             }
         });
@@ -351,7 +369,7 @@ public class mainWindowController implements Initializable {
 
         } else {
             isPlaying = false;
-            if (tableSongs.getSelectionModel().getSelectedItem() != null) {
+            if (song != null) {
                 mediaPlayer.pause();
             }
             playButton.setImage(new Image("mytunes/assets/play-button-black.png"));
@@ -403,6 +421,17 @@ public class mainWindowController implements Initializable {
 
     @FXML
     private void nextReleased(MouseEvent event) {
+        tableSongs.getSelectionModel().selectNext();
+        try
+        {
+            playSelectedSong();
+        } catch (UnsupportedAudioFileException ex)
+        {
+            Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nextButton.setImage(new Image("mytunes/assets/next-button-black.png"));
     }
 
@@ -411,8 +440,19 @@ public class mainWindowController implements Initializable {
         nextButton.setImage(new Image("mytunes/assets/next-button-grey.png"));
     }
 
-    @FXML
+     @FXML
     private void previousReleased(MouseEvent event) {
+        tableSongs.getSelectionModel().selectPrevious();
+        try
+        {
+            playSelectedSong();
+        } catch (UnsupportedAudioFileException ex)
+        {
+            Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(mainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         previousButton.setImage(new Image("mytunes/assets/previous-button-black.png"));
     }
 
