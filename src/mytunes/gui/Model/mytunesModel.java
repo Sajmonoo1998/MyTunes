@@ -53,11 +53,11 @@ public class mytunesModel {
 
     public List<Playlist> getAllPlaylists() {
         List<Playlist> p = mytun.getAllPlaylists();
-
         return p;
     }
 
     public void updatePlaylist(Playlist p) {
+        
         mytun.updatePlaylist(p);
     }
 
