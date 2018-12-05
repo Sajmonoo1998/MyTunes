@@ -16,8 +16,7 @@ public class Song {
     private String category;
     private String time;
     private String path;
-    private int playlistID;
-    private int positionInListID;
+    private int playlistElementID;
     public Song(int id, String artist, String title, String category, String time, String path) {
         this.id = id;
         this.title = title;
@@ -71,28 +70,20 @@ public class Song {
         this.path = path;
     }
 
-    public int getPlaylistID() {
-        return playlistID;
+    public int getPlaylistElementID() {
+        return playlistElementID;
     }
 
-    public void setPlaylistID(int playlistID) {
-        this.playlistID = playlistID;
+    public void setPlaylistElementID(int playlistElementID) {
+        this.playlistElementID = playlistElementID;
     }
 
+
+    
+    
+    
     @Override
     public String toString() {
         return artist+" - "+title;
-    }
-
-    
-    public void setPositionInListID(int id) {
-       this.positionInListID=id;
-    }
-    public int getPositionInListID(){
-    return positionInListID;
-    }
-    
-
-    
-    
+    }    
 }

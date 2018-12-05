@@ -35,19 +35,20 @@ public class playlistSongsDAO {
         List<Song> songs = new ArrayList<>();
         try {
             Connection con = cp.getConnection();
-            String sql = "SELECT name,artist,title,category,time,path,Songs.id AS XD FROM Playlists JOIN playlistSongs ON Playlists.id = "
-                    + "playlistSongs.playlistID JOIN Songs ON Songs.id = playlistSongs.songID WHERE Playlists.id=?";
+            String sql = "SELECT name,artist,title,category,time,path,Songs.id AS SongsID,playlistSongs.id AS playlistSongsID FROM Playlists JOIN playlistSongs ON Playlists.id =  playlistSongs.playlistID JOIN Songs ON Songs.id = playlistSongs.songID WHERE Playlists.id=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, p.getID());
             ResultSet rs = ppst.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("XD");
+                int id = rs.getInt("SongsID");
                 String artist = rs.getString("artist");
                 String title = rs.getString("title");
                 String category = rs.getString("category");
                 String time = rs.getString("time");
                 String path = rs.getString("path");
+                int playlistElementID = rs.getInt("playlistSongsID");
                 Song song = new Song(id, artist, title, category, time, path);
+                song.setPlaylistElementID(playlistElementID);
                 songs.add(song);
             }
 
@@ -58,17 +59,13 @@ public class playlistSongsDAO {
     }
 
     public void addSongToPlaylist(Song s, Playlist p) throws SQLException {
-      //  int id = -1;
         try {
             Connection con = cp.getConnection();
             String sql = "INSERT INTO playlistSongs (playlistID,songID) VALUES (?,?)";
             PreparedStatement ppst = con.prepareCall(sql);
-        //    id = getNewestSongInPlaylist(p.getID()) + 1;
             ppst.setInt(1, p.getID());
             ppst.setInt(2, s.getId());
-            //   ppst.setInt(3, id);
             ppst.execute();
-            //   s.setPositionInListID(id);
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,7 +75,7 @@ public class playlistSongsDAO {
     public void deleteSongFromPlaylistSongs(int id) throws SQLException {
         try {
             Connection con = cp.getConnection();
-            String sql = "DELETE FROM playlistSongs WHERE songID=?";
+            String sql = "DELETE FROM playlistSongs WHERE id=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
             ppst.execute();
@@ -100,26 +97,4 @@ public class playlistSongsDAO {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-//    private int getNewestSongInPlaylist(int id) {
-//        int newestID = -1;
-//        try (Connection con = cp.getConnection()) {
-//            String query = "SELECT TOP(1) * FROM playlistSongs WHERE PlaylistID = ? ORDER by positionInListID desc";
-//            PreparedStatement preparedStmt = con.prepareStatement(query);
-//            preparedStmt.setInt(1, id);
-//            ResultSet rs = preparedStmt.executeQuery();
-//            while (rs.next()) {
-//                newestID = rs.getInt("positionInListID");
-//            }
-//            System.out.println(newestID);
-//            return newestID;
-//        } catch (SQLServerException ex) {
-//            System.out.println(ex);
-//            return newestID;
-//        } catch (SQLException ex) {
-//            System.out.println(ex);
-//            return newestID;
-//        }
-//    }
-
 }
