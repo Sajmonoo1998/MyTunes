@@ -81,12 +81,13 @@ public class mainWindowController implements Initializable {
     boolean isPlaying;
     boolean muted;
 
-    Media hit;
-    File yourFile;
-    AudioInputStream stream;
-    MediaPlayer mediaPlayer;
-    AudioFormat format;
+    private Media hit;
+    private File yourFile;
+    private AudioInputStream stream;
+    private MediaPlayer mediaPlayer;
+    private AudioFormat format;
     private int songLenght;
+    private double volume = 0;
     @FXML
     private ImageView playButton;
     private String url;
@@ -154,6 +155,7 @@ public class mainWindowController implements Initializable {
                 progressBar.setProgress(newValue.doubleValue());
                 if (song != null) {
                     mediaPlayer.setVolume(newValue.doubleValue());
+                    volume = newValue.doubleValue();
                 }
             }
         });
@@ -326,6 +328,7 @@ public class mainWindowController implements Initializable {
         mediaPlayer = new MediaPlayer(hit);
         songTimeLabel.setText(song.getTime());
         lblSongTitle.setText(song.getArtist() + "|" + song.getTitle());
+        if(volume!=0)mediaPlayer.setVolume(volume);
         mediaPlayer.setOnReady(new Runnable() {
             @Override
             public void run() {
