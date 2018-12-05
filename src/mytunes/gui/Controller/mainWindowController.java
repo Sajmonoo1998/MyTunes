@@ -316,6 +316,7 @@ public class mainWindowController implements Initializable {
     }
 
     private void playSelectedSong() throws UnsupportedAudioFileException, IOException {
+         System.out.println(tableSongs.getSelectionModel().getSelectedItem());
         if (song == null) {
             setMusicPlayer();
             Runnable runnable = new progressUpdate();
@@ -323,10 +324,12 @@ public class mainWindowController implements Initializable {
             thread.start();
         } else if (song == tableSongs.getSelectionModel().getSelectedItem()) {
             mediaPlayer.play();
-        } else if (song != tableSongs.getSelectionModel().getSelectedItem()) {
+        } else if (song != tableSongs.getSelectionModel().getSelectedItem() && tableSongs.getSelectionModel().getSelectedItem() != null) {
             setMusicPlayer();
-        } else if (song != null)
+        } else 
             mediaPlayer.play();
+        
+       
         
         mediaPlayer.setOnEndOfMedia(()
                 -> {
@@ -361,7 +364,7 @@ public class mainWindowController implements Initializable {
 
         if (!isPlaying) {
             isPlaying = true;
-            if (tableSongs.getSelectionModel().getSelectedItem() != null) {
+            if (tableSongs.getSelectionModel().getSelectedItem() != null || song != null) {
                 playSelectedSong();
                 mediaPlayer.setMute(muted);
             }
