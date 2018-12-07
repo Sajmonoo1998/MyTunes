@@ -216,7 +216,7 @@ public class mainWindowController implements Initializable {
         playlistsAsObservable = FXCollections.observableArrayList(mm.getPlaylistsAsObservable());
         playlistNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         playlistSongsCol.setCellValueFactory(new PropertyValueFactory<>("countOfSongsOnPlaylist"));
-        playlistTimeCol.setCellValueFactory(new PropertyValueFactory<>("timeLengthOfPlaylist"));
+        playlistTimeCol.setCellValueFactory(new PropertyValueFactory<>("duratonOfPlaylist"));
         tablePlaylist.getColumns().clear();
         tablePlaylist.setItems(playlistsAsObservable);
         tablePlaylist.getColumns().addAll(playlistNameCol, playlistSongsCol, playlistTimeCol);
@@ -229,13 +229,17 @@ public class mainWindowController implements Initializable {
     @FXML
     private void clickToDeleteSongFromPlaylist(ActionEvent event) {
         if (listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null) {
+            int indexOfPlaylist = tablePlaylist.getSelectionModel().getSelectedIndex();
             Song s = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
             mm.deleteSongFromPlaylistSongs(s.getPlaylistElementID());
             listSongsOnPlaylist.getItems().clear();
             Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
             List<Song> l = mm.getPlaylistSongs(p);
             listSongsOnPlaylist.getItems().addAll(l);
+            refreshTablePlaylists();
             tablePlaylist.refresh();
+            tablePlaylist.getSelectionModel().select(indexOfPlaylist);
+            
         }
     }
 
@@ -543,6 +547,7 @@ public class mainWindowController implements Initializable {
             listSongsOnPlaylist.getItems().clear();
             listSongsOnPlaylist.getItems().addAll(mm.getPlaylistSongs(p));
             tablePlaylist.refresh();
+       
         }
 
         leftArrow.setImage(new Image("mytunes/assets/white-left-arrow.png"));

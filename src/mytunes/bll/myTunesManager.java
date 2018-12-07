@@ -54,13 +54,14 @@ public class myTunesManager implements mytunesLogicFacade {
 
     @Override
     public List<Playlist> getAllPlaylists() {
-        List<Playlist> playlists;
-        try {
-         return   playlists = playlistdao.getAllPlaylists();
-        } catch (SQLException ex) {
-            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+                List<Playlist> playlists = null;
+                try {
+                    return playlists=playlistdao.getAllPlaylists();
+                } catch (SQLException ex) {
+                    Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return null;
+        
     }
 
     @Override
@@ -149,16 +150,18 @@ public class myTunesManager implements mytunesLogicFacade {
         }
         return null;
     }
+
     
-    public void addSongToPlaylist(Song s, Playlist p){
+
+    public void addSongToPlaylist(Song s, Playlist p) {
         try {
             playlistSongsDAO.addSongToPlaylist(s, p);
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void deleteSongFromPlaylistSongs(int id){
+
+    public void deleteSongFromPlaylistSongs(int id) {
         try {
             playlistSongsDAO.deleteSongFromPlaylistSongs(id);
         } catch (SQLException ex) {
@@ -166,7 +169,7 @@ public class myTunesManager implements mytunesLogicFacade {
         }
     }
 
-    public void deletePlaylistFromPlaylistSongs(int id){
+    public void deletePlaylistFromPlaylistSongs(int id) {
         try {
             playlistSongsDAO.deletePlaylistFromPlaylistSongs(id);
         } catch (SQLException ex) {

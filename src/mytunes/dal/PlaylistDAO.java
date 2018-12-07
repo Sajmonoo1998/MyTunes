@@ -27,7 +27,7 @@ public class PlaylistDAO {
 
     private final ConnectionProvider cp;
     private final playlistSongsDAO playlistSDAO;
-
+   
     public PlaylistDAO() throws IOException {
         cp = new ConnectionProvider();
         playlistSDAO = new playlistSongsDAO();
@@ -62,7 +62,7 @@ public class PlaylistDAO {
         }
     }
 
-    public List<Playlist> getAllPlaylists() throws SQLException {
+    public List<Playlist> getAllPlaylists() throws SQLException, IOException {
         List<Playlist> p = new ArrayList<>();
         try {
             Connection con = cp.getConnection();
@@ -73,6 +73,7 @@ public class PlaylistDAO {
                 String name = rs.getString(2);
                 Playlist pl = new Playlist(id, name);
                 pl.setCountOfSongsOnPlaylist(playlistSDAO.getPlaylistSongs(pl).size());
+                pl.setDuratonOfPlaylist(calculatePlaylistDuration(pl));
                 p.add(pl);
             }
 
@@ -113,4 +114,40 @@ public class PlaylistDAO {
 
         return null;
     }
+    
+  public String calculatePlaylistDuration(Playlist p) throws SQLException, IOException {
+        int h = 0;
+        int min = 0;
+        int sec = 0;
+        String songTime;
+        int colonIndex = 0;
+        int wholeMins;
+        int wholeHours;
+        for (Song song : playlistSDAO.getPlaylistSongs(p)) {
+            songTime = song.getTime();
+
+            for (int i = 0; i < songTime.length(); i++) {
+                if (songTime.substring(i, i + 1).equals(":")) {
+                    colonIndex = i;
+                }
+            }
+            min += Integer.parseInt(songTime.substring(0, colonIndex));
+            sec += Integer.parseInt(songTime.substring(colonIndex + 1, songTime.length()));
+            if (sec > 60) {
+                wholeMins = sec / 60;
+                min += wholeMins;
+                sec = sec - (wholeMins * 60);
+                wholeMins = 0;
+            }
+            if (min > 60) {
+                wholeHours = min / 60;
+                h += wholeHours;
+                min = min - (wholeHours * 60);
+                wholeHours = 0;
+            }
+
+        }
+        return h + ":" + min + ":" + sec;
+    }
+    
 }

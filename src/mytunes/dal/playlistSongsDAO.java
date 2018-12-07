@@ -26,12 +26,13 @@ import mytunes.be.Song;
 public class playlistSongsDAO {
 
     ConnectionProvider cp;
-
+    PlaylistDAO pdao;
     public playlistSongsDAO() throws IOException {
         cp = new ConnectionProvider();
+        
     }
 
-    public List<Song> getPlaylistSongs(Playlist p) throws SQLException {
+    public List<Song> getPlaylistSongs(Playlist p) throws SQLException, IOException {
         List<Song> songs = new ArrayList<>();
         try {
             Connection con = cp.getConnection();
@@ -52,7 +53,7 @@ public class playlistSongsDAO {
                 songs.add(song);
                 p.setCountOfSongsOnPlaylist(songs.size());
             }
-
+               
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -98,4 +99,6 @@ public class playlistSongsDAO {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+      
 }
