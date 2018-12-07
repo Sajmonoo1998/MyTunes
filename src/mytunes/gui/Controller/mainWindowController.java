@@ -237,10 +237,27 @@ public class mainWindowController implements Initializable {
             List<Song> l = mm.getPlaylistSongs(p);
             listSongsOnPlaylist.getItems().addAll(l);
             refreshTablePlaylists();
-            tablePlaylist.refresh();
             tablePlaylist.getSelectionModel().select(indexOfPlaylist);
-            
+
         }
+    }
+
+    @FXML
+    private void clickToPutSongReleased(MouseEvent event) {
+
+        if (tableSongs.getSelectionModel().getSelectedItem() != null && tablePlaylist.getSelectionModel().getSelectedItem() != null) {
+            int indexOfPlaylist = tablePlaylist.getSelectionModel().getSelectedIndex();
+            Song s = tableSongs.getSelectionModel().getSelectedItem();
+            Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
+            mm.addSongToPlaylist(s, p);
+            listSongsOnPlaylist.getItems().clear();
+            listSongsOnPlaylist.getItems().addAll(mm.getPlaylistSongs(p));
+            refreshTablePlaylists();
+            tablePlaylist.getSelectionModel().select(indexOfPlaylist);
+
+        }
+
+        leftArrow.setImage(new Image("mytunes/assets/white-left-arrow.png"));
     }
 
     @FXML
@@ -335,14 +352,12 @@ public class mainWindowController implements Initializable {
 
         mediaPlayer.setOnEndOfMedia(()
                 -> {
-           if(tableSongs.getItems().size() == tableSongs.getSelectionModel().getSelectedItem().getId())
-           {
-           tableSongs.getSelectionModel().selectFirst();
-           }else
-           {
-           tableSongs.getSelectionModel().selectNext();
-           }
-           setMusicPlayer();
+            if (tableSongs.getItems().size() == tableSongs.getSelectionModel().getSelectedItem().getId()) {
+                tableSongs.getSelectionModel().selectFirst();
+            } else {
+                tableSongs.getSelectionModel().selectNext();
+            }
+            setMusicPlayer();
             mediaPlayer.play();
         });
     }
@@ -535,22 +550,6 @@ public class mainWindowController implements Initializable {
     @FXML
     private void clickToChangeOrderDownPressed(MouseEvent event) {
         downArrow.setImage(new Image("mytunes/assets/grey-down-arrow.png"));
-    }
-
-    @FXML
-    private void clickToPutSongReleased(MouseEvent event) {
-
-        if (tableSongs.getSelectionModel().getSelectedItem() != null && tablePlaylist.getSelectionModel().getSelectedItem() != null) {
-            Song s = tableSongs.getSelectionModel().getSelectedItem();
-            Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
-            mm.addSongToPlaylist(s, p);
-            listSongsOnPlaylist.getItems().clear();
-            listSongsOnPlaylist.getItems().addAll(mm.getPlaylistSongs(p));
-            tablePlaylist.refresh();
-       
-        }
-
-        leftArrow.setImage(new Image("mytunes/assets/white-left-arrow.png"));
     }
 
     @FXML

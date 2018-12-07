@@ -62,7 +62,7 @@ public class PlaylistDAO {
         }
     }
 
-    public List<Playlist> getAllPlaylists() throws SQLException, IOException {
+    public List<Playlist> getAllPlaylists() throws SQLException {
         List<Playlist> p = new ArrayList<>();
         try {
             Connection con = cp.getConnection();
@@ -115,7 +115,7 @@ public class PlaylistDAO {
         return null;
     }
     
-  public String calculatePlaylistDuration(Playlist p) throws SQLException, IOException {
+  public String calculatePlaylistDuration(Playlist p) throws SQLException  {
         int h = 0;
         int min = 0;
         int sec = 0;

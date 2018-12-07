@@ -32,7 +32,7 @@ public class playlistSongsDAO {
         
     }
 
-    public List<Song> getPlaylistSongs(Playlist p) throws SQLException, IOException {
+    public List<Song> getPlaylistSongs(Playlist p) throws SQLException {
         List<Song> songs = new ArrayList<>();
         try {
             Connection con = cp.getConnection();
