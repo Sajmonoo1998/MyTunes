@@ -7,22 +7,22 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="222.0" prefWidth="393.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.PlaylistEditorController">
+<AnchorPane id="AnchorPane" prefHeight="222.0" prefWidth="393.0" style="-fx-border-color: black; -fx-background-color: #0f1419;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.PlaylistEditorController">
    <children>
-      <Button layoutX="219.0" layoutY="120.0" mnemonicParsing="false" onAction="#clickToCancel" text="Cancel" />
-      <Button layoutX="298.0" layoutY="120.0" mnemonicParsing="false" onAction="#clickToSave" text="Save" />
-      <TextField fx:id="txtPlaylistName" layoutX="116.0" layoutY="73.0" prefHeight="26.0" prefWidth="248.0" />
-      <Label layoutX="52.0" layoutY="72.0" text="Name:">
+      <Button layoutX="219.0" layoutY="120.0" mnemonicParsing="false" onAction="#clickToCancel" style="-fx-border-radius: 25,25,25,25; -fx-background-color: transparent; -fx-border-color: white;" text="Cancel" textFill="WHITE" />
+      <Button layoutX="298.0" layoutY="120.0" mnemonicParsing="false" onAction="#clickToSave" style="-fx-border-radius: 25,25,25,25; -fx-background-color: transparent; -fx-border-color: white;" text="Save" textFill="WHITE" />
+      <TextField fx:id="txtPlaylistName" layoutX="116.0" layoutY="73.0" prefHeight="26.0" prefWidth="248.0" style="-fx-background-radius: 25,25,25,25;" />
+      <Label layoutX="52.0" layoutY="72.0" text="Name:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="138.0" layoutY="4.0" text="New/Edit Playlist">
+      <Label layoutX="138.0" layoutY="4.0" text="New/Edit Playlist" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Line endX="299.0000305175781" endY="1.9073486328125E-5" layoutX="103.0" layoutY="31.0" startX="-102.9999771118164" startY="5.7220458984375E-6" />
-      <Line endX="302.2928771972656" layoutX="101.0" layoutY="191.0" startX="-100.0" />
+      <Line endX="299.0000305175781" endY="1.9073486328125E-5" layoutX="103.0" layoutY="31.0" startX="-102.9999771118164" startY="5.7220458984375E-6" stroke="WHITE" />
+      <Line endX="302.2928771972656" layoutX="101.0" layoutY="191.0" startX="-100.0" stroke="WHITE" />
    </children>
 </AnchorPane>
