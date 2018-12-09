@@ -119,35 +119,42 @@ public class PlaylistDAO {
         int h = 0;
         int min = 0;
         int sec = 0;
+        String first;
+        String second;
+        String third;
         String songTime;
-        int colonIndex = 0;
-        int wholeMins;
-        int wholeHours;
+        int wholeSecs = 0;
+        
+        
         for (Song song : playlistSDAO.getPlaylistSongs(p)) {
             songTime = song.getTime();
 
-            for (int i = 0; i < songTime.length(); i++) {
-                if (songTime.substring(i, i + 1).equals(":")) {
-                    colonIndex = i;
-                }
-            }
-            min += Integer.parseInt(songTime.substring(0, colonIndex));
-            sec += Integer.parseInt(songTime.substring(colonIndex + 1, songTime.length()));
-            if (sec > 60) {
-                wholeMins = sec / 60;
-                min += wholeMins;
-                sec = sec - (wholeMins * 60);
-                wholeMins = 0;
-            }
-            if (min > 60) {
-                wholeHours = min / 60;
-                h += wholeHours;
-                min = min - (wholeHours * 60);
-                wholeHours = 0;
-            }
+            wholeSecs += 60*Integer.parseInt(songTime.substring(0, songTime.indexOf(":")));
+            wholeSecs += Integer.parseInt(songTime.substring(songTime.indexOf(":") + 1, songTime.length()));
+            
 
         }
-        return h + ":" + min + ":" + sec;
+        
+        h = wholeSecs/3600;
+        wholeSecs -= h*3600;
+        
+        min = wholeSecs/60;
+        wholeSecs -= min*60;
+        
+        sec = wholeSecs;
+        
+        if(h<10)first="0"+h;
+        else first = ""+h;
+        
+        if(min<10)second="0"+min;
+        else second = ""+min;
+        
+        if(sec<10)third="0"+sec;
+        else third = ""+sec;
+        
+        
+        
+        return first + ":" + second + ":" + third;
     }
     
 }

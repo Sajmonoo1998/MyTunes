@@ -30,7 +30,7 @@
                   <Button layoutX="236.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToEditPlaylist" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Edit" textFill="WHITE" />
                   <Button layoutX="106.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeletePlaylist" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
                   <ListView fx:id="listSongsOnPlaylist" layoutX="324.0" layoutY="60.0" prefHeight="386.0" prefWidth="220.0" style="-fx-background-color: #0f1419; -fx-border-color: white;" />
-                  <Label layoutX="33.0" layoutY="42.0" text="Playlists" textFill="WHITE">
+                  <Label layoutX="21.0" layoutY="42.0" text="Playlists" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -45,11 +45,11 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tablePlaylist" layoutX="33.0" layoutY="60.0" onMouseClicked="#youClickedPlaylist" prefHeight="386.0" prefWidth="255.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-text-fill: white; -fx-selection-bar: white;">
+                  <TableView fx:id="tablePlaylist" layoutX="21.0" layoutY="60.0" onMouseClicked="#youClickedPlaylist" prefHeight="386.0" prefWidth="277.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-text-fill: white; -fx-selection-bar: white;">
                     <columns>
                       <TableColumn fx:id="playlistNameCol" prefWidth="149.0" text="Name" />
                       <TableColumn fx:id="playlistSongsCol" prefWidth="54.0" text="Songs" />
-                        <TableColumn fx:id="playlistTimeCol" prefWidth="55.0" text="Time" />
+                        <TableColumn fx:id="playlistTimeCol" prefWidth="70.0" text="Time" />
                     </columns>
                   </TableView>
                   <TableView fx:id="tableSongs" layoutX="595.0" layoutY="60.0" onMouseClicked="#doubleClickToPlay" prefHeight="386.0" prefWidth="373.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-alignment: CENTER_RIGHT; -fx-text-fill: white; -fx-selection-bar: white;">
