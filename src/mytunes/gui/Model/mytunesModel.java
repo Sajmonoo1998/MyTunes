@@ -138,6 +138,9 @@ public class mytunesModel {
     public void deletePlaylistFromPlaylistSongs(int id) {
         mytun.deletePlaylistFromPlaylistSongs(id);
     }
+     public void reCreatePlaylistSongs(Song chosen, Song toSwapWith){
+     mytun.reCreatePlaylistSongs(chosen, toSwapWith);
+     }
 
     public Playlist getPlaylist()
     {
@@ -158,6 +161,8 @@ public class mytunesModel {
     {
         this.song = song;
     }
+    
+    
     
     
     

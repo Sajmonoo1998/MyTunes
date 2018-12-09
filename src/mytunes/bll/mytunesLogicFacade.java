@@ -45,4 +45,5 @@ public interface mytunesLogicFacade {
 
     public void deletePlaylistFromPlaylistSongs(int id);
     
+    public void reCreatePlaylistSongs(Song chosen, Song toSwapWith);
 }

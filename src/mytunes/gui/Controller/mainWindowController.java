@@ -294,10 +294,13 @@ public class mainWindowController implements Initializable {
     private void clickToDeletePlaylist(ActionEvent event
     ) {
         if (tablePlaylist.getSelectionModel().getSelectedItem() != null) {
-            Playlist playlistToDelete = (Playlist) tablePlaylist.getSelectionModel().getSelectedItem();
-            mm.deletePlaylist(playlistToDelete);
+            Playlist playlistToDelete = tablePlaylist.getSelectionModel().getSelectedItem();
+            if(playlistToDelete.getCountOfSongsOnPlaylist()>0)
             mm.deletePlaylistFromPlaylistSongs(playlistToDelete.getID());
+            mm.deletePlaylist(playlistToDelete);
+            
             mm.refreshTablePlaylist(tablePlaylist);
+
         }
     }
 
@@ -480,8 +483,22 @@ public class mainWindowController implements Initializable {
         stage.setIconified(true);
     }
 
-    @FXML
+     @FXML
     private void clickToChangeOrderUpReleased(MouseEvent event) {
+        int sizeOfPlaylist = listSongsOnPlaylist.getItems().size();
+        if (listSongsOnPlaylist.getSelectionModel().getSelectedIndex() > 0) {
+            Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
+            int chosenItem = listSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+            int itemToSwapWith = chosenItem - 1;
+            Song songActual = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            Song songToSwapWith = listSongsOnPlaylist.getItems().get(itemToSwapWith);
+            if (songActual.getId() != songToSwapWith.getId()) {
+                mm.reCreatePlaylistSongs(songToSwapWith, songActual);
+                listSongsOnPlaylist.getItems().clear();
+                listSongsOnPlaylist.getItems().addAll(mm.getPlaylistSongs(p));
+            }
+        
+        }
         upArrow.setImage(new Image("mytunes/assets/white-up-arrow.png"));
     }
 
@@ -490,10 +507,27 @@ public class mainWindowController implements Initializable {
         upArrow.setImage(new Image("mytunes/assets/grey-up-arrow.png"));
     }
 
-    @FXML
+  @FXML
     private void clickToChangeOrderDownReleased(MouseEvent event) {
+        int sizeOfPlaylist = listSongsOnPlaylist.getItems().size();
+        if (listSongsOnPlaylist.getSelectionModel().getSelectedIndex() < sizeOfPlaylist - 1) {
+            Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
+            int chosenItem = listSongsOnPlaylist.getSelectionModel().getSelectedIndex();
+            int itemToSwapWith = chosenItem + 1;
+            Song songActual = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
+            Song songToSwapWith = listSongsOnPlaylist.getItems().get(itemToSwapWith);
+            if (songActual.getId() != songToSwapWith.getId()) {
+                mm.reCreatePlaylistSongs(songActual, songToSwapWith);
+                listSongsOnPlaylist.getItems().clear();
+                listSongsOnPlaylist.getItems().addAll(mm.getPlaylistSongs(p));
+            }
+
+
+        }
         downArrow.setImage(new Image("mytunes/assets/white-down-arrow.png"));
+
     }
+
 
     @FXML
     private void clickToChangeOrderDownPressed(MouseEvent event) {

@@ -180,6 +180,12 @@ public class myTunesManager implements mytunesLogicFacade {
         }
     }
     
-    
+    public void reCreatePlaylistSongs(Song chosen, Song toSwapWith){
+        try {
+            playlistSongsDAO.reCreatePlaylistSongs(chosen, toSwapWith);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

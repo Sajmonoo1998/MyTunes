@@ -49,14 +49,14 @@ public class PlaylistDAO {
     public void deletePlaylist(Playlist playlistToDelete) throws SQLException {
         try {
             Connection con = cp.getConnection();
-            String sql = "DELETE  FROM Playlists WHERE id=?";
+            String sql = "DELETE FROM Playlists WHERE id=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, playlistToDelete.getID());
             ppst.execute();
-            String sql2 = "DELETE  FROM playlistSongs WHERE playlistID=?";
-            PreparedStatement ppst2 = con.prepareStatement(sql2);
-            ppst2.setInt(1, playlistToDelete.getID());
-            ppst2.execute();
+//          String sql2 = "DELETE  FROM playlistSongs WHERE playlistID=?";
+//          PreparedStatement ppst2 = con.prepareStatement(sql2);
+//          ppst2.setInt(1, playlistToDelete.getID());
+//          ppst2.execute();
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
