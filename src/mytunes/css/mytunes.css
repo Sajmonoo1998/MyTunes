@@ -1,0 +1,91 @@
+.root {
+    -fx-focus-color: white;
+    -fx-faint-focus-color: white;
+     -fx-cell-focus-inner-border: white;
+}
+
+.table-view .column-header .label{
+    -fx-alignment:CENTER_LEFT;
+    -fx-text-fill: white;
+}
+
+
+
+.table-view .column-header{
+    -fx-background-color: grey;
+    -fx-border-color: white;
+    -fx-border-width: 0 1 1 0;
+}
+
+.table-view .column-header.time-col{
+    -fx-background-color: grey;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 1 0;
+}
+
+.my-special-table-style-time {
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+  -fx-border-width: 0 0 0 0;
+}
+
+.my-special-table-style {
+  -fx-background-color: #0f1419;
+  -fx-text-fill: white;
+  
+}
+
+
+#listSongsOnPlaylist.list-view .list-cell {
+    
+    -fx-background-color: #0f1419;
+    -fx-text-fill: white;
+    
+}
+
+#listSongsOnPlaylist.list-view .list-cell:selected {
+    
+    -fx-border-color: white;
+    -fx-text-fill: white;
+    
+}
+
+#listSongsOnPlaylist.list-view #s.list-cell:selected {
+    
+    -fx-border-color: white;
+    -fx-text-fill: white;
+    
+}
+
+.table-row-cell{
+     -fx-background-color: #0f1419;
+     -fx-focus-color: transparent;
+     
+}
+
+.table-row-cell:selected{
+    -fx-border-color: white;
+    -fx-focus-color: transparent;
+}
+
+.slider .track{
+    
+-fx-background-color: null;    
+    
+}
+.slider .thumb{
+    
+-fx-background-color: null;    
+    
+}
+.progress-bar .bar { 
+    -fx-padding: 1px; 
+    -fx-background-insets: 0; 
+    -fx-accent: white;
+}
+
+.progress-bar > .track {
+  -fx-text-box-border: white;
+  -fx-control-inner-background: #171717;
+  -fx-background-radius: 0,0,0,0;
+}

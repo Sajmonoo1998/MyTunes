@@ -15,11 +15,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
+<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
    <children>
       <VBox layoutY="199.0" prefHeight="530.0" prefWidth="1019.0">
          <children>
-            <Line endX="935.1715698242188" endY="-8.8284273147583" startX="-78.0" startY="-10.0" stroke="WHITE" strokeWidth="4.0" />
+            <Line endX="936.0" endY="-10.0" startX="-78.0" startY="-10.0" stroke="WHITE" strokeWidth="4.0" />
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="523.0" prefWidth="1025.0">
                <children>
                   <Button layoutX="477.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeleteSongFromPlaylist" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
@@ -45,14 +45,14 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tablePlaylist" layoutX="33.0" layoutY="60.0" onMouseClicked="#youClickedPlaylist" prefHeight="386.0" prefWidth="255.0" style="-fx-background-color: #0f1419; -fx-border-color: white;">
+                  <TableView fx:id="tablePlaylist" layoutX="33.0" layoutY="60.0" onMouseClicked="#youClickedPlaylist" prefHeight="386.0" prefWidth="255.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-text-fill: white; -fx-selection-bar: white;">
                     <columns>
                       <TableColumn fx:id="playlistNameCol" prefWidth="149.0" text="Name" />
                       <TableColumn fx:id="playlistSongsCol" prefWidth="54.0" text="Songs" />
                         <TableColumn fx:id="playlistTimeCol" prefWidth="55.0" text="Time" />
                     </columns>
                   </TableView>
-                  <TableView fx:id="tableSongs" layoutX="595.0" layoutY="60.0" prefHeight="386.0" prefWidth="373.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-alignment: CENTER_RIGHT;">
+                  <TableView fx:id="tableSongs" layoutX="595.0" layoutY="60.0" onMouseClicked="#doubleClickToPlay" prefHeight="386.0" prefWidth="373.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-alignment: CENTER_RIGHT; -fx-text-fill: white; -fx-selection-bar: white;">
                      <columns>
                         <TableColumn fx:id="artistCol" prefWidth="101.0" text="Artist" />
                         <TableColumn fx:id="titleCol" prefWidth="117.0" text="Title" />
@@ -82,31 +82,31 @@
          <children>
           <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="1063.0" style="-fx-background-color: #171717;">
                <children>
-                  <ImageView fx:id="playButton" fitHeight="57.0" fitWidth="61.0" layoutX="856.0" layoutY="60.0" onKeyPressed="#spacePlay" onMousePressed="#playPressed" onMouseReleased="#playReleased">
+                  <ImageView fx:id="playButton" fitHeight="57.0" fitWidth="61.0" layoutX="856.0" layoutY="60.0" onMousePressed="#playPressed" onMouseReleased="#playReleased">
                      <image>
                         <Image url="@../../assets/play-button-black.png" />
                      </image>
                   </ImageView>
                   <ProgressBar fx:id="progressBar" layoutX="800.0" layoutY="148.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="173.0" progress="0.51" />
                   <Slider fx:id="slider" layoutX="800.0" layoutY="147.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="9.0" prefWidth="173.0" />
-                  <Label fx:id="lblSongTitle" alignment="CENTER" layoutX="356.0" layoutY="105.0" prefHeight="27.0" prefWidth="291.0" text="Label" textFill="#f5f5f5">
+                  <Label fx:id="lblSongTitle" alignment="CENTER" layoutX="257.0" layoutY="92.0" prefHeight="28.0" prefWidth="506.0" textFill="#f5f5f5">
                      <font>
                         <Font name="Consolas Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="14.0" layoutY="20.0" text="Filter:" textFill="WHITE">
+                  <Label layoutX="22.0" layoutY="20.0" text="Filter:" textFill="WHITE">
                      <font>
                         <Font name="Consolas Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button layoutX="271.0" layoutY="13.0" mnemonicParsing="false" onAction="#clickToSearch" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-border-radius: 25,25,25,25;" text="Search" textFill="WHITE" />
-                  <TextField fx:id="txtSearch" layoutX="75.0" layoutY="13.0" onKeyPressed="#enterSearch" prefHeight="25.0" prefWidth="187.0" />
-                  <ImageView fx:id="nextButton" fitHeight="35.0" fitWidth="35.0" layoutX="932.0" layoutY="88.0" onMouseClicked="#next" onMousePressed="#nextPressed" onMouseReleased="#nextReleased">
+                  <Button layoutX="311.0" layoutY="13.0" mnemonicParsing="false" onAction="#clickToSearch" opacity="0.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-border-radius: 25,25,25,25;" text="Search" textFill="WHITE" />
+                  <TextField fx:id="txtSearch" layoutX="100.0" layoutY="14.0" onKeyPressed="#enterSearch" prefHeight="25.0" prefWidth="187.0" />
+                  <ImageView fx:id="nextButton" fitHeight="35.0" fitWidth="35.0" layoutX="932.0" layoutY="88.0" onMousePressed="#nextPressed" onMouseReleased="#nextReleased">
                      <image>
                         <Image url="@../../assets/next-button-black.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="previousButton" fitHeight="35.0" fitWidth="35.0" layoutX="807.0" layoutY="88.0" onMouseClicked="#previous" onMousePressed="#previousPressed" onMouseReleased="#previousReleased">
+                  <ImageView fx:id="previousButton" fitHeight="35.0" fitWidth="35.0" layoutX="807.0" layoutY="88.0" onMousePressed="#previousPressed" onMouseReleased="#previousReleased">
                      <image>
                         <Image url="@../../assets/previous-button-black.png" />
                      </image>
@@ -126,6 +126,18 @@
                         <Image url="@../../assets/Speaker.png" />
                      </image>
                   </ImageView>
+                  <ProgressBar fx:id="songProgress" layoutY="193.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="9.0" prefWidth="1018.0" progress="0.0" />
+                  <Label fx:id="songTimeLabel" layoutX="970.0" layoutY="165.0" prefHeight="21.0" prefWidth="46.0" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentTimeLabel" layoutX="14.0" layoutY="165.0" prefHeight="21.0" prefWidth="46.0" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="15.0" />
+                     </font>
+                  </Label>
+                  <Slider fx:id="progressSlider" layoutY="193.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="9.0" prefWidth="1018.0" />
                </children>
             </AnchorPane>
          </children>

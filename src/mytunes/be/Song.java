@@ -16,14 +16,18 @@ public class Song {
     private String category;
     private String time;
     private String path;
-
-    public Song(int id, String title, String artist, String category, String time, String path) {
+    private int playlistElementID;
+    public Song(int id, String artist, String title, String category, String time, String path) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.category = category;
         this.time = time;
         this.path = path;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -66,8 +70,20 @@ public class Song {
         this.path = path;
     }
 
-    
+    public int getPlaylistElementID() {
+        return playlistElementID;
+    }
+
+    public void setPlaylistElementID(int playlistElementID) {
+        this.playlistElementID = playlistElementID;
+    }
+
 
     
     
+    
+    @Override
+    public String toString() {
+        return artist+" - "+title;
+    }    
 }
