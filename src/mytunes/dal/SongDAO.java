@@ -51,8 +51,7 @@ public class SongDAO {
     }
     public void deleteSong(Song song) throws SQLException {
 
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql ="DELETE FROM Songs WHERE id=?";
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setInt(1, song.getId());
@@ -91,8 +90,7 @@ public class SongDAO {
     }
 
     public void updateSong(Song song) throws SQLException {
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql = "UPDATE Songs SET artist=?,title=?,category=?,time=?,path=? WHERE id=?";
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setString(1, song.getArtist());
@@ -110,8 +108,7 @@ public class SongDAO {
     public List<Song> searchSong(String query) throws SQLException {
         List<Song> songs = new ArrayList<>();
         
-        try 
-        {   Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql = "SELECT * FROM Songs WHERE artist like ? OR title like ?";
             PreparedStatement ppst = con.prepareStatement(sql);
             ppst.setString(1, "%"+query+"%");
@@ -136,8 +133,7 @@ public class SongDAO {
         return songs;
     }
     public Integer nextAvailableSongID() throws SQLException{
-     try {
-        Connection con = cp.getConnection();
+     try (Connection con = cp.getConnection()){
         String sql = "SELECT MAX(id) FROM Songs";
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(sql);

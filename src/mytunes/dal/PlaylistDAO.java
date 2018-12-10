@@ -34,8 +34,7 @@ public class PlaylistDAO {
     }
 
     public void createPlaylist(Playlist p) throws SQLException {
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql = "INSERT INTO Playlists (id,name) VALUES (?,?)";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, p.getID());
@@ -47,8 +46,7 @@ public class PlaylistDAO {
     }
 
     public void deletePlaylist(Playlist playlistToDelete) throws SQLException {
-        try {
-            Connection con = cp.getConnection();
+       try (Connection con = cp.getConnection()){
             String sql = "DELETE FROM Playlists WHERE id=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, playlistToDelete.getID());
@@ -64,8 +62,7 @@ public class PlaylistDAO {
 
     public List<Playlist> getAllPlaylists() throws SQLException {
         List<Playlist> p = new ArrayList<>();
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Playlists");
             while (rs.next()) {
@@ -73,6 +70,7 @@ public class PlaylistDAO {
                 String name = rs.getString(2);
                 Playlist pl = new Playlist(id, name);
                 pl.setCountOfSongsOnPlaylist(playlistSDAO.getPlaylistSongs(pl).size());
+                pl.setDuratonOfPlaylist(calculatePlaylistDuration(pl));
                 p.add(pl);
             }
 
@@ -83,8 +81,7 @@ public class PlaylistDAO {
     }
 
     public void updatePlaylist(Playlist p) throws SQLException {
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql = "UPDATE Playlists SET name=? WHERE id=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setString(1, p.getName());
@@ -96,8 +93,7 @@ public class PlaylistDAO {
     }
 
     public Integer nextAvailablePlaylistID() throws SQLException {
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql = "SELECT MAX(id) FROM Playlists";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -112,5 +108,47 @@ public class PlaylistDAO {
         }
 
         return null;
+    }
+    
+    public String calculatePlaylistDuration(Playlist p) throws SQLException  {
+        int h = 0;
+        int min = 0;
+        int sec = 0;
+        String first;
+        String second;
+        String third;
+        String songTime;
+        int wholeSecs = 0;
+        
+        
+        for (Song song : playlistSDAO.getPlaylistSongs(p)) {
+            songTime = song.getTime();
+
+            wholeSecs += 60*Integer.parseInt(songTime.substring(0, songTime.indexOf(":")));
+            wholeSecs += Integer.parseInt(songTime.substring(songTime.indexOf(":") + 1, songTime.length()));
+            
+
+        }
+        
+        h = wholeSecs/3600;
+        wholeSecs -= h*3600;
+        
+        min = wholeSecs/60;
+        wholeSecs -= min*60;
+        
+        sec = wholeSecs;
+        
+        if(h<10)first="0"+h;
+        else first = ""+h;
+        
+        if(min<10)second="0"+min;
+        else second = ""+min;
+        
+        if(sec<10)third="0"+sec;
+        else third = ""+sec;
+        
+        
+        
+        return first + ":" + second + ":" + third;
     }
 }

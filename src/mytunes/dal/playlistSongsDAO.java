@@ -33,8 +33,7 @@ public class playlistSongsDAO {
 
     public List<Song> getPlaylistSongs(Playlist p) throws SQLException {
         List<Song> songs = new ArrayList<>();
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql = "SELECT name,artist,title,category,time,path,Songs.id AS SongsID,playlistSongs.id AS playlistSongsID FROM Playlists JOIN playlistSongs ON Playlists.id =  playlistSongs.playlistID JOIN Songs ON Songs.id = playlistSongs.songID WHERE Playlists.id=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, p.getID());
@@ -60,8 +59,7 @@ public class playlistSongsDAO {
     }
 
     public void addSongToPlaylist(Song s, Playlist p) throws SQLException {
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql = "INSERT INTO playlistSongs (playlistID,songID) VALUES (?,?)";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, p.getID());
@@ -74,8 +72,7 @@ public class playlistSongsDAO {
     }
 
     public void deleteSongFromPlaylistSongs(int id) throws SQLException {
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql = "DELETE FROM playlistSongs WHERE id=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
@@ -87,8 +84,7 @@ public class playlistSongsDAO {
     }
 
     public void deletePlaylistFromPlaylistSongs(int id) throws SQLException {
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             String sql = "DELETE FROM playlistSongs WHERE playlistID=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, id);
@@ -100,8 +96,7 @@ public class playlistSongsDAO {
     }
     
      public void reCreatePlaylistSongs(Song chosen, Song toSwapWith) throws SQLException {
-        try {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             int chosenSongID=chosen.getId();
             int toSwapWithID=toSwapWith.getId();
             String sql  = "UPDATE playlistSongs SET songID = ? WHERE id = ?";

@@ -5,6 +5,9 @@
  */
 package mytunes.be;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import mytunes.dal.playlistSongsDAO;
 
 /**
@@ -13,12 +16,11 @@ import mytunes.dal.playlistSongsDAO;
  */
 public class Playlist {
 
-    
     private final int id;
     private String name;
     playlistSongsDAO playlistSongsDAO;
     private int countOfSongsOnPlaylist;
-    private String timeLengthOfPlaylist = "0";
+    private String duratonOfPlaylist;
 
     public String getName() {
         return name;
@@ -42,14 +44,23 @@ public class Playlist {
         this.countOfSongsOnPlaylist = countOfSongsOnPlaylist;
     }
 
+    public String getDuratonOfPlaylist() {
+        return duratonOfPlaylist;
+    }
+
+    public void setDuratonOfPlaylist(String duratonOfPlaylist) {
+        this.duratonOfPlaylist = duratonOfPlaylist;
+    }
+
+    @Override
+    public String toString() {
+        return "Playlist{" + "id=" + id + ", name=" + name + ", playlistSongsDAO=" + playlistSongsDAO + ", countOfSongsOnPlaylist=" + countOfSongsOnPlaylist + ", duratonOfPlaylist=" + duratonOfPlaylist + '}';
+    }
+
    
     
 
-    public String getTimeLengthOfPlaylist() {
-        return timeLengthOfPlaylist;
-    }
+   
 
-//    public void addSongToPlaylist(Song song){
-//    songsList.add(song);
-//    }
+
 }
