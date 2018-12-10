@@ -774,6 +774,7 @@ public class mainWindowController implements Initializable
             fxmlLoader.<SongEditorController>getController().setController(this, edit, id);
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.centerOnScreen();
             stage.show();
         } catch (IOException ex)
@@ -792,6 +793,7 @@ public class mainWindowController implements Initializable
             fxmlLoader.<PlaylistEditorController>getController().setController(this, edit, id);
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.centerOnScreen();
             stage.show();
         } catch (IOException ex)
