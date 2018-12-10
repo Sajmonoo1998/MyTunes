@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mytunes.gui.Model;
 
-import static com.oracle.nio.BufferSecrets.instance;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,12 +18,8 @@ import mytunes.be.Song;
 import mytunes.bll.myTunesManager;
 import mytunes.bll.mytunesLogicFacade;
 
-/**
- *
- * @author Szymon
- */
-public class mytunesModel {
-
+public class mytunesModel
+{
     public final mytunesLogicFacade mytun;
     public ObservableList olSongs;
     public ObservableList olPlaylists;
@@ -41,16 +30,19 @@ public class mytunesModel {
     
     public static mytunesModel instance;
 
-    public mytunesModel() throws IOException {
+    public mytunesModel() throws IOException
+    {
         categories = new ArrayList();
         addCategories();
         olSongs = FXCollections.observableArrayList();
         olPlaylists = FXCollections.observableArrayList();
         mytun = new myTunesManager();
     }
-    
-    public static mytunesModel getInstance() {
-        if (instance == null) {
+
+    public static mytunesModel getInstance()
+    {
+        if (instance == null)
+        {
             try
             {
                 instance = new mytunesModel();
@@ -59,88 +51,105 @@ public class mytunesModel {
                 Logger.getLogger(mytunesModel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
         return instance;
     }
 
-    public ObservableList getSongsAsObservable() {
+    public ObservableList getSongsAsObservable()
+    {
         olSongs.clear();
         olSongs.addAll(getAllSongs());
         return olSongs;
     }
 
-    public ObservableList getPlaylistsAsObservable() {
+    public ObservableList getPlaylistsAsObservable()
+    {
         olPlaylists.clear();
         olPlaylists.addAll(getAllPlaylists());
         return olPlaylists;
     }
 
-    public void createPlaylist(Playlist p) {
+    public void createPlaylist(Playlist p)
+    {
         mytun.createPlaylist(p);
     }
 
-    public void deletePlaylist(Playlist playlistToDelete) {
+    public void deletePlaylist(Playlist playlistToDelete)
+    {
         mytun.deletePlaylist(playlistToDelete);
     }
 
-    public List<Playlist> getAllPlaylists() {
+    public List<Playlist> getAllPlaylists()
+    {
         List<Playlist> p = mytun.getAllPlaylists();
         return p;
     }
 
-    public void updatePlaylist(Playlist p) {
-        
+    public void updatePlaylist(Playlist p)
+    {
         mytun.updatePlaylist(p);
     }
 
-    public void createSong(int id, String title, String artist, String category, String time, String path) {
+    public void createSong(int id, String title, String artist, String category, String time, String path)
+    {
         mytun.createSong(id, title, artist, category, time, path);
     }
 
-    public void deleteSong(Song song) {
+    public void deleteSong(Song song)
+    {
         mytun.deleteSong(song);
     }
 
-    public List<Song> getAllSongs() {
+    public List<Song> getAllSongs()
+    {
         List<Song> s = mytun.getAllSongs();
         return s;
     }
 
-    public void updateSong(Song song) {
+    public void updateSong(Song song)
+    {
         mytun.updateSong(song);
     }
 
-    public List<Song> searchSong(String query) {
+    public List<Song> searchSong(String query)
+    {
         List<Song> s = mytun.searchSong(query);
         return s;
     }
 
-    public Integer nextAvailableSongID() {
+    public Integer nextAvailableSongID()
+    {
         return mytun.nextAvailableSongID();
     }
 
-    public Integer nextAvailablePlaylistID() {
+    public Integer nextAvailablePlaylistID()
+    {
         return mytun.nextAvailablePlaylistID();
     }
 
-    public List<Song> getPlaylistSongs(Playlist p) {
+    public List<Song> getPlaylistSongs(Playlist p)
+    {
         return mytun.getPlaylistSongs(p);
     }
 
-    public void addSongToPlaylist(Song s, Playlist p) {
+    public void addSongToPlaylist(Song s, Playlist p)
+    {
         mytun.addSongToPlaylist(s, p);
     }
 
-    public void deleteSongFromPlaylistSongs(int id) {
+    public void deleteSongFromPlaylistSongs(int id)
+    {
         mytun.deleteSongFromPlaylistSongs(id);
     }
 
-    public void deletePlaylistFromPlaylistSongs(int id) {
+    public void deletePlaylistFromPlaylistSongs(int id)
+    {
         mytun.deletePlaylistFromPlaylistSongs(id);
     }
-     public void reCreatePlaylistSongs(Song chosen, Song toSwapWith){
-     mytun.reCreatePlaylistSongs(chosen, toSwapWith);
-     }
+
+    public void reCreatePlaylistSongs(Song chosen, Song toSwapWith)
+    {
+        mytun.reCreatePlaylistSongs(chosen, toSwapWith);
+    }
 
     public Playlist getPlaylist()
     {
@@ -161,17 +170,13 @@ public class mytunesModel {
     {
         this.song = song;
     }
-    
-    
-    
-    
-    
+
     public void refreshTablePlaylist(TableView<Playlist> tablePlaylist)
     {
         tablePlaylist.getItems().clear();
         tablePlaylist.setItems(getPlaylistsAsObservable());
     }
-    
+
     public List<String> getCategories()
     {
         return categories;
@@ -181,7 +186,7 @@ public class mytunesModel {
     {
         categories.add(category);
     }
-    
+
     private void addCategories()
     {
         categories.add("Pop");
@@ -190,20 +195,20 @@ public class mytunesModel {
         categories.add("Minimal Techno");
         categories.add("Rap");
     }
-    
-    public void openWindow(String path, String title) {
 
-        try {
+    public void openWindow(String path, String title)
+    {
+        try
+        {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(path));
             Stage stage = new Stage();
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle(title);
             stage.setScene(new Scene(root));
             stage.show();
-//        ((Node)(event.getSource())).getScene().getWindow().hide();
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger("Problem: " + ex);
         }
     }
-    
 }

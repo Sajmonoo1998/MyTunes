@@ -15,57 +15,41 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419; -fx-border-color: white;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
+<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" style="-fx-background-color: #0f1419; -fx-border-color: white;" stylesheets="@../../css/mytunes.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.mainWindowController">
    <children>
       <VBox layoutY="199.0" prefHeight="530.0" prefWidth="1019.0">
          <children>
             <Line endX="936.0" endY="-10.0" startX="-78.0" startY="-10.0" stroke="WHITE" strokeWidth="4.0" />
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="523.0" prefWidth="1025.0">
                <children>
-                  <Button layoutX="467.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeleteSongFromPlaylist" prefHeight="32.0" prefWidth="77.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas" size="16.0" />
-                     </font></Button>
-                  <Button layoutX="656.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToEditSong" prefHeight="21.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Edit" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas" size="16.0" />
-                     </font></Button>
-                  <Button layoutX="891.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeleteSong" prefHeight="32.0" prefWidth="77.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas" size="16.0" />
-                     </font></Button>
-                  <Button layoutX="33.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToNewPlaylist" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="New" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas" size="16.0" />
-                     </font></Button>
-                  <Button layoutX="595.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToNewSong" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="New" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas" size="16.0" />
-                     </font></Button>
-                  <Button layoutX="226.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToEditPlaylist" prefHeight="32.0" prefWidth="62.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Edit" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas" size="16.0" />
-                     </font></Button>
-                  <Button layoutX="95.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeletePlaylist" prefHeight="32.0" prefWidth="84.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas" size="16.0" />
-                     </font></Button>
+                  <Button layoutX="477.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeleteSongFromPlaylist" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
+                  <Button layoutX="653.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToEditSong" prefHeight="35.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Edit" textFill="WHITE" />
+                  <Button layoutX="901.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeleteSong" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
+                  <Button layoutX="26.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToNewPlaylist" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="New" textFill="WHITE" />
+                  <Button layoutX="595.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToNewSong" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="New" textFill="WHITE" />
+                  <Button layoutX="236.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToEditPlaylist" prefHeight="10.0" prefWidth="52.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Edit" textFill="WHITE" />
+                  <Button layoutX="106.0" layoutY="453.0" mnemonicParsing="false" onAction="#clickToDeletePlaylist" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-background-radius: 25,25,25,25; -fx-border-radius: 25,25,25,25;" text="Delete" textFill="WHITE" />
                   <ListView fx:id="listSongsOnPlaylist" layoutX="324.0" layoutY="60.0" onMouseClicked="#doubleClickToPlay" prefHeight="386.0" prefWidth="220.0" style="-fx-background-color: #0f1419; -fx-border-color: white;" />
+                  <Label layoutX="33.0" layoutY="42.0" text="Playlists" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
                   <Label layoutX="323.0" layoutY="41.0" text="Songs on Playlist" textFill="WHITE">
                      <font>
-                        <Font name="Consolas" size="14.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <Label layoutX="595.0" layoutY="40.0" text="Songs" textFill="WHITE">
                      <font>
-                        <Font name="Consolas" size="14.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <TableView fx:id="tablePlaylist" layoutX="33.0" layoutY="60.0" onMouseClicked="#youClickedPlaylist" prefHeight="386.0" prefWidth="255.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-text-fill: white; -fx-selection-bar: white;">
                     <columns>
-                      <TableColumn fx:id="playlistNameCol" prefWidth="108.0" text="Name" />
-                      <TableColumn fx:id="playlistSongsCol" prefWidth="69.0" text="Songs" />
-                        <TableColumn fx:id="playlistTimeCol" prefWidth="74.0" text="Time" />
+                      <TableColumn fx:id="playlistNameCol" prefWidth="149.0" text="Name" />
+                      <TableColumn fx:id="playlistSongsCol" prefWidth="54.0" text="Songs" />
+                        <TableColumn fx:id="playlistTimeCol" prefWidth="55.0" text="Time" />
                     </columns>
                   </TableView>
                   <TableView fx:id="tableSongs" layoutX="595.0" layoutY="60.0" prefHeight="386.0" prefWidth="373.0" style="-fx-background-color: #0f1419; -fx-border-color: white; -fx-alignment: CENTER_RIGHT; -fx-text-fill: white; -fx-selection-bar: white;">
@@ -75,26 +59,21 @@
                         <TableColumn fx:id="categoryCol" prefWidth="103.0" text="Category" />
                         <TableColumn fx:id="timeCol" minWidth="1.0" prefWidth="48.0" text="Time" />
                      </columns></TableView>
-                  <ImageView fx:id="upArrow" fitHeight="28.0" fitWidth="35.0" layoutX="332.0" layoutY="455.0" onMousePressed="#clickToChangeOrderUpPressed" onMouseReleased="#clickToChangeOrderUpReleased">
+                  <ImageView fx:id="upArrow" fitHeight="35.0" fitWidth="38.0" layoutX="338.0" layoutY="453.0" onMousePressed="#clickToChangeOrderUpPressed" onMouseReleased="#clickToChangeOrderUpReleased">
                      <image>
                         <Image url="@../../assets/white-up-arrow.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="downArrow" fitHeight="28.0" fitWidth="35.0" layoutX="378.0" layoutY="455.0" onMousePressed="#clickToChangeOrderDownPressed" onMouseReleased="#clickToChangeOrderDownReleased">
+                  <ImageView fx:id="downArrow" fitHeight="35.0" fitWidth="38.0" layoutX="396.0" layoutY="455.0" onMousePressed="#clickToChangeOrderDownPressed" onMouseReleased="#clickToChangeOrderDownReleased">
                      <image>
                         <Image url="@../../assets/white-down-arrow.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="leftArrow" fitHeight="32.0" fitWidth="35.0" layoutX="551.0" layoutY="60.0" onMousePressed="#clickToPutSongPressed" onMouseReleased="#clickToPutSongReleased">
+                  <ImageView fx:id="leftArrow" fitHeight="42.0" fitWidth="35.0" layoutX="551.0" layoutY="60.0" onMousePressed="#clickToPutSongPressed" onMouseReleased="#clickToPutSongReleased">
                      <image>
                         <Image url="@../../assets/white-left-arrow.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="33.0" layoutY="41.0" text="Playlist" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas" size="14.0" />
-                     </font>
-                  </Label>
                </children>
             </AnchorPane>
          </children>
@@ -117,10 +96,10 @@
                   </Label>
                   <Label layoutX="22.0" layoutY="20.0" text="Filter:" textFill="WHITE">
                      <font>
-                        <Font name="Consolas" size="15.0" />
+                        <Font name="Consolas Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button layoutX="311.0" layoutY="13.0" mnemonicParsing="false" onAction="#clickToSearch" opacity="0.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-border-radius: 25,25,25,25;" text="Search" textFill="WHITE" />
+                  <Button layoutX="311.0" layoutY="13.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-border-radius: 25,25,25,25;" text="Search" textFill="WHITE" />
                   <TextField fx:id="txtSearch" layoutX="100.0" layoutY="14.0" onKeyPressed="#enterSearch" prefHeight="25.0" prefWidth="187.0" />
                   <ImageView fx:id="nextButton" fitHeight="35.0" fitWidth="35.0" layoutX="932.0" layoutY="88.0" onMousePressed="#nextPressed" onMouseReleased="#nextReleased">
                      <image>
@@ -132,12 +111,12 @@
                         <Image url="@../../assets/previous-button-black.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="exitButton" layoutX="987.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#appExit" onMouseEntered="#exitButtonEnter" onMouseExited="#exitButtonExit" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #384354;">
+                  <Button fx:id="exitButton" layoutX="987.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#appExit" onMouseEntered="#exitButtonEnter" onMouseExited="#exitButtonExit" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;">
                      <font>
                         <Font size="1.0" />
                      </font>
                   </Button>
-                  <Button fx:id="minimizeButton" layoutX="958.0" layoutY="11.0" mnemonicParsing="false" onMouseEntered="#minimizeButtonEnter" onMouseExited="#minimizeButtonExit" onMousePressed="#appMinimize" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #c1c1c1;">
+                  <Button fx:id="minimizeButton" layoutX="958.0" layoutY="11.0" mnemonicParsing="false" onMouseEntered="#minimizeButtonEnter" onMouseExited="#minimizeButtonExit" onMousePressed="#appMinimize" prefHeight="18.0" prefWidth="18.0" style="-fx-background-radius: 25,25,25,25; -fx-background-color: #21bc62;">
                      <font>
                         <Font size="1.0" />
                      </font>
