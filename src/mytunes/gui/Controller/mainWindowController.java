@@ -339,10 +339,10 @@ public class mainWindowController implements Initializable
             Runnable runnable = new progressUpdate();
             Thread thread = new Thread(runnable);
             thread.start();
-        } else if (song == tableSongs.getSelectionModel().getSelectedItem())
+        } else if (song == listSongsOnPlaylist.getSelectionModel().getSelectedItem())
         {
             mediaPlayer.play();
-        } else if (song != tableSongs.getSelectionModel().getSelectedItem() && tableSongs.getSelectionModel().getSelectedItem() != null)
+        } else if (song != listSongsOnPlaylist.getSelectionModel().getSelectedItem() && listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null)
         {
             setMusicPlayer();
         } else
@@ -353,12 +353,12 @@ public class mainWindowController implements Initializable
         mediaPlayer.setOnEndOfMedia(()
                 ->
         {
-            if (tableSongs.getItems().size() == tableSongs.getSelectionModel().getSelectedItem().getId())
+            if (listSongsOnPlaylist.getItems().size() == listSongsOnPlaylist.getSelectionModel().getSelectedIndex()+1)
             {
-                tableSongs.getSelectionModel().selectFirst();
+                listSongsOnPlaylist.getSelectionModel().selectFirst();
             } else
             {
-                tableSongs.getSelectionModel().selectNext();
+                listSongsOnPlaylist.getSelectionModel().selectNext();
             }
             setMusicPlayer();
             mediaPlayer.play();
@@ -371,7 +371,7 @@ public class mainWindowController implements Initializable
         {
             mediaPlayer.stop();
         }
-        song = tableSongs.getSelectionModel().getSelectedItem();
+        song = listSongsOnPlaylist.getSelectionModel().getSelectedItem();
         songPath = song.getPath();
         hit = new Media(new File(songPath).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
@@ -400,7 +400,7 @@ public class mainWindowController implements Initializable
         if (!isPlaying)
         {
             isPlaying = true;
-            if (tableSongs.getSelectionModel().getSelectedItem() != null || song != null)
+            if (listSongsOnPlaylist.getSelectionModel().getSelectedItem() != null || song != null)
             {
                 playSelectedSong();
                 mediaPlayer.setMute(muted);
@@ -475,7 +475,7 @@ public class mainWindowController implements Initializable
     @FXML
     private void nextReleased(MouseEvent event)
     {
-        tableSongs.getSelectionModel().selectNext();
+        listSongsOnPlaylist.getSelectionModel().selectNext();
         try
         {
             playSelectedSong();
@@ -495,7 +495,7 @@ public class mainWindowController implements Initializable
     @FXML
     private void previousReleased(MouseEvent event)
     {
-        tableSongs.getSelectionModel().selectPrevious();
+        listSongsOnPlaylist.getSelectionModel().selectPrevious();
         try
         {
             playSelectedSong();
