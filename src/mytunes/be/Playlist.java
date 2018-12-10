@@ -8,7 +8,8 @@ public class Playlist
     private String name;
     playlistSongsDAO playlistSongsDAO;
     private int countOfSongsOnPlaylist;
-    private String timeLengthOfPlaylist = "0";
+    private String durationOfPlaylist;
+    
 
     public String getName()
     {
@@ -36,8 +37,11 @@ public class Playlist
         this.countOfSongsOnPlaylist = countOfSongsOnPlaylist;
     }
 
-    public String getTimeLengthOfPlaylist()
-    {
-        return timeLengthOfPlaylist;
+    public String getDurationOfPlaylist() {
+        return durationOfPlaylist;
+    }
+
+     public void setDurationOfPlaylist(String durationOfPlaylist) {
+        this.durationOfPlaylist = durationOfPlaylist;
     }
 }

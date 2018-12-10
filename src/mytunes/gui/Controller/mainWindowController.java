@@ -178,7 +178,7 @@ public class mainWindowController implements Initializable
         playlistsAsObservable = FXCollections.observableArrayList(mm.getPlaylistsAsObservable());
         playlistNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         playlistSongsCol.setCellValueFactory(new PropertyValueFactory<>("countOfSongsOnPlaylist"));
-        playlistTimeCol.setCellValueFactory(new PropertyValueFactory<>("timeLengthOfPlaylist"));
+        playlistTimeCol.setCellValueFactory(new PropertyValueFactory<>("durationOfPlaylist"));
         tablePlaylist.getColumns().clear();
         tablePlaylist.setItems(playlistsAsObservable);
         tablePlaylist.getColumns().addAll(playlistNameCol, playlistSongsCol, playlistTimeCol);
@@ -197,9 +197,12 @@ public class mainWindowController implements Initializable
             mm.deleteSongFromPlaylistSongs(s.getPlaylistElementID());
             listSongsOnPlaylist.getItems().clear();
             Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
+            int index = tablePlaylist.getSelectionModel().getSelectedIndex();
             List<Song> l = mm.getPlaylistSongs(p);
             listSongsOnPlaylist.getItems().addAll(l);
+            refreshTablePlaylist();
             tablePlaylist.refresh();
+            tablePlaylist.getSelectionModel().select(index);
         }
     }
 
@@ -530,6 +533,7 @@ public class mainWindowController implements Initializable
                 mm.reCreatePlaylistSongs(songToSwapWith, songActual);
                 listSongsOnPlaylist.getItems().clear();
                 listSongsOnPlaylist.getItems().addAll(mm.getPlaylistSongs(p));
+                listSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
             }
         }
         upArrow.setImage(new Image("mytunes/assets/white-up-arrow.png"));
@@ -557,6 +561,7 @@ public class mainWindowController implements Initializable
                 mm.reCreatePlaylistSongs(songActual, songToSwapWith);
                 listSongsOnPlaylist.getItems().clear();
                 listSongsOnPlaylist.getItems().addAll(mm.getPlaylistSongs(p));
+                listSongsOnPlaylist.getSelectionModel().select(itemToSwapWith);
             }
         }
         downArrow.setImage(new Image("mytunes/assets/white-down-arrow.png"));
@@ -575,10 +580,13 @@ public class mainWindowController implements Initializable
         {
             Song s = tableSongs.getSelectionModel().getSelectedItem();
             Playlist p = tablePlaylist.getSelectionModel().getSelectedItem();
+            int index = tablePlaylist.getSelectionModel().getSelectedIndex();
             mm.addSongToPlaylist(s, p);
             listSongsOnPlaylist.getItems().clear();
             listSongsOnPlaylist.getItems().addAll(mm.getPlaylistSongs(p));
+            refreshTablePlaylist();
             tablePlaylist.refresh();
+            tablePlaylist.getSelectionModel().select(index);
         }
         leftArrow.setImage(new Image("mytunes/assets/white-left-arrow.png"));
     }

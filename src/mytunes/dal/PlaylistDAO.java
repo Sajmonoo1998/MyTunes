@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mytunes.be.Playlist;
+import mytunes.be.Song;
 
 public class PlaylistDAO
 {
@@ -55,24 +56,21 @@ public class PlaylistDAO
         }
     }
 
-    public List<Playlist> getAllPlaylists() throws SQLException
-    {
+    public List<Playlist> getAllPlaylists() throws SQLException {
         List<Playlist> p = new ArrayList<>();
-        try
-        {
-            Connection con = cp.getConnection();
+        try (Connection con = cp.getConnection()){
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Playlists");
-            while (rs.next())
-            {
+            while (rs.next()) {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
                 Playlist pl = new Playlist(id, name);
                 pl.setCountOfSongsOnPlaylist(playlistSDAO.getPlaylistSongs(pl).size());
+                pl.setDurationOfPlaylist(calculatePlaylistDuration(pl));
                 p.add(pl);
             }
-        } catch (SQLServerException ex)
-        {
+
+        } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return p;
@@ -113,5 +111,35 @@ public class PlaylistDAO
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public String calculatePlaylistDuration(Playlist p) throws SQLException  {
+        int h = 0;
+        int min = 0;
+        int sec = 0;
+        String first;
+        String second;
+        String third;
+        String songTime;
+        int wholeSecs = 0;
+        
+        for (Song song : playlistSDAO.getPlaylistSongs(p)) {
+            songTime = song.getTime();
+
+            wholeSecs += 60*Integer.parseInt(songTime.substring(0, songTime.indexOf(":")));
+            wholeSecs += Integer.parseInt(songTime.substring(songTime.indexOf(":") + 1, songTime.length()));
+
+        }
+        h = wholeSecs/3600;
+        wholeSecs -= h*3600;
+        min = wholeSecs/60;
+        wholeSecs -= min*60;
+        sec = wholeSecs;
+        if(h<10)first="0"+h;
+        else first = ""+h;
+        if(min<10)second="0"+min;
+        else second = ""+min;      
+        if(sec<10)third="0"+sec;
+        else third = ""+sec;
+        return first + ":" + second + ":" + third;
     }
 }
