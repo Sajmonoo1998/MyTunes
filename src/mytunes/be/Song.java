@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mytunes.be;
 
-/**
- *
- * @author Szymon
- */
-public class Song {
+public class Song
+{
     private final int id;
     private String title;
     private String artist;
@@ -17,7 +9,9 @@ public class Song {
     private String time;
     private String path;
     private int playlistElementID;
-    public Song(int id, String artist, String title, String category, String time, String path) {
+
+    public Song(int id, String artist, String title, String category, String time, String path)
+    {
         this.id = id;
         this.title = title;
         this.artist = artist;
@@ -26,64 +20,74 @@ public class Song {
         this.path = path;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 
-    public String getArtist() {
+    public String getArtist()
+    {
         return artist;
     }
 
-    public void setArtist(String artist) {
+    public void setArtist(String artist)
+    {
         this.artist = artist;
     }
 
-    public String getCategory() {
+    public String getCategory()
+    {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(String category)
+    {
         this.category = category;
     }
 
-    public String getTime() {
+    public String getTime()
+    {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(String time)
+    {
         this.time = time;
     }
 
-    public String getPath() {
+    public String getPath()
+    {
         return path;
     }
 
-    public void setPath(String path) {
+    public void setPath(String path)
+    {
         this.path = path;
     }
 
-    public int getPlaylistElementID() {
+    public int getPlaylistElementID()
+    {
         return playlistElementID;
     }
 
-    public void setPlaylistElementID(int playlistElementID) {
+    public void setPlaylistElementID(int playlistElementID)
+    {
         this.playlistElementID = playlistElementID;
     }
 
-
-    
-    
-    
     @Override
-    public String toString() {
-        return artist+" - "+title;
-    }    
+    public String toString()
+    {
+        return artist + " - " + title;
+    }
 }

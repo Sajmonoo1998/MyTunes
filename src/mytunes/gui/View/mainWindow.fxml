@@ -99,7 +99,7 @@
                         <Font name="Consolas Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button layoutX="311.0" layoutY="13.0" mnemonicParsing="false" onAction="#clickToSearch" opacity="0.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-border-radius: 25,25,25,25;" text="Search" textFill="WHITE" />
+                  <Button layoutX="311.0" layoutY="13.0" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="67.0" style="-fx-background-color: #171717; -fx-border-color: white; -fx-border-radius: 25,25,25,25;" text="Search" textFill="WHITE" />
                   <TextField fx:id="txtSearch" layoutX="100.0" layoutY="14.0" onKeyPressed="#enterSearch" prefHeight="25.0" prefWidth="187.0" />
                   <ImageView fx:id="nextButton" fitHeight="35.0" fitWidth="35.0" layoutX="932.0" layoutY="88.0" onMousePressed="#nextPressed" onMouseReleased="#nextReleased">
                      <image>

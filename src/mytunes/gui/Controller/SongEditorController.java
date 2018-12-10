@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mytunes.gui.Controller;
 
 import java.awt.FileDialog;
@@ -11,27 +6,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javax.swing.JFrame;
 import mytunes.be.Song;
 import mytunes.gui.Model.mytunesModel;
 
-/**
- * FXML Controller class
- *
- * @author Szymon
- */
-public class SongEditorController implements Initializable {
-
+public class SongEditorController implements Initializable
+{
     private mytunesModel mm;
     @FXML
     private TextField titleField;
@@ -49,13 +35,9 @@ public class SongEditorController implements Initializable {
     private List<String> categories;
     private Song song;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //    FXMLLoader loader = new FXMLLoader(getClass().getResource("mainWindow.fxml"));
-        //    mwController = loader.<mainWindowController>getController();
+    public void initialize(URL url, ResourceBundle rb)
+    {
         mm = mytunesModel.getInstance();
         song = mm.getSong();
         if (song != null)
@@ -75,27 +57,33 @@ public class SongEditorController implements Initializable {
     }
 
     @FXML
-    private void clickToPickFile(ActionEvent event) throws IOException {
+    private void clickToPickFile(ActionEvent event) throws IOException
+    {
         FileDialog fd = new FileDialog(new JFrame());
         fd.setVisible(true);
         File[] f = fd.getFiles();
-        if (f.length > 0) {
+        if (f.length > 0)
+        {
             String filePath = "src\\mp3 files\\" + fd.getFiles()[0].getName();
             fileField.setText(filePath);
         }
     }
 
     @FXML
-    private void clickToCancel(ActionEvent event) {
-        isEditing=false;
+    private void clickToCancel(ActionEvent event)
+    {
+        isEditing = false;
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
-    private void clickToSave(ActionEvent event) throws IOException {
-        if (!isEditing) {
-            if (timeField.getText() != "" && artistField.getText() != "" && categoryCombobox.getSelectionModel().getSelectedItem() != null
-                    && timeField.getText() != "" && fileField.getText() != "") {
+    private void clickToSave(ActionEvent event) throws IOException
+    {
+        if (!isEditing)
+        {
+            if (!"".equals(timeField.getText()) && !"".equals(artistField.getText()) && categoryCombobox.getSelectionModel().getSelectedItem() != null
+                    && !"".equals(timeField.getText()) && !"".equals(fileField.getText()))
+            {
                 int id = mm.nextAvailableSongID();
                 String title = titleField.getText();
                 String artist = artistField.getText();
@@ -106,9 +94,11 @@ public class SongEditorController implements Initializable {
                 mwController.refreshTableSongs();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
-        } else {
-            if (timeField.getText() != "" && artistField.getText() != "" && categoryCombobox.getSelectionModel().getSelectedItem() != null
-                    && timeField.getText() != "" && fileField.getText() != "") {
+        } else
+        {
+            if (!"".equals(timeField.getText()) && !"".equals(artistField.getText()) && categoryCombobox.getSelectionModel().getSelectedItem() != null
+                    && !"".equals(timeField.getText()) && !"".equals(fileField.getText()))
+            {
                 int id = updatedSongID;
                 String title = titleField.getText();
                 String artist = artistField.getText();
@@ -119,7 +109,7 @@ public class SongEditorController implements Initializable {
                 mm.updateSong(editSong);
                 mwController.refreshTableSongs();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
-                isEditing=false;
+                isEditing = false;
             }
         }
     }
@@ -132,11 +122,10 @@ public class SongEditorController implements Initializable {
         mm.openWindow(path, title);
     }
 
-    void setController(mainWindowController controller, boolean isEditing, int songID ) {
-
+    void setController(mainWindowController controller, boolean isEditing, int songID)
+    {
         this.mwController = controller;
         this.isEditing = isEditing;
         this.updatedSongID = songID;
     }
-
 }
