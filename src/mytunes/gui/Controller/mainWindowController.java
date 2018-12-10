@@ -481,7 +481,6 @@ public class mainWindowController implements Initializable
     }
 
     @FXML
-<<<<<<< HEAD
     private void exitButtonExit(MouseEvent event)
     {
         exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;");
@@ -490,35 +489,18 @@ public class mainWindowController implements Initializable
     @FXML
     private void exitButtonEnter(MouseEvent event)
     {
-=======
-    private void exitButtonExit(MouseEvent event) {
-        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;");
-
-    }
-
-    @FXML
-    private void exitButtonEnter(MouseEvent event) {
->>>>>>> parent of 05669ef... LayoutUpdate
         exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc6262;");
     }
 
     @FXML
-<<<<<<< HEAD
     private void minimizeButtonExit(MouseEvent event)
     {
-=======
-    private void minimizeButtonExit(MouseEvent event) {
->>>>>>> parent of 05669ef... LayoutUpdate
         minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #21bc62;");
     }
 
     @FXML
-<<<<<<< HEAD
     private void minimizeButtonEnter(MouseEvent event)
     {
-=======
-    private void minimizeButtonEnter(MouseEvent event) {
->>>>>>> parent of 05669ef... LayoutUpdate
         minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #5bea75;");
     }
 
