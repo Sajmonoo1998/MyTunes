@@ -27,7 +27,7 @@ public class PlaylistDAO {
 
     private final ConnectionProvider cp;
     private final playlistSongsDAO playlistSDAO;
-   
+
     public PlaylistDAO() throws IOException {
         cp = new ConnectionProvider();
         playlistSDAO = new playlistSongsDAO();
@@ -49,14 +49,14 @@ public class PlaylistDAO {
     public void deletePlaylist(Playlist playlistToDelete) throws SQLException {
         try {
             Connection con = cp.getConnection();
-            String sql = "DELETE  FROM Playlists WHERE id=?";
+            String sql = "DELETE FROM Playlists WHERE id=?";
             PreparedStatement ppst = con.prepareCall(sql);
             ppst.setInt(1, playlistToDelete.getID());
             ppst.execute();
-            String sql2 = "DELETE  FROM playlistSongs WHERE playlistID=?";
-            PreparedStatement ppst2 = con.prepareStatement(sql2);
-            ppst2.setInt(1, playlistToDelete.getID());
-            ppst2.execute();
+//          String sql2 = "DELETE  FROM playlistSongs WHERE playlistID=?";
+//          PreparedStatement ppst2 = con.prepareStatement(sql2);
+//          ppst2.setInt(1, playlistToDelete.getID());
+//          ppst2.execute();
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,7 +73,6 @@ public class PlaylistDAO {
                 String name = rs.getString(2);
                 Playlist pl = new Playlist(id, name);
                 pl.setCountOfSongsOnPlaylist(playlistSDAO.getPlaylistSongs(pl).size());
-                pl.setDuratonOfPlaylist(calculatePlaylistDuration(pl));
                 p.add(pl);
             }
 
@@ -114,47 +113,4 @@ public class PlaylistDAO {
 
         return null;
     }
-    
-  public String calculatePlaylistDuration(Playlist p) throws SQLException  {
-        int h = 0;
-        int min = 0;
-        int sec = 0;
-        String first;
-        String second;
-        String third;
-        String songTime;
-        int wholeSecs = 0;
-        
-        
-        for (Song song : playlistSDAO.getPlaylistSongs(p)) {
-            songTime = song.getTime();
-
-            wholeSecs += 60*Integer.parseInt(songTime.substring(0, songTime.indexOf(":")));
-            wholeSecs += Integer.parseInt(songTime.substring(songTime.indexOf(":") + 1, songTime.length()));
-            
-
-        }
-        
-        h = wholeSecs/3600;
-        wholeSecs -= h*3600;
-        
-        min = wholeSecs/60;
-        wholeSecs -= min*60;
-        
-        sec = wholeSecs;
-        
-        if(h<10)first="0"+h;
-        else first = ""+h;
-        
-        if(min<10)second="0"+min;
-        else second = ""+min;
-        
-        if(sec<10)third="0"+sec;
-        else third = ""+sec;
-        
-        
-        
-        return first + ":" + second + ":" + third;
-    }
-    
 }

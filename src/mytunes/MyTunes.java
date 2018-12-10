@@ -19,7 +19,6 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import mytunes.be.Playlist;
 import mytunes.be.Song;
-import mytunes.bll.myTunesManager;
 import mytunes.dal.PlaylistDAO;
 import mytunes.dal.SongDAO;
 import mytunes.dal.playlistSongsDAO;
@@ -28,23 +27,24 @@ import mytunes.dal.playlistSongsDAO;
  *
  * @author leopo
  */
-public class MyTunes extends Application {
-
+public class MyTunes extends Application
+{
     private double xOffset = 0;
     private double yOffset = 0;
-
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception
+    {
         stage.initStyle(StageStyle.UNDECORATED);
         Parent root = FXMLLoader.load(getClass().getResource("gui/View/mainWindow.fxml"));
-
+        
         Scene scene = new Scene(root);
-
+        
         stage.setScene(scene);
         stage.show();
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
             @Override
-            public void handle(WindowEvent event) {
+            public void handle(WindowEvent event)
+            {
                 Platform.exit();
             }
         });
@@ -67,10 +67,9 @@ public class MyTunes extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, SQLException {
-      
-        launch(args);
-
+    public static void main(String[] args) throws IOException, SQLException
+    {
+        launch(args); 
     }
-
+    
 }

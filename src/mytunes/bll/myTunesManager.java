@@ -54,14 +54,13 @@ public class myTunesManager implements mytunesLogicFacade {
 
     @Override
     public List<Playlist> getAllPlaylists() {
-                List<Playlist> playlists = null;
-                try {
-                    return playlists=playlistdao.getAllPlaylists();
-                } catch (SQLException ex) {
-                    Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                return null;
-        
+        List<Playlist> playlists;
+        try {
+         return   playlists = playlistdao.getAllPlaylists();
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -124,6 +123,7 @@ public class myTunesManager implements mytunesLogicFacade {
         return null;
     }
 
+    @Override
     public Integer nextAvailableSongID() {
         try {
             return songdao.nextAvailableSongID();
@@ -133,6 +133,7 @@ public class myTunesManager implements mytunesLogicFacade {
         return null;
     }
 
+    @Override
     public Integer nextAvailablePlaylistID() {
         try {
             return playlistdao.nextAvailablePlaylistID();
@@ -142,6 +143,7 @@ public class myTunesManager implements mytunesLogicFacade {
         return null;
     }
 
+    @Override
     public List<Song> getPlaylistSongs(Playlist p) {
         try {
             return playlistSongsDAO.getPlaylistSongs(p);
@@ -150,18 +152,18 @@ public class myTunesManager implements mytunesLogicFacade {
         }
         return null;
     }
-
     
-
-    public void addSongToPlaylist(Song s, Playlist p) {
+    @Override
+    public void addSongToPlaylist(Song s, Playlist p){
         try {
             playlistSongsDAO.addSongToPlaylist(s, p);
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void deleteSongFromPlaylistSongs(int id) {
+    
+    @Override
+    public void deleteSongFromPlaylistSongs(int id){
         try {
             playlistSongsDAO.deleteSongFromPlaylistSongs(id);
         } catch (SQLException ex) {
@@ -169,9 +171,18 @@ public class myTunesManager implements mytunesLogicFacade {
         }
     }
 
-    public void deletePlaylistFromPlaylistSongs(int id) {
+    @Override
+    public void deletePlaylistFromPlaylistSongs(int id){
         try {
             playlistSongsDAO.deletePlaylistFromPlaylistSongs(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void reCreatePlaylistSongs(Song chosen, Song toSwapWith){
+        try {
+            playlistSongsDAO.reCreatePlaylistSongs(chosen, toSwapWith);
         } catch (SQLException ex) {
             Logger.getLogger(myTunesManager.class.getName()).log(Level.SEVERE, null, ex);
         }

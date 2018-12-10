@@ -26,10 +26,9 @@ import mytunes.be.Song;
 public class playlistSongsDAO {
 
     ConnectionProvider cp;
-    PlaylistDAO pdao;
+
     public playlistSongsDAO() throws IOException {
         cp = new ConnectionProvider();
-        
     }
 
     public List<Song> getPlaylistSongs(Playlist p) throws SQLException {
@@ -53,7 +52,7 @@ public class playlistSongsDAO {
                 songs.add(song);
                 p.setCountOfSongsOnPlaylist(songs.size());
             }
-               
+
         } catch (SQLServerException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -100,5 +99,25 @@ public class playlistSongsDAO {
         }
     }
     
-      
+     public void reCreatePlaylistSongs(Song chosen, Song toSwapWith) throws SQLException {
+        try {
+            Connection con = cp.getConnection();
+            int chosenSongID=chosen.getId();
+            int toSwapWithID=toSwapWith.getId();
+            String sql  = "UPDATE playlistSongs SET songID = ? WHERE id = ?";
+            String sql2 = "UPDATE playlistSongs SET songID = ? WHERE id = ?";
+            PreparedStatement ppst = con.prepareCall(sql);
+            ppst.setInt(1, toSwapWithID);
+            ppst.setInt(2, chosen.getPlaylistElementID());
+            PreparedStatement ppst2 = con.prepareCall(sql2);
+            ppst2.setInt(1, chosenSongID);
+            ppst2.setInt(2, toSwapWith.getPlaylistElementID());
+            ppst.execute();
+            ppst2.execute();
+            
+        } catch (SQLServerException ex) {
+            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

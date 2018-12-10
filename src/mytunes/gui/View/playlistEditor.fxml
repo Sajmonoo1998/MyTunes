@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="222.0" prefWidth="393.0" style="-fx-border-color: black; -fx-background-color: #0f1419;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.PlaylistEditorController">
+<AnchorPane id="AnchorPane" prefHeight="222.0" prefWidth="393.0" style="-fx-border-color: white; -fx-background-color: #0f1419;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.PlaylistEditorController">
    <children>
       <Button layoutX="219.0" layoutY="120.0" mnemonicParsing="false" onAction="#clickToCancel" style="-fx-border-radius: 25,25,25,25; -fx-background-color: transparent; -fx-border-color: white;" text="Cancel" textFill="WHITE" />
       <Button layoutX="298.0" layoutY="120.0" mnemonicParsing="false" onAction="#clickToSave" style="-fx-border-radius: 25,25,25,25; -fx-background-color: transparent; -fx-border-color: white;" text="Save" textFill="WHITE" />

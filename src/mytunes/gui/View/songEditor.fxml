@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="413.0" prefWidth="429.0" style="-fx-border-color: black; -fx-background-color: #0f1419;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.SongEditorController">
+<AnchorPane id="AnchorPane" prefHeight="413.0" prefWidth="429.0" style="-fx-border-color: white; -fx-background-color: #0f1419;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.Controller.SongEditorController">
    <children>
       <Line endX="229.0" layoutX="192.0" layoutY="63.0" startX="-189.0" />
       <Line endX="228.0" layoutX="199.0" layoutY="359.0" startX="-198.0" />

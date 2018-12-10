@@ -9,6 +9,7 @@ import java.awt.FileDialog;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,6 +46,8 @@ public class SongEditorController implements Initializable {
     private mainWindowController mwController;
     private boolean isEditing = false;
     private int updatedSongID;
+    private List<String> categories;
+    private Song song;
 
     /**
      * Initializes the controller class.
@@ -53,13 +56,22 @@ public class SongEditorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //    FXMLLoader loader = new FXMLLoader(getClass().getResource("mainWindow.fxml"));
         //    mwController = loader.<mainWindowController>getController();
-
-        try {
-            mm = new mytunesModel();
-        } catch (IOException ex) {
-            Logger.getLogger(SongEditorController.class.getName()).log(Level.SEVERE, null, ex);
+        mm = mytunesModel.getInstance();
+        song = mm.getSong();
+        if (song != null)
+        {
+            titleField.setText(song.getTitle());
+            artistField.setText(song.getArtist());
+            timeField.setText(song.getTime());
+            fileField.setText(song.getPath());
+            String s = song.getCategory();
+            categoryCombobox.getSelectionModel().select(s);
         }
-        categoryCombobox.getItems().addAll("Pop", "Metal", "Hip hop", "Minimal Techno", "Rap");
+        categories = mm.getCategories();
+        for (String category : categories)
+        {
+            categoryCombobox.getItems().add(category);
+        }
     }
 
     @FXML
@@ -91,8 +103,8 @@ public class SongEditorController implements Initializable {
                 String time = timeField.getText();
                 String path = fileField.getText();
                 mm.createSong(id, artist, title, category, time, path);
-                ((Node) (event.getSource())).getScene().getWindow().hide();
                 mwController.refreshTableSongs();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         } else {
             if (timeField.getText() != "" && artistField.getText() != "" && categoryCombobox.getSelectionModel().getSelectedItem() != null
@@ -103,18 +115,21 @@ public class SongEditorController implements Initializable {
                 String category = categoryCombobox.getSelectionModel().getSelectedItem();
                 String time = timeField.getText();
                 String path = fileField.getText();
-                Song song = new Song(id, artist, title, category, time, path);
-                mm.updateSong(song);
-                ((Node) (event.getSource())).getScene().getWindow().hide();
+                Song editSong = new Song(id, artist, title, category, time, path);
+                mm.updateSong(editSong);
                 mwController.refreshTableSongs();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
                 isEditing=false;
             }
         }
     }
 
     @FXML
-    private void clickToMoreCategories(ActionEvent event
-    ) {
+    private void clickToMoreCategories(ActionEvent event)
+    {
+        String path = "mytunes/gui/View/categoryWindow.fxml";
+        String title = "New Category";
+        mm.openWindow(path, title);
     }
 
     void setController(mainWindowController controller, boolean isEditing, int songID ) {
