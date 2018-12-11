@@ -16,8 +16,8 @@ import javax.swing.JFrame;
 import mytunes.be.Song;
 import mytunes.gui.Model.mytunesModel;
 
-public class SongEditorController implements Initializable
-{
+public class SongEditorController implements Initializable {
+
     private mytunesModel mm;
     @FXML
     private TextField titleField;
@@ -36,12 +36,10 @@ public class SongEditorController implements Initializable
     private Song song;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         mm = mytunesModel.getInstance();
         song = mm.getSong();
-        if (song != null)
-        {
+        if (song != null) {
             titleField.setText(song.getTitle());
             artistField.setText(song.getArtist());
             timeField.setText(song.getTime());
@@ -50,40 +48,36 @@ public class SongEditorController implements Initializable
             categoryCombobox.getSelectionModel().select(s);
         }
         categories = mm.getCategories();
-        for (String category : categories)
-        {
+        for (String category : categories) {
             categoryCombobox.getItems().add(category);
         }
     }
 
     @FXML
-    private void clickToPickFile(ActionEvent event) throws IOException
+    private void clickToPickFile(ActionEvent event) throws IOException // While creating/editing a song we are using this button to pick path of the song.
     {
         FileDialog fd = new FileDialog(new JFrame());
         fd.setVisible(true);
         File[] f = fd.getFiles();
-        if (f.length > 0)
-        {
+        if (f.length > 0) {
             String filePath = "src\\mp3 files\\" + fd.getFiles()[0].getName();
             fileField.setText(filePath);
         }
     }
 
     @FXML
-    private void clickToCancel(ActionEvent event)
+    private void clickToCancel(ActionEvent event) // Closes the SongEditor window
     {
         isEditing = false;
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
-    private void clickToSave(ActionEvent event) throws IOException
+    private void clickToSave(ActionEvent event) throws IOException // Saving data from SongEditor window
     {
-        if (!isEditing)
-        {
+        if (!isEditing) {
             if (!"".equals(timeField.getText()) && !"".equals(artistField.getText()) && categoryCombobox.getSelectionModel().getSelectedItem() != null
-                    && !"".equals(timeField.getText()) && !"".equals(fileField.getText()))
-            {
+                    && !"".equals(timeField.getText()) && !"".equals(fileField.getText())) {
                 int id = mm.nextAvailableSongID();
                 String title = titleField.getText();
                 String artist = artistField.getText();
@@ -94,11 +88,9 @@ public class SongEditorController implements Initializable
                 mwController.refreshTableSongs();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
-        } else
-        {
+        } else {
             if (!"".equals(timeField.getText()) && !"".equals(artistField.getText()) && categoryCombobox.getSelectionModel().getSelectedItem() != null
-                    && !"".equals(timeField.getText()) && !"".equals(fileField.getText()))
-            {
+                    && !"".equals(timeField.getText()) && !"".equals(fileField.getText())) {
                 int id = updatedSongID;
                 String title = titleField.getText();
                 String artist = artistField.getText();
@@ -115,14 +107,14 @@ public class SongEditorController implements Initializable
     }
 
     @FXML
-    private void clickToMoreCategories(ActionEvent event)
+    private void clickToMoreCategories(ActionEvent event) // Opens categoryWindow
     {
         String path = "mytunes/gui/View/categoryWindow.fxml";
         String title = "New Category";
         mm.openWindow(path, title);
     }
 
-    void setController(mainWindowController controller, boolean isEditing, int songID)
+    public void setController(mainWindowController controller, boolean isEditing, int songID) // We use this method to get connection with mainWindowController and distinguish if we are editing or creating.
     {
         this.mwController = controller;
         this.isEditing = isEditing;
