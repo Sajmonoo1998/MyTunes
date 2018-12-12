@@ -155,7 +155,7 @@ public class mainWindowController implements Initializable
         setSongsTable();
         setPlaylistTable();
     }
-//This method sets items on main songs table and change way it looks
+
     public void setSongsTable()
     {
         songsAsObservable = FXCollections.observableArrayList(mm.getSongsAsObservable());
@@ -172,7 +172,7 @@ public class mainWindowController implements Initializable
         timeCol.getStyleClass().add("my-special-table-style-time");
         timeCol.getStyleClass().add("time-col");
     }
-//This method sets items on playlist index table and change way it looks
+
     private void setPlaylistTable()
     {
         playlistsAsObservable = FXCollections.observableArrayList(mm.getPlaylistsAsObservable());
@@ -187,7 +187,7 @@ public class mainWindowController implements Initializable
         playlistTimeCol.getStyleClass().add("my-special-table-style-time");
         playlistTimeCol.getStyleClass().add("time-col");
     }
-//This is action event of button, deletes song from playlist
+
     @FXML
     private void clickToDeleteSongFromPlaylist(ActionEvent event)
     {
@@ -483,25 +483,25 @@ public class mainWindowController implements Initializable
     @FXML
     private void exitButtonExit(MouseEvent event)
     {
-        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #384354;");
+        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;");
     }
 
     @FXML
     private void exitButtonEnter(MouseEvent event)
     {
-        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #91a6c9;");
+        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc6262;");
     }
 
     @FXML
     private void minimizeButtonExit(MouseEvent event)
     {
-        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #c1c1c1;");
+        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #21bc62;");
     }
 
     @FXML
     private void minimizeButtonEnter(MouseEvent event)
     {
-        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: white;");
+        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #5bea75;");
     }
 
     @FXML
