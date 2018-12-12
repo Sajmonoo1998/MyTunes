@@ -479,27 +479,28 @@ public class mainWindowController implements Initializable
     }
 
     @FXML
-    private void exitButtonExit(MouseEvent event) // Changes looks of the button when mouse is not on it
+    private void exitButtonExit(MouseEvent event)
     {
-        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc3a3a;");
+        
+        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #384354;");
     }
-
     @FXML
-    private void exitButtonEnter(MouseEvent event) // Changes looks of the button when mouse is on it
+    private void exitButtonEnter(MouseEvent event)
     {
-        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #fc6262;");
+       
+        exitButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #71819b;");
     }
-
     @FXML
-    private void minimizeButtonExit(MouseEvent event) // Changes looks of the button when mouse is not on it
+    private void minimizeButtonExit(MouseEvent event)
     {
-        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #21bc62;");
+        
+        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #c1c1c1;");
     }
-
     @FXML
-    private void minimizeButtonEnter(MouseEvent event) // Changes looks of the button when mouse is on it
+    private void minimizeButtonEnter(MouseEvent event)
     {
-        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: #5bea75;");
+       
+        minimizeButton.setStyle("-fx-background-radius: 25,25,25,25; -fx-background-color: white;");
     }
 
     @FXML
@@ -702,7 +703,7 @@ public class mainWindowController implements Initializable
         }
     }
 
-    public void refreshTableSongs() // Clears and reloads tableSongs
+    public void refreshTableSongs() //Clears and reloads tableSongs
     {
         tableSongs.getItems().clear();
         tableSongs.setItems(mm.getSongsAsObservable());

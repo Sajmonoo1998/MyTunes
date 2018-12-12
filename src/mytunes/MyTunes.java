@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -35,6 +36,7 @@ public class MyTunes extends Application
     public void start(Stage stage) throws Exception
     {
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.getIcons().add(new Image("mytunes/assets/owl-face-outline-front.png"));
         Parent root = FXMLLoader.load(getClass().getResource("gui/View/mainWindow.fxml"));
         
         Scene scene = new Scene(root);
