@@ -22,7 +22,7 @@ public class playlistSongsDAO
         cp = new ConnectionProvider();
     }
 
-    public List<Song> getPlaylistSongs(Playlist p) throws SQLException
+    public List<Song> getPlaylistSongs(Playlist p) throws SQLException // returns all song of selected playlist
     {
         List<Song> songs = new ArrayList<>();
         try
@@ -69,7 +69,7 @@ public class playlistSongsDAO
         }
     }
 
-    public void deleteSongFromPlaylistSongs(int id) throws SQLException
+    public void deleteSongFromPlaylistSongs(int id) throws SQLException  // After we delete song, we want to also delete every record from playlistSongs which is having deleted song id
     {
         try
         {
@@ -84,7 +84,7 @@ public class playlistSongsDAO
         }
     }
 
-    public void deletePlaylistFromPlaylistSongs(int id) throws SQLException
+    public void deletePlaylistFromPlaylistSongs(int id) throws SQLException // After we delete playlist, we want to also delete every record from playlistSongs which is having deleted playlist id
     {
         try
         {
@@ -99,19 +99,19 @@ public class playlistSongsDAO
         }
     }
 
-    public void reCreatePlaylistSongs(Song chosen, Song toSwapWith) throws SQLException
+    public void reCreatePlaylistSongs(Song chosen, Song toSwapWith) throws SQLException // This method switches positions of two songs in the playlist
     {
         try
         {
             Connection con = cp.getConnection();
-            int chosenSongID = chosen.getId();
-            int toSwapWithID = toSwapWith.getId();
-            String sql = "UPDATE playlistSongs SET songID = ? WHERE id = ?";
+            int chosenSongID = chosen.getId();   
+            int toSwapWithID = toSwapWith.getId();   
+            String sql = "UPDATE playlistSongs SET songID = ? WHERE id = ?";    
             String sql2 = "UPDATE playlistSongs SET songID = ? WHERE id = ?";
             PreparedStatement ppst = con.prepareCall(sql);
-            ppst.setInt(1, toSwapWithID);
-            ppst.setInt(2, chosen.getPlaylistElementID());
-            PreparedStatement ppst2 = con.prepareCall(sql2);
+            ppst.setInt(1, toSwapWithID);                       
+            ppst.setInt(2, chosen.getPlaylistElementID());     
+            PreparedStatement ppst2 = con.prepareCall(sql2);    
             ppst2.setInt(1, chosenSongID);
             ppst2.setInt(2, toSwapWith.getPlaylistElementID());
             ppst.execute();

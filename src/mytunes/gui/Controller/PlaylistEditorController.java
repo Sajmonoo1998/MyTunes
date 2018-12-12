@@ -33,14 +33,14 @@ public class PlaylistEditorController implements Initializable
     }
 
     @FXML
-    private void clickToCancel(ActionEvent event)
+    private void clickToCancel(ActionEvent event) // closes PlaylistEditor window
     {
         isEditing = false;
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
-    private void clickToSave(ActionEvent event)
+    private void clickToSave(ActionEvent event)  // Saving data from PlaylistEditor window
     {
         if (!isEditing)
         {
@@ -64,7 +64,7 @@ public class PlaylistEditorController implements Initializable
         }
     }
 
-    void setController(mainWindowController controller, boolean isEditing, int playlistID)
+    void setController(mainWindowController controller, boolean isEditing, int playlistID) // We use this method to get connection with mainWindowController and distinguish if we are editing or creating.
     {
         this.mwController = controller;
         this.isEditing = isEditing;

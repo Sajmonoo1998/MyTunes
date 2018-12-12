@@ -112,7 +112,7 @@ public class PlaylistDAO
         }
         return null;
     }
-    public String calculatePlaylistDuration(Playlist p) throws SQLException  {
+    public String calculatePlaylistDuration(Playlist p) throws SQLException  { 
         int h = 0;
         int min = 0;
         int sec = 0;

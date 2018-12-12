@@ -33,4 +33,5 @@ public class CategoryWindowController implements Initializable
         mm.addNewCategory(txtCategory.getText());
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
+    
 }

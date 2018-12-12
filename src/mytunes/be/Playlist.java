@@ -6,7 +6,6 @@ public class Playlist
 {
     private final int id;
     private String name;
-    playlistSongsDAO playlistSongsDAO;
     private int countOfSongsOnPlaylist;
     private String durationOfPlaylist;
     
